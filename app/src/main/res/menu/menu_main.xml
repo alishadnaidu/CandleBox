@@ -3,6 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/add"
+        android:icon="@drawable/instagram_new_post_outline_24"
+        android:title=""
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/instagram_home_outline_24"
+        android:title=""
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/logout"
         android:icon="@drawable/instagram_user_outline_24"
         android:title=""
