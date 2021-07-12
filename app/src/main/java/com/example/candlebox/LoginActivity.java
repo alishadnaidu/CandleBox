@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //checks if the user is already logged in --> takes user straight to home page
         if (ParseUser.getCurrentUser() != null) {
-            goFeedActivity();
+            goMainActivity();
         }
 
         etUsername = findViewById(R.id.etUsername);
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // Sign up didn't succeed. Look at the ParseException
                             // to figure out what went wrong
-                            Toast.makeText(LoginActivity.this, "Please make sure you have entered a username and password!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Please make sure you have entered a valid username and password!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -91,16 +91,16 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 //if request succeeds (e is not null), navigate to the main activity
-                goFeedActivity();
+                goMainActivity();
                 Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
             }
             });
     }
 
     //function to navigate to main activity
-    private void goFeedActivity() {
+    private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
-        //finish();
+        finish();
     }
 }
