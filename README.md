@@ -42,13 +42,14 @@ The Candle App allows a user to scan the barcode of a candle they’re thinking 
     * Potential APIs to use:
     * User can be recommended a song to listen to based on name/scent of candle (integrate with Spotify API, use keywords from candle name and scent to search for songs)
     * Connect to social media to view posts on eco-friendly candles and carbon emissions/other sustainable accounts
-    * Barcode scanner to see list of ingredients with toxic ones highlighted
+    * Barcode scanner to see list of ingredients with toxic ones highlighted: https://developers.google.com/ml-kit/vision/barcode-scanning/android#java
     * Suggest a cocktail based on the name and scent of your candle: https://apilist.fun/api/the-cocktail-db
 11. Your app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
 13. Your app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)
 15. Your app incorporates at least one external library to add visual polish
 17. Your app provides opportunities for you to overcome difficult/ambiguous technical problems (more below)
     * Barcode scanning feature
+    * Local database for candle ingredients
 
 **Optional Nice-to-have Stories**
 
