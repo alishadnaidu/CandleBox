@@ -28,11 +28,27 @@ The Candle App allows a user to scan the barcode of a candle they’re thinking 
 
 **Required Must-have Stories**
 
-* User must be able to log their hours of burning
-* Users must be able to see stats (on what they have logged and what environmental impacts they have had)
-* User can create a new account or potentially connect their account to Google or Facebook account if the first option is not viable
-* User can log in and out
-* User can specify if they are using an environmentally friendly candle, which will allow them to see their stats on their positive impact on the environment (or rather, how they have avoided having a negative effect)
+1. Your app has multiple views
+    * User must be able to log their hours of burning
+    * Users must be able to see stats (on what they have logged and what environmental impacts they have had)
+3. Your app interacts with a database (e.g. Parse)
+    * Use Parse database for storing data on stats for each user
+5. You can log in/log out of your app as a user
+    * User can log in and out
+    * Potentially connect to their Spotify account for song recommendations
+7. You can sign up with a new user profile
+    * User can create a new account on login page using Parse
+9. Your app integrates with at least one SDK (e.g. Google Maps SDK, Facebook SDK) or API (that you didn’t learn about in CodePath)
+    * Potential APIs to use:
+    * User can be recommended a song to listen to based on name/scent of candle (integrate with Spotify API, use keywords from candle name and scent to search for songs)
+    * Connect to social media to view posts on eco-friendly candles and carbon emissions/other sustainable accounts
+    * Barcode scanner to see list of ingredients with toxic ones highlighted
+    * Suggest a cocktail based on the name and scent of your candle: https://apilist.fun/api/the-cocktail-db
+11. Your app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
+13. Your app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)
+15. Your app incorporates at least one external library to add visual polish
+17. Your app provides opportunities for you to overcome difficult/ambiguous technical problems (more below)
+    * Barcode scanning feature
 
 **Optional Nice-to-have Stories**
 
@@ -40,7 +56,7 @@ The Candle App allows a user to scan the barcode of a candle they’re thinking 
 * User can set a timer for burning a candle to avoid over-burning it and risk starting a fire
 * "Fake Candle" page with a gif/video of a burning candle (just for fun!)
 * Barcode scanner to see list of ingredients in your candle; highlight the toxic chemicals
-* Can make it similar to Instagram - follow friends, see their stats, etc. to encourage community-building and consistent use
+* For stats page: can see a "history" of the stats in graph form
 
 ### 2. Screen Archetypes
 
