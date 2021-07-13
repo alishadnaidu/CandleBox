@@ -11,21 +11,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static final String TAG = "MainActivity";
+    private Integer totalHours;
+    private TextView tvTotalHours;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_second_main);
+        tvTotalHours = findViewById(R.id.tvTotalHours);
+        /*
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
@@ -34,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+         */
+        queryPosts();
     }
 
     //inflate actionbar
@@ -63,5 +76,28 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void queryPosts() {
+        totalHours = 0;
+        ParseQuery<Stats> query = ParseQuery.getQuery(Stats.class);
+        query.include(Stats.KEY_USER);
+        query.findInBackground(new FindCallback<Stats>() {
+            @Override
+            public void done(List<Stats> statistics, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for (Stats stat : statistics) {
+                    //check that the hours are being logged correctly
+                    Log.i(TAG, "Hours: " + stat.getHours() + ", username: " + stat.getUser().getUsername());
+                    totalHours += stat.getHours();
+                }
+                //check that the total hours is correct
+                Log.i(TAG, String.valueOf(totalHours));
+                tvTotalHours.setText("Total Hours: " + totalHours);
+            }
+        });
     }
 }

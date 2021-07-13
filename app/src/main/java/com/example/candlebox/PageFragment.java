@@ -1,5 +1,6 @@
 package com.example.candlebox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 // In this case, the fragment displays simple text based on the page
-public class PageFragment extends Fragment {
+public class PageFragment extends Fragment{
     public static final String ARG_PAGE = "ARG_PAGE";
 
     private int mPage;
@@ -33,7 +34,7 @@ public class PageFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page, container, false);
         TextView textView = (TextView) view;
-        textView.setText("Fragment #" + mPage);
+        textView.setText("Total Hours:" + mPage);
         return view;
     }
 }
