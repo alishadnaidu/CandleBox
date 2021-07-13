@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.parse.ParseUser;
 
 public class AddActivity extends AppCompatActivity {
+
+    private EditText etHours;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        etHours = findViewById(R.id.etHours);
+
     }
 
     //inflate actionbar
