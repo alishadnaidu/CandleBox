@@ -45,6 +45,7 @@ public class AddActivity extends AppCompatActivity {
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 saveStats(hours, currentUser);
                 Intent i = new Intent(AddActivity.this, MainActivity.class);
+                startActivity(i);
             }
         });
     }
