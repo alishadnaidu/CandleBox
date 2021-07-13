@@ -30,12 +30,17 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     private Integer totalHours;
     private TextView tvTotalHours;
+    private TextView tvTotalCO2;
+    private TextView tvTotalTrees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_main);
         tvTotalHours = findViewById(R.id.tvTotalHours);
+        tvTotalCO2 = findViewById(R.id.tvTotalCO2);
+        tvTotalTrees = findViewById(R.id.tvTotalTrees);
+
         /*
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -97,7 +102,19 @@ public class MainActivity extends AppCompatActivity {
                 //check that the total hours is correct
                 Log.i(TAG, String.valueOf(totalHours));
                 tvTotalHours.setText("Total Hours: " + totalHours);
+                tvTotalCO2.setText("From burning candles, you have emitted " + calcCO2(totalHours)
+                        + " grams of CO2.");
+                tvTotalTrees.setText("It would take a tree " + calcTrees(totalHours) + " hours to " +
+                        "offset that amount of CO2! Maybe try a more eco-friendly candle next time... :) You got this!");
             }
         });
+    }
+
+    private Integer calcCO2(Integer hours) {
+        return hours*10;
+    }
+
+    private Integer calcTrees(Integer hours) {
+        return hours*4;
     }
 }
