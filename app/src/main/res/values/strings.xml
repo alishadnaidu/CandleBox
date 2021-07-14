@@ -3,4 +3,7 @@
     <string name="title_activity_tabbed">TabbedActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="hoursLabel">hours</string>
+    <string name="CO2Label">g of CO2 emitted</string>
+    <string name="treesLabel">trees</string>
 </resources>
