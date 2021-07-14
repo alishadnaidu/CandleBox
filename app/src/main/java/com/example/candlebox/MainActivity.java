@@ -37,20 +37,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_main);
+
         tvTotalHours = findViewById(R.id.tvTotalHours);
         tvTotalCO2 = findViewById(R.id.tvTotalCO2);
         tvTotalTrees = findViewById(R.id.tvTotalTrees);
 
-        /*
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
-                MainActivity.this));
-
-        // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
-         */
         queryPosts();
     }
 
@@ -87,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         totalHours = 0;
         ParseQuery<Stats> query = ParseQuery.getQuery(Stats.class);
         query.include(Stats.KEY_USER);
+        //only include the stats of the current user
+        query.whereEqualTo(Stats.KEY_USER, ParseUser.getCurrentUser());
         query.findInBackground(new FindCallback<Stats>() {
             @Override
             public void done(List<Stats> statistics, ParseException e) {
@@ -95,16 +88,17 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 for (Stats stat : statistics) {
-                    //check that the hours are being logged correctly
-                    Log.i(TAG, "Hours: " + stat.getHours() + ", username: " + stat.getUser().getUsername());
-                    totalHours += stat.getHours();
+                        //check that the hours are being logged correctly
+                        Log.i(TAG, "Hours: " + stat.getHours() + ", username: " +
+                                stat.getUser().getUsername());
+                        totalHours += stat.getHours();
                 }
                 //check that the total hours is correct
                 Log.i(TAG, String.valueOf(totalHours));
                 tvTotalHours.setText("Total Hours: " + totalHours);
                 tvTotalCO2.setText("From burning candles, you have emitted " + calcCO2(totalHours)
                         + " grams of CO2.");
-                tvTotalTrees.setText("It would take a tree " + calcTrees(totalHours) + " hours to " +
+                tvTotalTrees.setText("It would take a mature tree " + calcTrees(totalHours) + " hours to " +
                         "offset that amount of CO2! Maybe try a more eco-friendly candle next time... :) You got this!");
             }
         });
