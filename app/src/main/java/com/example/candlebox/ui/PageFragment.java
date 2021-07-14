@@ -13,7 +13,7 @@ import com.example.candlebox.R;
 // In this case, the fragment displays simple text based on the page
 public class PageFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
-
+/*
     private int mPage;
 
     public static PageFragment newInstance(int page) {
@@ -38,4 +38,5 @@ public class PageFragment extends Fragment {
         //textView.setText("Fragment #" + mPage);
         return view;
     }
+    */
 }

@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return true;
         }
+        //if add icon is tapped, navigate to the add screen
         if (item.getItemId() == R.id.add) {
             Intent i = new Intent(MainActivity.this, AddActivity.class);
             startActivity(i);
@@ -89,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void queryStats() {
         totalHours = 0;
+        amountOfCO2 = 0;
+        totalTrees = 0;
         ParseQuery<Stats> query = ParseQuery.getQuery(Stats.class);
         query.include(Stats.KEY_USER);
         //only include the stats of the current user
@@ -100,17 +103,22 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
+                //add up all the hours for that user
                 for (Stats stat : statistics) {
                         //check that the hours are being logged correctly
                         Log.i(TAG, "Hours: " + stat.getHours() + ", username: " +
                                 stat.getUser().getUsername());
                         totalHours += stat.getHours();
                 }
-                //check that the total hours is correct
-                Log.i(TAG, String.valueOf(totalHours));
+                //calculate the stats for CO2 and trees
                 amountOfCO2 = calcCO2(totalHours);
-                Log.i(TAG, String.valueOf(amountOfCO2));
                 totalTrees = calcTrees(totalHours);
+                //check that the total hours is correct
+                Log.i(TAG, "Hours: " + String.valueOf(totalHours));
+                //amountOfCO2 = calcCO2(totalHours);
+                Log.i(TAG, "CO2: " + String.valueOf(amountOfCO2));
+                //totalTrees = calcTrees(totalHours);
+                Log.i(TAG, "Trees: " + String.valueOf(totalTrees));
                 /*
                 tvHoursFrag.setText("Total Hours: " + totalHours);
                 tvTotalCO2.setText("From burning candles, you have emitted " + calcCO2(totalHours)
@@ -123,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //simple calculation functions used in queryStats()
     private Integer calcCO2(Integer hours) {
         return hours*10;
     }
