@@ -26,10 +26,12 @@ import java.util.concurrent.Executors;
 
 public class BottomDialog extends BottomSheetDialogFragment {
 
+    //some variables set to public static because they are accessed in getCandleData()
     public static final String TAG = "BottomDialog";
-    public static TextView title, candleName, rawDataDisplay, ingredientsList;
+    private TextView title;
+    public static TextView candleName, rawDataDisplay, ingredientsList;
     private String fetchRawBarcode;
-    private ImageView ivCandle;
+    public static ImageView ivCandle;
     private String candleDatabaseName = "";
 
     @Nullable
@@ -42,8 +44,6 @@ public class BottomDialog extends BottomSheetDialogFragment {
         rawDataDisplay = view.findViewById(R.id.rawdatadisplay);
         ingredientsList = view.findViewById(R.id.ingredientsList);
         ivCandle = view.findViewById(R.id.ivCandle);
-
-        rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
 
         getCandleData();
 
@@ -87,11 +87,16 @@ public class BottomDialog extends BottomSheetDialogFragment {
                     Log.e(TAG, "Issue with getting candle ID", e);
                     return;
                 }
+                //should only have one value in this list, which is the candle that corresponds to the barcode
                 for (Candles candle: objects) {
+                    //check that the name and barcode and correct
                     Log.i(TAG, "Candle name: " + candle.getCandleName() + ", Raw barcode: " +
                             candle.getRawBarcodeValue());
+
+                    //get the candle name and set the textview
                     candleDatabaseName = candle.getCandleName();
                     candleName.setText(candleDatabaseName);
+                    rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
                 }
 
             }
