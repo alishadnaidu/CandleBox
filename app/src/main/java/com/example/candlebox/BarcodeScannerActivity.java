@@ -50,6 +50,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
     private ExecutorService cameraExecutor;
     private PreviewView previewView;
     private MyImageAnalyzer analyzer;
+    public static String rawValue;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -172,7 +173,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                 Rect bounds = barcode.getBoundingBox();
                 Point[] corners = barcode.getCornerPoints();
 
-                String rawValue = barcode.getRawValue();
+                rawValue = barcode.getRawValue();
 
                 int valueType = barcode.getValueType();
                 // See API reference for complete list of supported types

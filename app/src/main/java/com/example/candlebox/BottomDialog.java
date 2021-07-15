@@ -23,9 +23,9 @@ import java.util.concurrent.Executors;
 
 public class BottomDialog extends BottomSheetDialogFragment {
 
-    private TextView title, link, btnVisit;
-    private ImageView close;
+    private TextView title, link, btnVisit, rawDataDisplay;
     private String fetchUrl;
+    private String fetchRawBarcode;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -35,11 +35,13 @@ public class BottomDialog extends BottomSheetDialogFragment {
         title = view.findViewById(R.id.txt_title);
         link = view.findViewById(R.id.txt_link);
         btnVisit = view.findViewById(R.id.visit);
-        close = view.findViewById(R.id.close);
-        close.setClickable(true);
+        rawDataDisplay = view.findViewById(R.id.rawdatadisplay);
         btnVisit.setClickable(true);
 
         title.setText(fetchUrl);
+
+        rawDataDisplay.setText(BarcodeScannerActivity.rawValue);
+
 
         btnVisit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,13 +49,6 @@ public class BottomDialog extends BottomSheetDialogFragment {
                 Intent i = new Intent("android.intent.action.VIEW");
                 i.setData(Uri.parse(fetchUrl));
                 startActivity(i);
-            }
-        });
-
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
             }
         });
 
@@ -70,5 +65,4 @@ public class BottomDialog extends BottomSheetDialogFragment {
             }
         });
     }
-
 }
