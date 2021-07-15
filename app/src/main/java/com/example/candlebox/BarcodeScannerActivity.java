@@ -188,12 +188,15 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                         }
                         bd.fetchRawBarcode(barcode.getRawValue());
                         break;
+                        /*
                     case Barcode.TYPE_URL:
                         if (!bd.isAdded()) {
                             bd.show(fragmentManager, "");
                         }
                         bd.fetchUrl(barcode.getUrl().getUrl());
                         break;
+
+                         */
                 }
             }
         }
