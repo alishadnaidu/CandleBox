@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Size;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -139,10 +140,11 @@ public class BarcodeScannerActivity extends AppCompatActivity {
             InputImage inputImage = InputImage.fromMediaImage(image1, image.getImageInfo().getRotationDegrees());
             BarcodeScannerOptions options =
                     new BarcodeScannerOptions.Builder()
-                            //.setBarcodeFormats(
+                            .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
                             //Barcode.FORMAT_QR_CODE,
                             //Barcode.FORMAT_AZTEC)
                             .build();
+
             BarcodeScanner scanner = BarcodeScanning.getClient();
 
             Task<List<Barcode>> result = scanner.process(inputImage)
@@ -174,22 +176,23 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                 Point[] corners = barcode.getCornerPoints();
 
                 rawValue = barcode.getRawValue();
+                Log.i("BarcodeScannerActivity", rawValue);
 
                 int valueType = barcode.getValueType();
+                //Log.i("BarcodeScannerActivity", String.valueOf(valueType));
                 // See API reference for complete list of supported types
                 switch (valueType) {
-                    case Barcode.TYPE_WIFI:
-                        String ssid = barcode.getWifi().getSsid();
-                        String password = barcode.getWifi().getPassword();
-                        int type = barcode.getWifi().getEncryptionType();
+                    case Barcode.TYPE_PRODUCT:
+                        if (!bd.isAdded()) {
+                            bd.show(fragmentManager, "");
+                        }
+                        bd.fetchRawBarcode(barcode.getRawValue());
                         break;
                     case Barcode.TYPE_URL:
                         if (!bd.isAdded()) {
                             bd.show(fragmentManager, "");
                         }
                         bd.fetchUrl(barcode.getUrl().getUrl());
-                        String title = barcode.getUrl().getTitle();
-                        String url = barcode.getUrl().getUrl();
                         break;
                 }
             }

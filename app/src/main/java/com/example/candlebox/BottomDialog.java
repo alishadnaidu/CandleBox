@@ -38,9 +38,9 @@ public class BottomDialog extends BottomSheetDialogFragment {
         rawDataDisplay = view.findViewById(R.id.rawdatadisplay);
         btnVisit.setClickable(true);
 
-        title.setText(fetchUrl);
+        title.setText(String.valueOf(fetchRawBarcode));
 
-        rawDataDisplay.setText(BarcodeScannerActivity.rawValue);
+        //rawDataDisplay.setText(BarcodeScannerActivity.rawValue);
 
 
         btnVisit.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +62,17 @@ public class BottomDialog extends BottomSheetDialogFragment {
             @Override
             public void run() {
                 fetchUrl = url;
+            }
+        });
+    }
+
+    public void fetchRawBarcode(String rawBarcode) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                fetchRawBarcode = rawBarcode;
             }
         });
     }
