@@ -27,6 +27,7 @@
         android:layout_below="@+id/circle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-220dp"
+        android:fontFamily="@font/avenir"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
         android:textStyle="bold"
         tools:text="17" />
@@ -37,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTreesFragThree"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-20dp"
+        android:layout_marginTop="-40dp"
+        android:fontFamily="@font/avenir"
         android:text="@string/hoursLabel"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="27sp" />
@@ -50,9 +52,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="7dp"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/avenir"
         android:text="@string/treesTitle"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvTreesEnd"
@@ -62,6 +65,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="5dp"
+        android:fontFamily="@font/avenir"
         android:text="@string/treesTitleEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="20dp" />
@@ -74,6 +78,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/avenir"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="30sp"
         android:textStyle="bold"
