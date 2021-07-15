@@ -85,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
+        if (item.getItemId() == R.id.scan) {
+            Intent i = new Intent(MainActivity.this, BarcodeScannerActivity.class);
+            startActivity(i);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
