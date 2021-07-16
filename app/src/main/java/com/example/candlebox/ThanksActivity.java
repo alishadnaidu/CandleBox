@@ -13,15 +13,10 @@ import com.parse.ParseUser;
 
 public class ThanksActivity extends AppCompatActivity {
 
-    //private ImageView ivThanks;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanks);
-
-        //ivThanks.findViewById(R.id.ivThanks);
-        //ivThanks.setBackgroundResource();
     }
 
     //inflate actionbar
@@ -45,13 +40,24 @@ public class ThanksActivity extends AppCompatActivity {
             finish();
             return true;
         }
+
+        // if the home icon is tapped, navigate to home screen
         if (item.getItemId() == R.id.home) {
             Intent i = new Intent(ThanksActivity.this, MainActivity.class);
             startActivity(i);
             return true;
         }
+
+        // if the scan icon is tapped, navigate to barcode scanning screen
         if (item.getItemId() == R.id.scan) {
             Intent i = new Intent(ThanksActivity.this, BarcodeScannerActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+        // if the add icon is tapped, navigate to add screen
+        if (item.getItemId() == R.id.add) {
+            Intent i = new Intent(ThanksActivity.this, AddActivity.class);
             startActivity(i);
             return true;
         }

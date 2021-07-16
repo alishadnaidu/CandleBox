@@ -47,10 +47,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class BarcodeScannerActivity extends AppCompatActivity {
+
+    public static final String TAG = "BarcodeScannerActivity";
     private ListenableFuture cameraProviderFuture;
     private ExecutorService cameraExecutor;
     private PreviewView previewView;
     private MyImageAnalyzer analyzer;
+    //set to public static because used in UploadCandle to auto-set candle barcode in EditText
     public static String rawValue;
 
     @Override
@@ -106,6 +109,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
 
     private void bindpreview(ProcessCameraProvider processCameraProvider) {
 
+        //setup for camera + barcode scanner
         Preview preview = new Preview.Builder().build();
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
@@ -136,7 +140,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         private void scanbarcode(ImageProxy image) {
             @SuppressLint("UnsafeOptInUsageError") Image image1 = image.getImage();
             assert image1 != null;
-            // if not working -- 11:00 minutes, fromMediaImage issue that I never ran into
             InputImage inputImage = InputImage.fromMediaImage(image1, image.getImageInfo().getRotationDegrees());
             BarcodeScannerOptions options =
                     new BarcodeScannerOptions.Builder()
@@ -156,7 +159,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // Task failed with an exception
-                            // ...
+                            Log.e(TAG, "Failed to scan barcode: " + e);
                         }
                     })
                     .addOnCompleteListener(new OnCompleteListener<List<Barcode>>() {
@@ -168,6 +171,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
 
         }
 
+        //read the barcode and get raw value of barcode
         private void readerBarcodeData(List<Barcode> barcodes) {
             for (Barcode barcode : barcodes) {
                 Rect bounds = barcode.getBoundingBox();
@@ -177,8 +181,9 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                 Log.i("BarcodeScannerActivity", rawValue);
 
                 int valueType = barcode.getValueType();
-                //Log.i("BarcodeScannerActivity", String.valueOf(valueType));
                 // See API reference for complete list of supported types
+                // all candles are type: TYPE_PRODUCT
+                // when candle is scanned, fetch raw barcode (this # serves as the ID of product)
                 switch (valueType) {
                     case Barcode.TYPE_PRODUCT:
                         if (!bd.isAdded()) {

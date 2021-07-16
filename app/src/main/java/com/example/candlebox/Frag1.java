@@ -26,6 +26,7 @@ public class Frag1 extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag1, container, false);
 
+        //must use view.findViewById bc this is a fragment
         TextView tvGreeting1 = (TextView) view.findViewById(R.id.tvGreeting1);
         tvTesterFrag1 = view.findViewById(R.id.tvTesterFrag1);
 
@@ -36,9 +37,11 @@ public class Frag1 extends Fragment {
         // set the hours based on calculations from MainActivity
         tvTesterFrag1.setText(String.valueOf(MainActivity.totalHours));
         Log.i(TAG, String.valueOf(MainActivity.totalHours));
+
         return view;
     }
 
+    //creates new instance of Frag1(), used in adapter
     public static Frag1 newInstance() {
         return new Frag1();
     }

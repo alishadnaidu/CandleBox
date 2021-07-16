@@ -10,33 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.candlebox.R;
 
-// In this case, the fragment displays simple text based on the page
+//fragment stats do not update properly after adding stats without this class
 public class PageFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
-/*
-    private int mPage;
-
-    public static PageFragment newInstance(int page) {
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, page);
-        PageFragment fragment = new PageFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag1, container, false);
-        TextView textView = (TextView) view;
-        //textView.setText("Fragment #" + mPage);
-        return view;
-    }
-    */
 }

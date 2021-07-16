@@ -6,6 +6,7 @@ import com.parse.ParseUser;
 
 @ParseClassName("Stats")
 public class Stats extends ParseObject {
+    // set keys; set getter and setter methods for each field in Stats class
     public static final String KEY_USER = "user";
     public static final String KEY_HOURS = "hours";
 

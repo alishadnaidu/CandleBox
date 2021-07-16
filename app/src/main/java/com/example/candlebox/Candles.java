@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 @ParseClassName("Candles")
 public class Candles extends ParseObject {
+    // set keys; set getter and setter methods for each field in Candles class
     public static final String KEY_RAWBARCODEVALUE = "rawBarcodeValue";
     public static final String KEY_CANDLENAME = "candleName";
     public static final String KEY_INGREDIENTS = "ingredients";

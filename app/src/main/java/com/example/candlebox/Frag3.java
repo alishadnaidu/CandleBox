@@ -27,6 +27,8 @@ public class Frag3 extends Fragment {
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag3, container, false);
+
+        //must use view.findViewById bc this is a fragment
         TextView tvGreeting = (TextView) view.findViewById(R.id.tvGreeting3);
         tvTesterFrag3 = view.findViewById(R.id.tvTesterFrag3);
 
@@ -37,14 +39,16 @@ public class Frag3 extends Fragment {
         //set tree statistic
         tvTesterFrag3.setText(String.valueOf(MainActivity.totalTrees));
         Log.i(TAG, String.valueOf(MainActivity.totalTrees));
+
         return view;
     }
 
+    //creates new instance of Frag3(), used in adapter
     public static Frag3 newInstance() {
         return new Frag3();
     }
 
-    //returns the beginning of a greeting based on the current time
+    //returns the beginning of a greeting based on the current time, used in Frag1 and Frag2 as well
     public static void returnTime() {
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);

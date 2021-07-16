@@ -33,23 +33,25 @@ public class UploadCandle extends AppCompatActivity {
         etRawBarcode = findViewById(R.id.etRawBarcode);
         btnUploadCandle = findViewById(R.id.btnUploadCandle);
 
+        //set hints and auto-fill raw barcode so user doesn't have to type it in
         etCandleName.setHint("Enter name of candle here...");
-        ///etRawBarcode.setHint("Enter the raw barcode number here...");
         etRawBarcode.setText(BarcodeScannerActivity.rawValue);
         etCandleIngredients.setHint("List the ingredients here...");
 
-        //when you submit a new candle to the database, get a fun thank you message!
         btnUploadCandle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String candleName = etCandleName.getText().toString();
                 String candleIngredients = etCandleIngredients.getText().toString();
                 String rawBarcode = etRawBarcode.getText().toString();
+                // error handling for when 1+ fields are left blank
                 if (candleName.isEmpty() || candleIngredients.isEmpty() || rawBarcode.isEmpty()) {
                     Toast.makeText(UploadCandle.this, "Please make sure all fields are filled out!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 saveCandle(candleName, candleIngredients, rawBarcode);
+
+                //when you submit a new candle to the database, get a fun thank you message!
                 Intent i = new Intent(UploadCandle.this, ThanksActivity.class);
                 startActivity(i);
                 finish();
@@ -57,6 +59,7 @@ public class UploadCandle extends AppCompatActivity {
         });
     }
 
+    // save new candle entry in back4app database
     private void saveCandle(String candleName, String ingredients, String rawBarcodeValue) {
         Candles candle = new Candles();
         candle.setCandleName(candleName);
@@ -71,6 +74,8 @@ public class UploadCandle extends AppCompatActivity {
                 }
                 Log.i(TAG, "Candle save was successful!");
                 Toast.makeText(UploadCandle.this, "Successfully added new candle to database!", Toast.LENGTH_SHORT).show();
+
+                //clear edit text fields
                 etCandleName.setText("");
                 etCandleIngredients.setText("");
                 etRawBarcode.setText("");
@@ -99,16 +104,22 @@ public class UploadCandle extends AppCompatActivity {
             finish();
             return true;
         }
+
+        // if the home icon is tapped, navigate to home screen
         if (item.getItemId() == R.id.home) {
             Intent i = new Intent(UploadCandle.this, MainActivity.class);
             startActivity(i);
             return true;
         }
+
+        // if the scan icon is tapped, navigate to barcode scanning screen
         if (item.getItemId() == R.id.scan) {
             Intent i = new Intent(UploadCandle.this, BarcodeScannerActivity.class);
             startActivity(i);
             return true;
         }
+
+        // if the add icon is tapped, navigate to add screen
         if (item.getItemId() == R.id.add) {
             Intent i = new Intent(UploadCandle.this, AddActivity.class);
             startActivity(i);

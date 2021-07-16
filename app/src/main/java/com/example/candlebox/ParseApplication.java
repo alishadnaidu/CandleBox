@@ -10,7 +10,7 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Register your parse models
+        // Registering parse models: stats class and candles class
         ParseObject.registerSubclass(Stats.class);
         ParseObject.registerSubclass(Candles.class);
 

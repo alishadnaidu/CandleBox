@@ -90,11 +90,15 @@ public class AddActivity extends AppCompatActivity {
             finish();
             return true;
         }
+
+        // if the home icon is tapped, navigate to home screen
         if (item.getItemId() == R.id.home) {
             Intent i = new Intent(AddActivity.this, MainActivity.class);
             startActivity(i);
             return true;
         }
+
+        // if the scan icon is tapped, navigate to barcode scanning screen
         if (item.getItemId() == R.id.scan) {
             Intent i = new Intent(AddActivity.this, BarcodeScannerActivity.class);
             startActivity(i);

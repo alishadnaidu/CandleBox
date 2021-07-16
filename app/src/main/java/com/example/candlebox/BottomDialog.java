@@ -31,10 +31,10 @@ public class BottomDialog extends BottomSheetDialogFragment {
     //some variables set to public static because they are accessed in getCandleData() and checkToxicity()
     public static final String TAG = "BottomDialog";
     public static String message;
-    private TextView title;
     public static TextView candleName, ingredientsList, sustainabilityMessage;
-    private String fetchRawBarcode;
     public static ImageView ivCandle;
+
+    private String fetchedRawBarcode;
     private String candleDatabaseName = "";
 
     @Nullable
@@ -42,52 +42,43 @@ public class BottomDialog extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_dialog_barcode, container, false);
-        title = view.findViewById(R.id.allAboutYourCandle);
+
         candleName = view.findViewById(R.id.candleName);
         ingredientsList = view.findViewById(R.id.ingredientsList);
         ivCandle = view.findViewById(R.id.ivCandle);
         sustainabilityMessage = view.findViewById(R.id.sustainabilityMessage);
 
         getCandleData();
-
         return view;
     }
 
-    /*
-    public void fetchUrl(String url) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                fetchUrl = url;
-            }
-        });
-    }
 
-     */
-
+    //gets value of rawBarcode (method used in BarcodeScannerActivity)
     public void fetchRawBarcode(String rawBarcode) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                fetchRawBarcode = rawBarcode;
+                fetchedRawBarcode = rawBarcode;
             }
         });
     }
 
+    //helper method to find candle in database and redirect to upload candle page if it doesn't exist
     private void getCandleData() {
         ParseQuery<Candles> query = ParseQuery.getQuery(Candles.class);
         query.include(Candles.KEY_RAWBARCODEVALUE);
         //find the candle associated with the raw barcode value
-        query.whereEqualTo(Candles.KEY_RAWBARCODEVALUE, fetchRawBarcode);
+        query.whereEqualTo(Candles.KEY_RAWBARCODEVALUE, fetchedRawBarcode);
 
+        //uses getFirstInBackground rather than findInBackground so it doesn't have to search through whole db
         query.getFirstInBackground(new GetCallback<Candles>() {
             @Override
             public void done(Candles candle, ParseException e) {
+                //no ParseException: candle was found successfully
                 if (e == null) {
+                    //check that candlename and rawbarcode value are being fetched correctly
                     Log.i(TAG, "Candle name: " + candle.getCandleName() + ", Raw barcode: " +
                             candle.getRawBarcodeValue());
                     //get the candle name and set the textview
@@ -95,17 +86,18 @@ public class BottomDialog extends BottomSheetDialogFragment {
                     candleName.setText(candleDatabaseName);
                     //rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
                     ingredientsList.setText(candle.getIngredients());
+                    //check whether the candle contains toxic ingredients
                     checkToxicity(candle.getIngredients());
                 }
+                //candle doesn't exist --> navigate to the upload candle screen
                 else if (e.getCode() == ParseException.OBJECT_NOT_FOUND)
                 {
-                    //candle doesn't exist --> navigate to the upload candle screen
                     Intent i = new Intent(BottomDialog.this.getActivity(), UploadCandle.class);
                     startActivity(i);
                     return;
                 }
+                // some other issue with finding candle in database
                 else {
-                    // some other issue with finding candle in database
                     Log.e(TAG, "Issue with getting candle ID", e);
                     return;
                 }
@@ -113,6 +105,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
         });
     }
 
+    //check if candle contain toxic ingredient, have sustainability message reflect message
     private void checkToxicity(String ingredients) {
         if (ingredients.contains("paraffin")) {
             message = "Your candle contains paraffin, which releases carcinogenic soot when burned.";
