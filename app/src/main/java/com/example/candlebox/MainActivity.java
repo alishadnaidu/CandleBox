@@ -124,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "CO2: " + String.valueOf(amountOfCO2));
                 //totalTrees = calcTrees(totalHours);
                 Log.i(TAG, "Trees: " + String.valueOf(totalTrees));
+
+                Frag1.tvTesterFrag1.setText(String.valueOf(totalHours));
+                Frag2.tvTesterFrag2.setText(String.valueOf(amountOfCO2));
+
+                //Frag3.tvTesterFrag3.setText(String.valueOf(totalTrees));
                 /*
                 tvHoursFrag.setText("Total Hours: " + totalHours);
                 tvTotalCO2.setText("From burning candles, you have emitted " + calcCO2(totalHours)

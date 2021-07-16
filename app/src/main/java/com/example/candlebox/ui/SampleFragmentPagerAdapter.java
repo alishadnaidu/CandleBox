@@ -28,6 +28,7 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
         return PAGE_COUNT;
     }
 
+    /*
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
@@ -45,8 +46,10 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
         return fragment;
     }
 
+     */
 
-    /*
+
+
     @NonNull
     @NotNull
     @Override
@@ -63,7 +66,7 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
         return myFragment3;
     }
 
-     */
+
 
 
     @Override

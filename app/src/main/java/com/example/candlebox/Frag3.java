@@ -20,6 +20,7 @@ import java.util.Calendar;
 public class Frag3 extends Fragment {
     public static final String TAG = "Frag3";
     public static String time;
+    public static TextView tvTesterFrag3;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -27,14 +28,14 @@ public class Frag3 extends Fragment {
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag3, container, false);
         TextView tvGreeting = (TextView) view.findViewById(R.id.tvGreeting3);
-        TextView tvTester = (TextView) view.findViewById(R.id.tvTreesFragThree);
+        tvTesterFrag3 = view.findViewById(R.id.tvTesterFrag3);
 
         //set personalized greeting based on current time
         returnTime();
         tvGreeting.setText(time + String.valueOf(ParseUser.getCurrentUser().getUsername()));
 
         //set tree statistic
-        tvTester.setText(String.valueOf(MainActivity.totalTrees));
+        tvTesterFrag3.setText(String.valueOf(MainActivity.totalTrees));
         Log.i(TAG, String.valueOf(MainActivity.totalTrees));
         return view;
     }

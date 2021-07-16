@@ -21,7 +21,7 @@
         android:src="@drawable/blue_circle_outline" />
 
     <TextView
-        android:id="@+id/tvCO2FragTwo"
+        android:id="@+id/tvTesterFrag2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/circle"
@@ -36,7 +36,7 @@
         android:id="@+id/tvCO2Label"
         android:layout_width="155dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvCO2FragTwo"
+        android:layout_below="@+id/tvTesterFrag2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-40dp"
         android:fontFamily="@font/avenir"

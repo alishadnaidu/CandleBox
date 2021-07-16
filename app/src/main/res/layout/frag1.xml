@@ -22,7 +22,7 @@
         android:src="@drawable/blue_circle_outline" />
 
     <TextView
-        android:id="@+id/tvHoursFrag"
+        android:id="@+id/tvTesterFrag1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/circle"
@@ -37,7 +37,7 @@
         android:id="@+id/tvHoursLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvHoursFrag"
+        android:layout_below="@+id/tvTesterFrag1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-40dp"
         android:fontFamily="@font/avenir"
