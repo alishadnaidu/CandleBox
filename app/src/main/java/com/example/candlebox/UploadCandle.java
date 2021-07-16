@@ -21,7 +21,6 @@ public class UploadCandle extends AppCompatActivity {
 
     public static final String TAG = "UploadActivity";
     private EditText etCandleName, etCandleIngredients, etRawBarcode;
-    private Button btnUploadCandle;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class UploadCandle extends AppCompatActivity {
         etCandleName = findViewById(R.id.etCandleName);
         etCandleIngredients = findViewById(R.id.etCandleIngredients);
         etRawBarcode = findViewById(R.id.etRawBarcode);
-        btnUploadCandle = findViewById(R.id.btnUploadCandle);
+        Button btnUploadCandle = findViewById(R.id.btnUploadCandle);
 
         //set hints and auto-fill raw barcode so user doesn't have to type it in
         etCandleName.setHint("Enter name of candle here...");

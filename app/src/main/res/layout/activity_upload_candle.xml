@@ -17,7 +17,7 @@
         android:layout_marginTop="5sp"
         android:layout_marginEnd="5sp"
         android:fontFamily="@font/avenir"
-        android:text="Uh-oh! Looks like your candle doesn't exist in our database yet. Would you mind filling it out for us below?"
+        android:text="@string/uhOh"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
