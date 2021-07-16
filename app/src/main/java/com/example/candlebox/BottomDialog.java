@@ -28,10 +28,11 @@ import java.util.concurrent.Executors;
 
 public class BottomDialog extends BottomSheetDialogFragment {
 
-    //some variables set to public static because they are accessed in getCandleData()
+    //some variables set to public static because they are accessed in getCandleData() and checkToxicity()
     public static final String TAG = "BottomDialog";
+    public static String message;
     private TextView title;
-    public static TextView candleName, rawDataDisplay, ingredientsList;
+    public static TextView candleName, rawDataDisplay, ingredientsList, sustainabilityMessage;
     private String fetchRawBarcode;
     public static ImageView ivCandle;
     private String candleDatabaseName = "";
@@ -46,6 +47,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
         rawDataDisplay = view.findViewById(R.id.rawdatadisplay);
         ingredientsList = view.findViewById(R.id.ingredientsList);
         ivCandle = view.findViewById(R.id.ivCandle);
+        sustainabilityMessage = view.findViewById(R.id.sustainabilityMessage);
 
         getCandleData();
 
@@ -93,51 +95,31 @@ public class BottomDialog extends BottomSheetDialogFragment {
                     candleDatabaseName = candle.getCandleName();
                     candleName.setText(candleDatabaseName);
                     rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
+                    checkToxicity(candle.getIngredients());
                 }
                 else if (e.getCode() == ParseException.OBJECT_NOT_FOUND)
                 {
-                    //object doesn't exist
+                    //candle doesn't exist --> navigate to the upload candle screen
                     Intent i = new Intent(BottomDialog.this.getActivity(), UploadCandle.class);
                     startActivity(i);
-
                     return;
                 }
                 else {
+                    // some other issue with finding candle in database
                     Log.e(TAG, "Issue with getting candle ID", e);
                     return;
                 }
             }
         });
+    }
 
-        /*
-        query.findInBackground(new FindCallback<Candles>() {
-            @Override
-            public void done(List<Candles> objects, ParseException e) {
-                if (e == null) {
-                    //should only have one value in this list, which is the candle that corresponds to the barcode
-                    for (Candles candle: objects) {
-                        //check that the name and barcode and correct
-                        Log.i(TAG, "Candle name: " + candle.getCandleName() + ", Raw barcode: " +
-                                candle.getRawBarcodeValue());
-                        //get the candle name and set the textview
-                        candleDatabaseName = candle.getCandleName();
-                        candleName.setText(candleDatabaseName);
-                        rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
-                    }
-                }
-                else if (e.getCode() == ParseException.OBJECT_NOT_FOUND)
-                {
-                    //object doesn't exist
-
-                }
-                else {
-                    Log.e(TAG, "Issue with getting candle ID", e);
-                    return;
-                }
-
-            }
-        });
-
-         */
+    private void checkToxicity(String ingredients) {
+        if (ingredients.contains("paraffin")) {
+            message = "Your candle contains paraffin, which releases carcinogenic soot when burned.";
+        }
+        else {
+            message = "Your candle seems to be non-toxic!";
+        }
+        sustainabilityMessage.setText(message);
     }
 }

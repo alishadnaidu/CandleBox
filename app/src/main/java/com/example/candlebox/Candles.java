@@ -4,6 +4,8 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+
 @ParseClassName("Candles")
 public class Candles extends ParseObject {
     public static final String KEY_RAWBARCODEVALUE = "rawBarcodeValue";
@@ -25,6 +27,7 @@ public class Candles extends ParseObject {
         return getString(KEY_INGREDIENTS);
     }
     public void setIngredients(String ingredients) { put(KEY_INGREDIENTS, ingredients);}
+
 
 
 }
