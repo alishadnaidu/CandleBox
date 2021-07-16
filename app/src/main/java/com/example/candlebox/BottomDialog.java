@@ -32,7 +32,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
     public static final String TAG = "BottomDialog";
     public static String message;
     private TextView title;
-    public static TextView candleName, rawDataDisplay, ingredientsList, sustainabilityMessage;
+    public static TextView candleName, ingredientsList, sustainabilityMessage;
     private String fetchRawBarcode;
     public static ImageView ivCandle;
     private String candleDatabaseName = "";
@@ -44,7 +44,6 @@ public class BottomDialog extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.bottom_dialog_barcode, container, false);
         title = view.findViewById(R.id.allAboutYourCandle);
         candleName = view.findViewById(R.id.candleName);
-        rawDataDisplay = view.findViewById(R.id.rawdatadisplay);
         ingredientsList = view.findViewById(R.id.ingredientsList);
         ivCandle = view.findViewById(R.id.ivCandle);
         sustainabilityMessage = view.findViewById(R.id.sustainabilityMessage);
@@ -94,7 +93,8 @@ public class BottomDialog extends BottomSheetDialogFragment {
                     //get the candle name and set the textview
                     candleDatabaseName = candle.getCandleName();
                     candleName.setText(candleDatabaseName);
-                    rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
+                    //rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
+                    ingredientsList.setText(candle.getIngredients());
                     checkToxicity(candle.getIngredients());
                 }
                 else if (e.getCode() == ParseException.OBJECT_NOT_FOUND)

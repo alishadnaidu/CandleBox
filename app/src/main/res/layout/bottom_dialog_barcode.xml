@@ -37,37 +37,26 @@
         android:textSize="16sp"
         tools:text="The Lovers Candle" />
 
-    <TextView
-        android:id="@+id/rawdatadisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/candleName"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="162dp"
-        android:textAlignment="center"
-        tools:text="39028439022" />
-
 
     <TextView
         android:id="@+id/ingredientsList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rawdatadisplay"
+        android:layout_below="@+id/ivCandle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="158dp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        tools:text="List of ingredients, etc etc." />
 
     <TextView
         android:id="@+id/sustainabilityMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivCandle"
+        android:layout_below="@+id/ingredientsList"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="158dp"
+        android:paddingBottom="20dp"
         android:textAlignment="center"
         tools:text="Great job picking out this candle! It has no toxic ingredients and is safe for the environment!" />
 
@@ -75,8 +64,9 @@
         android:id="@+id/ivCandle"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@+id/ingredientsList"
+        android:layout_below="@+id/candleName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/candle_logo" />
+        app:srcCompat="@drawable/candle_logo"
+        tools:layout_centerHorizontal="true" />
 </RelativeLayout>
