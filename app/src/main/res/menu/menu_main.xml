@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/addCandle"
+        android:icon="@drawable/candle_logo"
+        android:title=""
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/scan"
         android:icon="@drawable/scan"
         android:title=""

@@ -90,6 +90,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
+        if (item.getItemId() == R.id.addCandle) {
+            Intent i = new Intent(MainActivity.this, UploadCandle.class);
+            startActivity(i);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

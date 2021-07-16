@@ -25,6 +25,8 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".AddActivity"></activity>
         <activity android:name=".BarcodeScannerActivity"></activity>
+        <activity android:name=".UploadCandle"></activity>
+        <activity android:name=".ThanksActivity"></activity>
         
     </application>
 
