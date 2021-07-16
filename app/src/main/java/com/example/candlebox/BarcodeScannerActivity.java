@@ -141,8 +141,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
             BarcodeScannerOptions options =
                     new BarcodeScannerOptions.Builder()
                             .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
-                            //Barcode.FORMAT_QR_CODE,
-                            //Barcode.FORMAT_AZTEC)
                             .build();
 
             BarcodeScanner scanner = BarcodeScanning.getClient();
@@ -188,15 +186,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                         }
                         bd.fetchRawBarcode(barcode.getRawValue());
                         break;
-                        /*
-                    case Barcode.TYPE_URL:
-                        if (!bd.isAdded()) {
-                            bd.show(fragmentManager, "");
-                        }
-                        bd.fetchUrl(barcode.getUrl().getUrl());
-                        break;
-
-                         */
                 }
             }
         }

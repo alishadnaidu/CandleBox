@@ -34,7 +34,8 @@ public class UploadCandle extends AppCompatActivity {
         btnUploadCandle = findViewById(R.id.btnUploadCandle);
 
         etCandleName.setHint("Enter name of candle here...");
-        etRawBarcode.setHint("Enter the raw barcode number here...");
+        ///etRawBarcode.setHint("Enter the raw barcode number here...");
+        etRawBarcode.setText(BarcodeScannerActivity.rawValue);
         etCandleIngredients.setHint("List the ingredients here...");
 
         //when you submit a new candle to the database, get a fun thank you message!

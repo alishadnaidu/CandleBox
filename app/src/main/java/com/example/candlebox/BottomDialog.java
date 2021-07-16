@@ -1,5 +1,6 @@
 package com.example.candlebox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -80,26 +82,62 @@ public class BottomDialog extends BottomSheetDialogFragment {
         query.include(Candles.KEY_RAWBARCODEVALUE);
         //find the candle associated with the raw barcode value
         query.whereEqualTo(Candles.KEY_RAWBARCODEVALUE, fetchRawBarcode);
-        query.findInBackground(new FindCallback<Candles>() {
+
+        query.getFirstInBackground(new GetCallback<Candles>() {
             @Override
-            public void done(List<Candles> objects, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting candle ID", e);
-                    return;
-                }
-                //should only have one value in this list, which is the candle that corresponds to the barcode
-                for (Candles candle: objects) {
-                    //check that the name and barcode and correct
+            public void done(Candles candle, ParseException e) {
+                if (e == null) {
                     Log.i(TAG, "Candle name: " + candle.getCandleName() + ", Raw barcode: " +
                             candle.getRawBarcodeValue());
-
                     //get the candle name and set the textview
                     candleDatabaseName = candle.getCandleName();
                     candleName.setText(candleDatabaseName);
                     rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
                 }
+                else if (e.getCode() == ParseException.OBJECT_NOT_FOUND)
+                {
+                    //object doesn't exist
+                    Intent i = new Intent(BottomDialog.this.getActivity(), UploadCandle.class);
+                    startActivity(i);
+
+                    return;
+                }
+                else {
+                    Log.e(TAG, "Issue with getting candle ID", e);
+                    return;
+                }
+            }
+        });
+
+        /*
+        query.findInBackground(new FindCallback<Candles>() {
+            @Override
+            public void done(List<Candles> objects, ParseException e) {
+                if (e == null) {
+                    //should only have one value in this list, which is the candle that corresponds to the barcode
+                    for (Candles candle: objects) {
+                        //check that the name and barcode and correct
+                        Log.i(TAG, "Candle name: " + candle.getCandleName() + ", Raw barcode: " +
+                                candle.getRawBarcodeValue());
+                        //get the candle name and set the textview
+                        candleDatabaseName = candle.getCandleName();
+                        candleName.setText(candleDatabaseName);
+                        rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
+                    }
+                }
+                else if (e.getCode() == ParseException.OBJECT_NOT_FOUND)
+                {
+                    //object doesn't exist
+
+                }
+                else {
+                    Log.e(TAG, "Issue with getting candle ID", e);
+                    return;
+                }
 
             }
         });
+
+         */
     }
 }
