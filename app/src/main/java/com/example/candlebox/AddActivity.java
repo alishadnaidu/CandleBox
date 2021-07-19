@@ -74,7 +74,13 @@ public class AddActivity extends AppCompatActivity {
                     Toast.makeText(AddActivity.this, "Error while saving stats", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Stats save was successful!");
-                Toast.makeText(AddActivity.this, "Successfully logged hours!", Toast.LENGTH_SHORT).show();
+
+                if (hours == 1) {
+                    Toast.makeText(AddActivity.this, "Successfully logged " + hours + " hour!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(AddActivity.this, "Successfully logged " + hours + " hours!", Toast.LENGTH_SHORT).show();
+                }
                 stepperTouch.setCount(0);
             }
         });

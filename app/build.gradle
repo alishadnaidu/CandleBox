@@ -73,4 +73,9 @@ dependencies {
     // https://github.com/DanielMartinus/Stepper-Touch
     implementation 'com.github.DanielMartinus:Stepper-Touch:1.0.1'
 
+    // konfetti dependency
+    // https://github.com/DanielMartinus/konfetti
+    implementation 'nl.dionsegijn:konfetti:1.3.2'
+
+
 }
