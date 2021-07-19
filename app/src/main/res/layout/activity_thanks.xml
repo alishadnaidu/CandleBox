@@ -29,5 +29,18 @@
         android:background="@drawable/largesize_celebrations"
         app:backgroundTint="@null" />
 
+    <Button
+        android:id="@+id/btnTakeMeHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnCelebrate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/avenir"
+        android:text="Take me home"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
 
 </RelativeLayout>

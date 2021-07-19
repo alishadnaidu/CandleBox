@@ -12,7 +12,7 @@
     <string name="hoursTitleEnd">of candle-burning</string>
     <string name="co2Title">You have emitted…</string>
     <string name="co2TitleEnd">of CO2 by burning candles</string>
-    <string name="enterHours">Enter hours of candle-burning here…</string>
+    <string name="enterHours">Enter hours of candle-burning below:</string>
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="signIn">sign in</string>

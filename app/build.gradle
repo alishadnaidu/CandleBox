@@ -69,4 +69,8 @@ dependencies {
     // from google ml kit website
     implementation 'com.google.mlkit:barcode-scanning:16.2.0'
 
+    // stepper-touch dependency
+    // https://github.com/DanielMartinus/Stepper-Touch
+    implementation 'com.github.DanielMartinus:Stepper-Touch:1.0.1'
+
 }

@@ -107,11 +107,11 @@ public class BottomDialog extends BottomSheetDialogFragment {
 
     //check if candle contain toxic ingredient, have sustainability message reflect message
     private void checkToxicity(String ingredients) {
-        if (ingredients.contains("paraffin")) {
+        if (ingredients.toLowerCase().contains("paraffin")) {
             message = "Your candle contains paraffin, which releases carcinogenic soot when burned.";
         }
         else {
-            message = "Your candle seems to be non-toxic!";
+            message = "Your candle is non-toxic. Great job picking it out!";
         }
         sustainabilityMessage.setText(message);
     }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -17,6 +19,15 @@ public class ThanksActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanks);
+        Button btnTakeMeHome = findViewById(R.id.btnTakeMeHome);
+
+        btnTakeMeHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ThanksActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     //inflate actionbar

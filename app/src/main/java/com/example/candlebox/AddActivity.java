@@ -18,35 +18,46 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import nl.dionsegijn.steppertouch.OnStepCallback;
+import nl.dionsegijn.steppertouch.StepperTouch;
+
 public class AddActivity extends AppCompatActivity {
 
     public static final String TAG = "AddActivity";
-    private EditText etHours;
     private Button btnLog;
+    private StepperTouch stepperTouch;
+    private Integer hoursToAdd;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        etHours = findViewById(R.id.etHours);
         btnLog = findViewById(R.id.btnLog);
+
+        stepperTouch = findViewById(R.id.stepperTouch);
+        stepperTouch.setMinValue(0);
+        stepperTouch.setSideTapEnabled(true);
+        stepperTouch.addStepCallback(new OnStepCallback() {
+            @Override
+            public void onStep(int value, boolean positive) {
+                hoursToAdd = value;
+            }
+        });
 
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //assign the integer value with etHours to hours integer variable
-                Integer hours = Integer.parseInt(etHours.getText().toString());
-                //if user has not inputted anything, show a toast
-                if (hours.toString().isEmpty() || hours == 0) {
-                    Toast.makeText(AddActivity.this, "Hours cannot be empty or 0!", Toast.LENGTH_SHORT).show();
+                //error-handling for if user inputs 0
+                if (hoursToAdd == 0) {
+                    Toast.makeText(AddActivity.this, "Hours must be greater than 0!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                saveStats(hours, currentUser);
+                saveStats(hoursToAdd, currentUser);
                 Intent i = new Intent(AddActivity.this, MainActivity.class);
                 startActivity(i);
-            }
+                }
         });
     }
 
@@ -64,7 +75,7 @@ public class AddActivity extends AppCompatActivity {
                 }
                 Log.i(TAG, "Stats save was successful!");
                 Toast.makeText(AddActivity.this, "Successfully logged hours!", Toast.LENGTH_SHORT).show();
-                etHours.setText("");
+                stepperTouch.setCount(0);
             }
         });
     }
