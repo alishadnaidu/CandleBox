@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvRecentCandleName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenir"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Name of Candle" />
+
+    <TextView
+        android:id="@+id/tvRecentCandleIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Ingredients" />
+
+    <TextView
+        android:id="@+id/tvRecentToxicity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Toxicity" />
+</LinearLayout>

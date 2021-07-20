@@ -49,6 +49,16 @@ public class BottomDialog extends BottomSheetDialogFragment {
         sustainabilityMessage = view.findViewById(R.id.sustainabilityMessage);
 
         getCandleData();
+
+        ivCandle.setClickable(true);
+        ivCandle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //use v.getContext() to start intent from bottom sheet dialog fragment
+                Intent i = new Intent(v.getContext(), AddActivity.class);
+                startActivity(i);
+            }
+        });
         return view;
     }
 

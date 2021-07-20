@@ -24,6 +24,7 @@ public class ThanksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thanks);
         Button btnTakeMeHome = findViewById(R.id.btnTakeMeHome);
         final KonfettiView konfettiView = findViewById(R.id.viewKonfetti);
+        //automatic confetti when thank you page is created
         konfettiView.build().addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA, Color.rgb(42,205,255), Color.rgb(169,100,253))
                 .setDirection(0.0, 359.0)
                 .setSpeed(1f, 5f)
@@ -33,6 +34,8 @@ public class ThanksActivity extends AppCompatActivity {
                 .addSizes(new Size(12, 5f))
                 .setPosition(-50f, konfettiView.getWidth() + 50f, -50f, -50f)
                 .streamFor(300, 5000L);
+
+        //so that you can click and have confetti too!
         konfettiView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
