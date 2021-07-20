@@ -39,7 +39,7 @@ public class CandlesAdapter extends RecyclerView.Adapter<CandlesAdapter.ViewHold
             // Bind the post data to the view elements
             tvRecentCandleName.setText(candle.getCandleName());
             tvRecentCandleIngredients.setText(candle.getIngredients());
-            tvRecentCandleToxicity.setText("Change this later but...not toxic!");
+            tvRecentCandleToxicity.setText(checkToxicity(candle.getIngredients()));
         }
     }
 
@@ -60,5 +60,17 @@ public class CandlesAdapter extends RecyclerView.Adapter<CandlesAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Candles candle = candles.get(position);
         holder.bind(candle);
+    }
+
+    //check if candle contain toxic ingredient, have sustainability message reflect message
+    public String checkToxicity(String ingredients) {
+        String message;
+        if (ingredients.toLowerCase().contains("paraffin")) {
+            message = "Your candle contains paraffin, which releases carcinogenic soot when burned.";
+        }
+        else {
+            message = "Your candle is non-toxic. Great job picking it out!";
+        }
+        return message;
     }
 }
