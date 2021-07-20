@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -50,12 +51,13 @@ public class BottomDialog extends BottomSheetDialogFragment {
 
         getCandleData();
 
+        //double tap to go to screen with recently scanned candles
         ivCandle.setClickable(true);
-        ivCandle.setOnClickListener(new View.OnClickListener() {
+        ivCandle.setOnTouchListener(new OnDoubleTapListener(view.getContext()) {
             @Override
-            public void onClick(View v) {
-                //use v.getContext() to start intent from bottom sheet dialog fragment
-                Intent i = new Intent(v.getContext(), RecentlyScannedActivity.class);
+            public void onDoubleTap(MotionEvent e) {
+                Log.i(TAG, "Double tapped!");
+                Intent i = new Intent(view.getContext(), RecentlyScannedActivity.class);
                 startActivity(i);
             }
         });

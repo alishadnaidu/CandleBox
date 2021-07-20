@@ -1,7 +1,10 @@
 package com.example.candlebox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,5 +64,50 @@ public class RecentlyScannedActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    //inflate actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    // comes into play when an item in the actionbar is clicked
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // if the logout icon is tapped, log out + navigate to the login screen
+        if (item.getItemId() == R.id.logout) {
+            ParseUser.logOut();
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            Intent i = new Intent(RecentlyScannedActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish();
+            return true;
+        }
+
+        // if the home icon is tapped, navigate to home screen
+        if (item.getItemId() == R.id.home) {
+            Intent i = new Intent(RecentlyScannedActivity.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+        // if the scan icon is tapped, navigate to barcode scanning screen
+        if (item.getItemId() == R.id.scan) {
+            Intent i = new Intent(RecentlyScannedActivity.this, BarcodeScannerActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+        // if the add icon is tapped, navigate to logging screen
+        if (item.getItemId() == R.id.add) {
+            Intent i = new Intent(RecentlyScannedActivity.this, AddActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
