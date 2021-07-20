@@ -28,7 +28,7 @@
         <activity android:name=".UploadCandle"></activity>
         <activity android:name=".ThanksActivity"></activity>
         <activity android:name=".RecentlyScannedActivity"></activity>
-        
+
     </application>
 
 </manifest>

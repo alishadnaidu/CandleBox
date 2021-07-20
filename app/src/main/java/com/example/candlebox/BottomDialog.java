@@ -55,7 +55,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 //use v.getContext() to start intent from bottom sheet dialog fragment
-                Intent i = new Intent(v.getContext(), AddActivity.class);
+                Intent i = new Intent(v.getContext(), RecentlyScannedActivity.class);
                 startActivity(i);
             }
         });
