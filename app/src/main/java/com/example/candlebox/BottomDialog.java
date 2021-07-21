@@ -53,7 +53,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
 
         getCandleData();
 
-        //double tap to go to screen with recently scanned candlesthdflfuunbcejfbelkeknjefjcbebkdr
+        //double tap to go to screen with recently scanned candles
         ivCandle.setClickable(true);
         ivCandle.setOnTouchListener(new OnDoubleTapListener(view.getContext()) {
             @Override
@@ -120,6 +120,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
         });
     }
 
+    //SAVE candle to recently scanned class on back4app
     private void addToRecentlyScanned(String candleName, String ingredients, String rawBarcodeValue) {
         RecentlyScannedCandles candle = new RecentlyScannedCandles();
         candle.setRecentCandleName(candleName);
@@ -143,6 +144,12 @@ public class BottomDialog extends BottomSheetDialogFragment {
         }
         else {
             message = "Your candle is non-toxic. Great job picking it out!";
+            if (ingredients.toLowerCase().contains("soy")) {
+                message = message + " Your candle also has a soy wax base, which is a healthy, eco-friendly alternative!";
+            }
+            if (ingredients.toLowerCase().contains("beeswax")) {
+                message = message + " Your candle also has a beeswax base, which is a healthy, eco-friendly alternative. Say thanks to the bees!";
+            }
         }
         sustainabilityMessage.setText(message);
     }

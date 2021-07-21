@@ -35,7 +35,7 @@ public class RecentlyScannedActivity extends AppCompatActivity {
 
         rvRecentlyScanned = findViewById(R.id.rvRecentlyScanned);
 
-        // initialize the array that will hold posts and create a PostsAdapter
+        // initialize the array that will hold posts and create an adapter for RecentlyScannedCandles
         allCandles = new ArrayList<>();
         adapter = new CandlesAdapter(this, allCandles);
 
@@ -46,31 +46,8 @@ public class RecentlyScannedActivity extends AppCompatActivity {
         queryRecentlyScanned();
     }
 
-    /*
-    private void queryCandles() {
-        ParseQuery<Candles> query = ParseQuery.getQuery(Candles.class);
-        query.include(Candles.KEY_RAWBARCODEVALUE);
-        query.addDescendingOrder("createdAt");
-        query.findInBackground(new FindCallback<Candles>() {
-            @Override
-            public void done(List<Candles> candles, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting candles", e);
-                    return;
-                }
 
-                for (Candles candle: candles) {
-                    Log.i(TAG, "Candle name: " + candle.getCandleName());
-                }
-
-                //allCandles.addAll(candles);
-                adapter.notifyDataSetChanged();
-            }
-        });
-    }
-
-     */
-
+    // load in the entries in the recently scanned candles class
     private void queryRecentlyScanned() {
         ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
         query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
