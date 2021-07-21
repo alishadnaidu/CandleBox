@@ -42,7 +42,6 @@ public class RecentlyScannedActivity extends AppCompatActivity {
         rvRecentlyScanned.setAdapter(adapter);
         rvRecentlyScanned.setLayoutManager(new LinearLayoutManager(this));
 
-
         queryRecentlyScanned();
     }
 
