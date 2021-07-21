@@ -6,7 +6,7 @@
     <string name="hoursLabel">hours</string>
     <string name="CO2Label">grams</string>
     <string name="treesLabel">trees</string>
-    <string name="treesTitle">It would take a mature tree…</string>
+    <string name="treesTitle">To put this into context, it would take a mature tree…</string>
     <string name="treesTitleEnd">to offset your CO2 emission</string>
     <string name="hoursTitle">You have logged…</string>
     <string name="hoursTitleEnd">of candle-burning</string>

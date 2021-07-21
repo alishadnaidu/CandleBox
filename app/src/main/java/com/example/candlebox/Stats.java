@@ -13,14 +13,13 @@ public class Stats extends ParseObject {
     public ParseUser getUser() {
         return getParseUser(KEY_USER);
     }
-
     public void setUser(ParseUser user) {
         put(KEY_USER, user);
     }
+
     public Integer getHours() {
         return getInt(KEY_HOURS);
     }
-
     public void setHours(Integer hours) {
         put(KEY_HOURS, hours);
     }

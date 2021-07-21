@@ -12,7 +12,7 @@ public class RecentlyScannedCandles extends ParseObject {
     public static final String KEY_RECENTRAWBARCODEVALUE = "rawBarcodeValue";
     public static final String KEY_RECENTCANDLENAME = "candleName";
     public static final String KEY_RECENTINGREDIENTS = "ingredients";
-
+    public static final String KEY_USER = "user";
 
     public String getRecentRawBarcodeValue() {
         return getString(KEY_RECENTRAWBARCODEVALUE);
@@ -29,6 +29,11 @@ public class RecentlyScannedCandles extends ParseObject {
     }
     public void setRecentIngredients(String ingredients) { put(KEY_RECENTINGREDIENTS, ingredients);}
 
-
+    public ParseUser getUser() {
+        return getParseUser(KEY_USER);
+    }
+    public void setUser(ParseUser user) {
+        put(KEY_USER, user);
+    }
 
 }

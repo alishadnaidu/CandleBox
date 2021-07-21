@@ -21,6 +21,7 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import org.jetbrains.annotations.NotNull;
@@ -120,12 +121,14 @@ public class BottomDialog extends BottomSheetDialogFragment {
         });
     }
 
-    //SAVE candle to recently scanned class on back4app
+    //save candle to recently scanned class on back4app
     private void addToRecentlyScanned(String candleName, String ingredients, String rawBarcodeValue) {
         RecentlyScannedCandles candle = new RecentlyScannedCandles();
         candle.setRecentCandleName(candleName);
         candle.setRecentIngredients(ingredients);
         candle.setRecentRawBarcodeValue(rawBarcodeValue);
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        candle.setUser(currentUser);
         candle.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

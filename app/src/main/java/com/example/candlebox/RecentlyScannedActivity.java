@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -25,6 +27,8 @@ public class RecentlyScannedActivity extends AppCompatActivity {
 
     protected CandlesAdapter adapter;
     protected List<RecentlyScannedCandles> allCandles;
+
+    public String mostRecentBarcode;
 
     private RecyclerView rvRecentlyScanned;
 
@@ -49,7 +53,10 @@ public class RecentlyScannedActivity extends AppCompatActivity {
     // load in the entries in the recently scanned candles class
     private void queryRecentlyScanned() {
         ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
+        //query.include(ParseUser.getCurrentUser().toString());
         query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
+        //only include the candle-burning stats of the current user
+        query.whereEqualTo(RecentlyScannedCandles.KEY_USER, ParseUser.getCurrentUser());
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<RecentlyScannedCandles>() {
             @Override
@@ -59,12 +66,32 @@ public class RecentlyScannedActivity extends AppCompatActivity {
                     return;
                 }
                 for (RecentlyScannedCandles candle: candles) {
-                    Log.i(TAG, "Candle name: " + candle.getRecentCandleName());
+                    //Log.i(TAG, "Candle name: " + candle.getRecentCandleName());
                 }
                 allCandles.addAll(candles);
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+
+    // gets the raw barcode value of the most recent entry
+    private String getFirstCandle() {
+        ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
+        query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
+        query.addDescendingOrder("createdAt");
+        query.getFirstInBackground(new GetCallback<RecentlyScannedCandles>() {
+            @Override
+            public void done(RecentlyScannedCandles object, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with finding first candle", e);
+                    return;
+                }
+                mostRecentBarcode = object.getRecentRawBarcodeValue();
+                Log.i(TAG, "first candle barcode: " + mostRecentBarcode);
+            }
+        });
+        return mostRecentBarcode;
     }
 
     //inflate actionbar
