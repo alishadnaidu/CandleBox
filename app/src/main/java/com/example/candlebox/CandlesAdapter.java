@@ -16,9 +16,9 @@ import java.util.List;
 public class CandlesAdapter extends RecyclerView.Adapter<CandlesAdapter.ViewHolder> {
 
     private Context context;
-    private List<Candles> candles;
+    private List<RecentlyScannedCandles> candles;
 
-    public CandlesAdapter(Context context, List<Candles> candles) {
+    public CandlesAdapter(Context context, List<RecentlyScannedCandles> candles) {
         this.context = context;
         this.candles = candles;
     }
@@ -35,11 +35,11 @@ public class CandlesAdapter extends RecyclerView.Adapter<CandlesAdapter.ViewHold
             tvRecentCandleToxicity = itemView.findViewById(R.id.tvRecentToxicity);
         }
 
-        public void bind(Candles candle) {
+        public void bind(RecentlyScannedCandles candle) {
             // Bind the post data to the view elements
-            tvRecentCandleName.setText(candle.getCandleName());
-            tvRecentCandleIngredients.setText(candle.getIngredients());
-            tvRecentCandleToxicity.setText(checkToxicity(candle.getIngredients()));
+            tvRecentCandleName.setText(candle.getRecentCandleName());
+            tvRecentCandleIngredients.setText(candle.getRecentIngredients());
+            tvRecentCandleToxicity.setText(checkToxicity(candle.getRecentIngredients()));
         }
     }
 
@@ -58,7 +58,7 @@ public class CandlesAdapter extends RecyclerView.Adapter<CandlesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Candles candle = candles.get(position);
+        RecentlyScannedCandles candle = candles.get(position);
         holder.bind(candle);
     }
 

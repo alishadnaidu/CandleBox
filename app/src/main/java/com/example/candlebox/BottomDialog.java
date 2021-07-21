@@ -51,7 +51,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
 
         getCandleData();
 
-        //double tap to go to screen with recently scanned candles
+        //double tap to go to screen with recently scanned candlesthdflfuunbcejfbelkeknjefjcbebkdr
         ivCandle.setClickable(true);
         ivCandle.setOnTouchListener(new OnDoubleTapListener(view.getContext()) {
             @Override

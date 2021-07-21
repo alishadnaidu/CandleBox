@@ -24,7 +24,7 @@ public class RecentlyScannedActivity extends AppCompatActivity {
     public static final String TAG = "RecentlyScannedActivity";
 
     protected CandlesAdapter adapter;
-    protected List<Candles> allCandles;
+    protected List<RecentlyScannedCandles> allCandles;
 
     private RecyclerView rvRecentlyScanned;
 
@@ -41,9 +41,12 @@ public class RecentlyScannedActivity extends AppCompatActivity {
 
         rvRecentlyScanned.setAdapter(adapter);
         rvRecentlyScanned.setLayoutManager(new LinearLayoutManager(this));
-        queryCandles();
+
+
+        queryRecentlyScanned();
     }
 
+    /*
     private void queryCandles() {
         ParseQuery<Candles> query = ParseQuery.getQuery(Candles.class);
         query.include(Candles.KEY_RAWBARCODEVALUE);
@@ -60,6 +63,28 @@ public class RecentlyScannedActivity extends AppCompatActivity {
                     Log.i(TAG, "Candle name: " + candle.getCandleName());
                 }
 
+                //allCandles.addAll(candles);
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+     */
+
+    private void queryRecentlyScanned() {
+        ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
+        query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
+        query.addDescendingOrder("createdAt");
+        query.findInBackground(new FindCallback<RecentlyScannedCandles>() {
+            @Override
+            public void done(List<RecentlyScannedCandles> candles, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting candles", e);
+                    return;
+                }
+                for (RecentlyScannedCandles candle: candles) {
+                    Log.i(TAG, "Candle name: " + candle.getRecentCandleName());
+                }
                 allCandles.addAll(candles);
                 adapter.notifyDataSetChanged();
             }
