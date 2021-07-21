@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -100,6 +102,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
                     ingredientsList.setText(candle.getIngredients());
                     //check whether the candle contains toxic ingredients
                     checkToxicity(candle.getIngredients());
+                    addToRecentlyScanned(candleDatabaseName, candle.getIngredients(), candle.getRawBarcodeValue());
                 }
                 //candle doesn't exist --> navigate to the upload candle screen
                 else if (e.getCode() == ParseException.OBJECT_NOT_FOUND)
@@ -113,6 +116,22 @@ public class BottomDialog extends BottomSheetDialogFragment {
                     Log.e(TAG, "Issue with getting candle ID", e);
                     return;
                 }
+            }
+        });
+    }
+
+    private void addToRecentlyScanned(String candleName, String ingredients, String rawBarcodeValue) {
+        RecentlyScannedCandles candle = new RecentlyScannedCandles();
+        candle.setRecentCandleName(candleName);
+        candle.setRecentIngredients(ingredients);
+        candle.setRecentRawBarcodeValue(rawBarcodeValue);
+        candle.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "error while saving stats");
+                }
+                Log.i(TAG, "Recently scanned candle save was successful!");
             }
         });
     }
