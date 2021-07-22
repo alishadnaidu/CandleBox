@@ -1,6 +1,7 @@
 package com.example.candlebox;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -8,30 +9,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.parse.ParseUser;
 import com.spotify.android.appremote.api.AppRemote;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 
+import com.spotify.protocol.client.CallResult;
 import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
 
 //starter code from : https://developer.spotify.com/documentation/android/quick-start/
 public class SpotifyActivity extends AppCompatActivity {
+    public static final String TAG = "SpotifyActivity";
     private static final String CLIENT_ID = "41b1fdcb5723453d9e7e114cb85bf7be";
     private static final String REDIRECT_URI = "https://courses.codepath.com/courses/android_university_fast_track/pages/bootcamp_structure";
     private SpotifyAppRemote mSpotifyAppRemote;
     private TextView spotifyTitle;
     private EditText etSearchBar;
     private Button btnPlay, btnPause;
+    private ImageView ivSongCover;
     private String song;
     private String artist;
+    private String imageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,7 @@ public class SpotifyActivity extends AppCompatActivity {
         etSearchBar = findViewById(R.id.etSearchBar);
         btnPlay = findViewById(R.id.btnPlay);
         btnPause = findViewById(R.id.btnPause);
+        ivSongCover = findViewById(R.id.ivSongCover);
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +100,7 @@ public class SpotifyActivity extends AppCompatActivity {
 
     private void connected() {
         //start playing a song
-        mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX7K31D69s4M1");
+        mSpotifyAppRemote.getPlayerApi().play("spotify:track:0ZNU020wNYvgW84iljPkPP");
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
@@ -102,6 +110,10 @@ public class SpotifyActivity extends AppCompatActivity {
                         Log.d("MainActivity", track.name + " by " + track.artist.name);
                         song = track.name;
                         artist = track.artist.name;
+                        imageUrl = track.imageUri.toString();
+                        Log.i(TAG, imageUrl + " " + imageUrl.hashCode());
+
+                        setImage(track);
                         setCurrentlyPlaying();
                     }
                 });
@@ -113,13 +125,20 @@ public class SpotifyActivity extends AppCompatActivity {
         SpotifyAppRemote.disconnect(mSpotifyAppRemote);
     }
 
+
+    private void setImage(Track track) {
+        mSpotifyAppRemote.getImagesApi().getImage(track.imageUri).setResultCallback(new CallResult.ResultCallback<Bitmap>() {
+            @Override
+            public void onResult(Bitmap data) {
+                ivSongCover.setImageBitmap(data);
+            }
+        });
+    }
+
     //sets a textview with the currently playing song and artist
     private void setCurrentlyPlaying() {
         spotifyTitle.setText("Currently playing: " + song + " by " + artist);
     }
-
-
-
 
     //inflate actionbar
     @Override
