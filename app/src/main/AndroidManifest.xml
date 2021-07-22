@@ -28,6 +28,7 @@
         <activity android:name=".UploadCandle"></activity>
         <activity android:name=".ThanksActivity"></activity>
         <activity android:name=".RecentlyScannedActivity"></activity>
+        <activity android:name=".SpotifyActivity"></activity>
 
     </application>
 

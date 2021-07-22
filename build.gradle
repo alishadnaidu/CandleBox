@@ -17,6 +17,9 @@ allprojects {
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
+        flatDir{
+            dirs "src/main/libs"
+        }
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
