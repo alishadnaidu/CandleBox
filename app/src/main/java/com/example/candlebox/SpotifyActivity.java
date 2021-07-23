@@ -100,7 +100,7 @@ public class SpotifyActivity extends AppCompatActivity {
 
     private void connected() {
         //start playing a song
-        mSpotifyAppRemote.getPlayerApi().play("spotify:track:0ZNU020wNYvgW84iljPkPP");
+        mSpotifyAppRemote.getPlayerApi().play("spotify:track:5kI4eCXXzyuIUXjQra0Cxi");
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
@@ -110,8 +110,6 @@ public class SpotifyActivity extends AppCompatActivity {
                         Log.d("MainActivity", track.name + " by " + track.artist.name);
                         song = track.name;
                         artist = track.artist.name;
-                        imageUrl = track.imageUri.toString();
-                        Log.i(TAG, imageUrl + " " + imageUrl.hashCode());
 
                         setImage(track);
                         setCurrentlyPlaying();
@@ -137,7 +135,7 @@ public class SpotifyActivity extends AppCompatActivity {
 
     //sets a textview with the currently playing song and artist
     private void setCurrentlyPlaying() {
-        spotifyTitle.setText("Currently playing: " + song + " by " + artist);
+        spotifyTitle.setText(song + " by " + artist);
     }
 
     //inflate actionbar

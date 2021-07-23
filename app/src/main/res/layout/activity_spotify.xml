@@ -9,10 +9,11 @@
         android:id="@+id/tvSpotifyTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/avenir"
-        android:text="Welcome to the Spotify Song Recommendation Page!"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        tools:text="betty by Taylor Swift" />
 
     <EditText
         android:id="@+id/etSearchBar"
@@ -28,21 +29,27 @@
 
     <Button
         android:id="@+id/btnPlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_below="@+id/etSearchBar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="play" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/play"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:backgroundTint="@null" />
 
     <Button
         android:id="@+id/btnPause"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnPlay"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="pause" />
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/etSearchBar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="108dp"
+        android:background="@drawable/pause"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:backgroundTint="@null" />
 
     <ImageView
         android:id="@+id/ivSongCover"

@@ -1,13 +1,18 @@
 package com.example.candlebox;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.parse.ParseFile;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,6 +20,7 @@ import java.util.List;
 
 public class CandlesAdapter extends RecyclerView.Adapter<CandlesAdapter.ViewHolder> {
 
+    public static final String TAG = "CandlesAdapter";
     private Context context;
     private List<RecentlyScannedCandles> candles;
 

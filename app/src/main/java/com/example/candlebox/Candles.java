@@ -1,10 +1,12 @@
 package com.example.candlebox;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @ParseClassName("Candles")
 public class Candles extends ParseObject {
@@ -12,6 +14,7 @@ public class Candles extends ParseObject {
     public static final String KEY_RAWBARCODEVALUE = "rawBarcodeValue";
     public static final String KEY_CANDLENAME = "candleName";
     public static final String KEY_INGREDIENTS = "ingredients";
+    public static final String KEY_IMAGE = "image";
 
 
     public String getRawBarcodeValue() {
@@ -28,6 +31,13 @@ public class Candles extends ParseObject {
         return getString(KEY_INGREDIENTS);
     }
     public void setIngredients(String ingredients) { put(KEY_INGREDIENTS, ingredients);}
+
+    public ParseFile getImg() {
+        return getParseFile(KEY_IMAGE);
+    }
+    public void setImg(ParseFile parseFile) {
+        put(KEY_IMAGE, parseFile);
+    }
 
 
 
