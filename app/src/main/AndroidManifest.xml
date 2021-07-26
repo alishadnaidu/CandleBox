@@ -16,11 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CandleBox">
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".AddActivity"></activity>
@@ -29,6 +24,13 @@
         <activity android:name=".ThanksActivity"></activity>
         <activity android:name=".RecentlyScannedActivity"></activity>
         <activity android:name=".SpotifyActivity"></activity>
+        <activity android:name=".SongRecActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 
