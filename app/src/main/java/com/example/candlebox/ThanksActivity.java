@@ -103,6 +103,12 @@ public class ThanksActivity extends AppCompatActivity {
             startActivity(i);
             return true;
         }
+
+        if (item.getItemId() == R.id.song) {
+            Intent i = new Intent(ThanksActivity.this, SongRecActivity.class);
+            startActivity(i);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

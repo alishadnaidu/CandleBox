@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.song) {
-            Intent i = new Intent(MainActivity.this, SpotifyActivity.class);
+            Intent i = new Intent(MainActivity.this, SongRecActivity.class);
             startActivity(i);
             return true;
         }

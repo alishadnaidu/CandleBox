@@ -10,7 +10,7 @@
     app:cardElevation="8dp"
     app:cardMaxElevation="10dp"
     app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="false">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,11 +26,12 @@
 
         <TextView
             android:id="@+id/tvSongName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_width="248dp"
+            android:layout_height="99dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/ivSongImage"
+            android:gravity="center_vertical"
             android:text="song name"
             android:textColor="@color/black"
             android:textSize="18sp"

@@ -1,6 +1,7 @@
 package com.example.candlebox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.Viewholder> {
@@ -39,7 +43,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.Viewholder> 
         return songList.size();
     }
 
-    public class Viewholder extends RecyclerView.ViewHolder {
+    public class Viewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView ivSongImage;
         private TextView tvSongName;
 
@@ -47,6 +51,18 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.Viewholder> 
             super(itemView);
             ivSongImage = itemView.findViewById(R.id.ivSongImage);
             tvSongName = itemView.findViewById(R.id.tvSongName);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Song song = songList.get(position);
+                Intent intent = new Intent(context, SpotifyActivity.class);
+                intent.putExtra(Song.class.getSimpleName(), Parcels.wrap(song));
+                context.startActivity(intent);
+            }
         }
     }
 }

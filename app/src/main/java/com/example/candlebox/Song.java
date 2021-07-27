@@ -1,14 +1,23 @@
 package com.example.candlebox;
+
+import org.parceler.Parcel;
+
+@Parcel
 public class Song {
 
-    private String songName;
-    private String artist;
-    private int songCover;
+    public String songName;
+    public String artist;
+    public int songCover;
+    public String songUri;
 
-    public Song(String songName, String artist, int songCover) {
+    //empty constructor for Parcel
+    public Song() {}
+
+    public Song(String songName, String artist, int songCover, String songUri) {
         this.songName = songName;
         this.artist = artist;
         this.songCover = songCover;
+        this.songUri = songUri;
     }
 
     public String getSongName() {
@@ -33,5 +42,13 @@ public class Song {
 
     public void setSongCover(Integer songCover) {
         this.songCover = songCover;
+    }
+
+    public String getSongUri() {
+        return songUri;
+    }
+
+    public void setSongUri(String uri) {
+        this.songUri = uri;
     }
 }

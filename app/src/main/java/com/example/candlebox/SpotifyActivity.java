@@ -26,6 +26,11 @@ import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
 
+import org.parceler.Parcels;
+
+import java.io.BufferedReader;
+import java.net.URI;
+
 //starter code from : https://developer.spotify.com/documentation/android/quick-start/
 public class SpotifyActivity extends AppCompatActivity {
     public static final String TAG = "SpotifyActivity";
@@ -38,17 +43,23 @@ public class SpotifyActivity extends AppCompatActivity {
     private ImageView ivSongCover;
     private String song;
     private String artist;
-    private String imageUrl;
+    Song newSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotify);
+        newSong = (Song) Parcels.unwrap(getIntent().getParcelableExtra(Song.class.getSimpleName()));
+        Log.d(TAG, String.format("Showing details for '%s'", newSong.getSongName()));
+
         spotifyTitle = findViewById(R.id.tvSpotifyTitle);
         etSearchBar = findViewById(R.id.etSearchBar);
         btnPlay = findViewById(R.id.btnPlay);
         btnPause = findViewById(R.id.btnPause);
         ivSongCover = findViewById(R.id.ivSongCover);
+
+        //spotifyTitle.setText(newSong.getSongName() + " by " + newSong.getArtist());
+
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +111,7 @@ public class SpotifyActivity extends AppCompatActivity {
 
     private void connected() {
         //start playing a song
-        mSpotifyAppRemote.getPlayerApi().play("spotify:track:5kI4eCXXzyuIUXjQra0Cxi");
+        mSpotifyAppRemote.getPlayerApi().play(newSong.songUri);
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
@@ -138,7 +149,11 @@ public class SpotifyActivity extends AppCompatActivity {
         spotifyTitle.setText(song + " by " + artist);
     }
 
-    //inflate actionbar
+
+
+
+
+            //inflate actionbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -152,6 +167,7 @@ public class SpotifyActivity extends AppCompatActivity {
 
         // if the logout icon is tapped, log out + navigate to the login screen
         if (item.getItemId() == R.id.logout) {
+            mSpotifyAppRemote.getPlayerApi().pause();
             ParseUser.logOut();
             // this will be null bc there is no current user
             ParseUser currentUser = ParseUser.getCurrentUser();
@@ -162,19 +178,29 @@ public class SpotifyActivity extends AppCompatActivity {
         }
         //if add icon is tapped, navigate to the add screen
         if (item.getItemId() == R.id.add) {
+            mSpotifyAppRemote.getPlayerApi().pause();
             Intent i = new Intent(SpotifyActivity.this, AddActivity.class);
             startActivity(i);
             return true;
         }
         //if scan icon is tapped, navigate to the barcode screen
         if (item.getItemId() == R.id.scan) {
+            mSpotifyAppRemote.getPlayerApi().pause();
             Intent i = new Intent(SpotifyActivity.this, BarcodeScannerActivity.class);
             startActivity(i);
             return true;
         }
         if (item.getItemId() == R.id.home) {
+            mSpotifyAppRemote.getPlayerApi().pause();
             Intent i = new Intent(SpotifyActivity.this, MainActivity.class);
             startActivity(i);
+            return true;
+        }
+        if (item.getItemId() == R.id.song) {
+            mSpotifyAppRemote.getPlayerApi().pause();
+            Intent i = new Intent(SpotifyActivity.this, SongRecActivity.class);
+            startActivity(i);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
