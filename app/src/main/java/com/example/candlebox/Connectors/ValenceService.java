@@ -30,6 +30,9 @@ public class ValenceService {
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
     public static HashMap<String, String> valenceMap = new HashMap<String, String>();
+    public static HashMap<String, String> negativeMap = new HashMap<String, String>();
+    public static HashMap<String, String> neutralMap = new HashMap<String, String>();
+    public static HashMap<String, String> positiveMap = new HashMap<String, String>();
 
     public ValenceService(Context context) {
         sharedPreferences = context.getSharedPreferences("SPOTIFY", 0);
@@ -86,7 +89,20 @@ public class ValenceService {
         for (Map.Entry m : valenceMap.entrySet()) {
             Log.i(TAG, m.getKey() + ": " + m.getValue());
         }
+        splitMap();
     }
 
-
+    private void splitMap() {
+        for (Map.Entry m : valenceMap.entrySet()) {
+            if (Double.parseDouble(m.getValue().toString()) < 0.333) {
+                negativeMap.put(m.getKey().toString(), m.getValue().toString());
+            }
+            else if (Double.parseDouble(m.getValue().toString()) < 0.666) {
+                neutralMap.put((m.getKey().toString()), m.getValue().toString());
+            }
+            else {
+                positiveMap.put((m.getKey().toString()), m.getValue().toString());
+            }
+        }
+    }
 }
