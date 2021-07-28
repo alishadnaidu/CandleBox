@@ -8,22 +8,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.candlebox.Connectors.SongService;
 import com.example.candlebox.Connectors.TopTrackService;
+import com.example.candlebox.Connectors.ValenceService;
 import com.example.candlebox.R;
-import com.example.candlebox.Song;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class SpotifyMainActivity extends AppCompatActivity {
 
+    public static final String TAG = "SpotifyMainActivity";
     private TextView userView;
     private TextView songView;
     private Button addBtn;
@@ -32,9 +26,11 @@ public class SpotifyMainActivity extends AppCompatActivity {
 
     private SongService songService;
     private TopTrackService topTrackService;
+    private ValenceService valenceService;
     private ArrayList<RecentlyPlayedSong> recentlyPlayedTracks;
     private ArrayList<TopTracks> favTracks;
-    private ArrayList<String> songIds;
+    private ArrayList<String> valences;
+    public static ArrayList<String> songIds;
 
 
     @Override
@@ -44,6 +40,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
 
         songService = new SongService(getApplicationContext());
         topTrackService = new TopTrackService(getApplicationContext());
+        valenceService = new ValenceService(getApplicationContext());
 
         userView = (TextView) findViewById(R.id.mainSongID);
         songView = (TextView) findViewById(R.id.songName);
@@ -52,7 +49,6 @@ public class SpotifyMainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences("SPOTIFY", 0);
         userView.setText(sharedPreferences.getString("userid", "No User"));
 
-        //getTracks();
         getTopTracks();
 
     }
@@ -66,7 +62,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
     }
 
     private void updateTopTrack() {
-        Log.i("SpotifyMainActivity", String.valueOf(favTracks.size()));
+        Log.i(TAG, String.valueOf(favTracks.size()));
         if (favTracks.size() > 0) {
             for (int n = 0; n < favTracks.size(); n++) {
                 //Log.i("SpotifyMainActivity", String.valueOf(favTracks.get(n).getArtist().getName()));
@@ -79,12 +75,25 @@ public class SpotifyMainActivity extends AppCompatActivity {
 
     private void processList() {
         songIds = new ArrayList<>();
-        for (int i = 0; i < favTracks.size()/2; i++) {
+        for (int i = 0; i < favTracks.size(); i++) {
             songIds.add(favTracks.get(i).getId());
         }
-        Log.i("SpotifyMainActivity", String.valueOf(songIds));
+        Log.i(TAG, String.valueOf(songIds));
     }
 
+    private void getValences() {
+        valences = valenceService.getValenceValues(new VolleyCallBack() {
+            @Override
+            public void onSuccess() {
+                Log.i(TAG, "Finished!");
+            }
+        });
+        //valenceService.getValenceValues(() -> {
+            //valences = valenceService.getValences();
+        //});
+
+        Log.i("Valence Values:", String.valueOf(valences));
+    }
 
     private void getTracks() {
         songService.getRecentlyPlayedTracks(() -> {
@@ -96,7 +105,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
     private void updateSong() {
         if (recentlyPlayedTracks.size() > 0) {
             for (int n = 0; n < recentlyPlayedTracks.size(); n++) {
-                //Log.i("SpotifyMainActivity", String.valueOf(recentlyPlayedTracks));
+                //Log.i(TAG, String.valueOf(recentlyPlayedTracks));
             }
             songView.setText(recentlyPlayedTracks.get(0).getName());
             song = recentlyPlayedTracks.get(0);

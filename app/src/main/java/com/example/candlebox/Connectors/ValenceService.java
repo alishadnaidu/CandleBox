@@ -2,13 +2,15 @@ package com.example.candlebox.Connectors;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.candlebox.SpotifyStuff.TopTracks;
+import com.example.candlebox.SpotifyStuff.RecentlyPlayedSong;
+import com.example.candlebox.SpotifyStuff.Valence;
 import com.example.candlebox.SpotifyStuff.VolleyCallBack;
 import com.google.gson.Gson;
 
@@ -20,36 +22,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TopTrackService {
-    private ArrayList<TopTracks> songs = new ArrayList<>();
+public class ValenceService {
+
+    private ArrayList<String> valences = new ArrayList<>();
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
-    String artists, songTitle;
+    private String songValence;
+    //private String endpoint = "https://api.spotify.com/v1/audio-features/";
 
-    public TopTrackService(Context context) {
+    public ValenceService(Context context) {
         sharedPreferences = context.getSharedPreferences("SPOTIFY", 0);
         queue = Volley.newRequestQueue(context);
     }
 
-    public ArrayList<TopTracks> getTopSongs() {
-        return songs;
+    public ArrayList<String> getValences() {
+        return valences;
     }
 
-    public ArrayList<TopTracks> getTopTracks(final VolleyCallBack callBack) {
-        String endpoint = "https://api.spotify.com/v1/me/top/tracks?limit=5";
+
+    public ArrayList<String> getValenceValues(final VolleyCallBack callBack) {
+
+        String endpoint = "https://api.spotify.com/v1/audio-features?ids=2Eeur20xVqfUoM3Q7EFPFt%2C3hUxzQpSfdDqwM3ZTFQY0K%2C1BxfuPKGuaTgP7aM0Bbdwr%2C4svZDCRz4cJoneBpjpx8DJ%2C5kI4eCXXzyuIUXjQra0Cxi";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, endpoint, null, response -> {
-                    Gson gson = new Gson();
-                    JSONArray jsonArray = response.optJSONArray("items");
-                    for (int n = 0; n < jsonArray.length(); n++) {
+                    JSONArray audioFeatures = response.optJSONArray("audio_features");
+                    Log.i("ValenceService", String.valueOf(audioFeatures.length()));
+                    for (int n = 0; n < audioFeatures.length(); n++) {
                         try {
-                            JSONObject object = jsonArray.getJSONObject(n);
-                            TopTracks song = gson.fromJson(object.toString(), TopTracks.class);
-                            songs.add(song);
+                            double v = audioFeatures.getJSONObject(n).optDouble("valence");
+                            valences.add(String.valueOf(v));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
+                    Log.i("All the valences: ", String.valueOf(valences));
 
                     callBack.onSuccess();
                 }, error -> {
@@ -66,8 +72,8 @@ public class TopTrackService {
             }
         };
         queue.add(jsonObjectRequest);
-        return songs;
+        return valences;
     }
+
+
 }
-
-
