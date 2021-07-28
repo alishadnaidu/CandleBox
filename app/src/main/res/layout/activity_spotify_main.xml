@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/recentlyPlayedSongName"
+        android:id="@+id/songName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,10 +15,10 @@
         android:textSize="35sp" />
 
     <TextView
-        android:id="@+id/songId"
+        android:id="@+id/mainSongID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recentlyPlayedSongName"
+        android:layout_below="@+id/songName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="43dp"
         android:text="TextView"

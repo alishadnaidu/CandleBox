@@ -1,4 +1,4 @@
-package com.example.candlebox;
+package com.example.candlebox.SpotifyStuff;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.candlebox.R;
+import com.example.candlebox.Song;
 
 import org.parceler.Parcels;
 

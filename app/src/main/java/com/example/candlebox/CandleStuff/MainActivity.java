@@ -1,7 +1,6 @@
-package com.example.candlebox;
+package com.example.candlebox.CandleStuff;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -9,8 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
+import com.example.candlebox.R;
+import com.example.candlebox.SpotifyStuff.SongRecActivity;
 import com.example.candlebox.ui.SampleFragmentPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.parse.FindCallback;

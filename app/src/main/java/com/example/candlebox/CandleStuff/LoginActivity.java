@@ -1,4 +1,4 @@
-package com.example.candlebox;
+package com.example.candlebox.CandleStuff;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.candlebox.R;
 import com.parse.LogInCallback;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
-import java.text.ParseException;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";

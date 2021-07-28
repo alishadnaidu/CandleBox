@@ -1,4 +1,4 @@
-package com.example.candlebox;
+package com.example.candlebox.CandleStuff;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.candlebox.R;
+import com.example.candlebox.SpotifyStuff.SongRecActivity;
 import com.parse.ParseUser;
 
 import nl.dionsegijn.konfetti.KonfettiView;

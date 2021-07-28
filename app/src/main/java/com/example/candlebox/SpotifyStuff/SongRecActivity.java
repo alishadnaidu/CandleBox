@@ -1,14 +1,16 @@
-package com.example.candlebox;
+package com.example.candlebox.SpotifyStuff;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.example.candlebox.R;
+import com.example.candlebox.Song;
+import com.example.candlebox.SpotifyStuff.SongsAdapter;
 
 import java.util.ArrayList;
 

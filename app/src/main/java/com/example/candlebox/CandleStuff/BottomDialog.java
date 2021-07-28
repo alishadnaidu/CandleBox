@@ -1,4 +1,4 @@
-package com.example.candlebox;
+package com.example.candlebox.CandleStuff;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.candlebox.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -26,7 +25,6 @@ import com.parse.SaveCallback;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

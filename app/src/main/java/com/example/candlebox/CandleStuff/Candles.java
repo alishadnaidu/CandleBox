@@ -1,4 +1,4 @@
-package com.example.candlebox;
+package com.example.candlebox.CandleStuff;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;

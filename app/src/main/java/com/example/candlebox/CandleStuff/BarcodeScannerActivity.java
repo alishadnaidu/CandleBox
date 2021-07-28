@@ -1,4 +1,4 @@
-package com.example.candlebox;
+package com.example.candlebox.CandleStuff;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -27,6 +27,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.candlebox.R;
+import com.example.candlebox.SpotifyStuff.SongRecActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

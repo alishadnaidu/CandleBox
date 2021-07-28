@@ -1,4 +1,4 @@
-package com.example.candlebox;
+package com.example.candlebox.SpotifyStuff;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,22 +14,21 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
+import com.example.candlebox.CandleStuff.AddActivity;
+import com.example.candlebox.CandleStuff.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.LoginActivity;
+import com.example.candlebox.CandleStuff.MainActivity;
+import com.example.candlebox.R;
+import com.example.candlebox.Song;
 import com.parse.ParseUser;
-import com.spotify.android.appremote.api.AppRemote;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 
 import com.spotify.protocol.client.CallResult;
-import com.spotify.protocol.client.Subscription;
-import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
 
 import org.parceler.Parcels;
-
-import java.io.BufferedReader;
-import java.net.URI;
 
 //starter code from : https://developer.spotify.com/documentation/android/quick-start/
 public class SpotifyActivity extends AppCompatActivity {

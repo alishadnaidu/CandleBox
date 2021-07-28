@@ -1,4 +1,4 @@
-package com.example.candlebox;
+package com.example.candlebox.CandleStuff;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.candlebox.R;
 import com.parse.ParseUser;
 
 public class Frag2 extends Fragment {

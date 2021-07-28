@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.candlebox.Frag1;
-import com.example.candlebox.Frag2;
-import com.example.candlebox.Frag3;
+import com.example.candlebox.CandleStuff.Frag1;
+import com.example.candlebox.CandleStuff.Frag2;
+import com.example.candlebox.CandleStuff.Frag3;
 
 import org.jetbrains.annotations.NotNull;
 
