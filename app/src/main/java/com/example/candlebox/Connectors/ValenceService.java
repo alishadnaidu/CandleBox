@@ -10,6 +10,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.candlebox.SpotifyStuff.RecentlyPlayedSong;
+import com.example.candlebox.SpotifyStuff.SpotifyMainActivity;
 import com.example.candlebox.SpotifyStuff.Valence;
 import com.example.candlebox.SpotifyStuff.VolleyCallBack;
 import com.google.gson.Gson;
@@ -27,8 +28,6 @@ public class ValenceService {
     private ArrayList<String> valences = new ArrayList<>();
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
-    private String songValence;
-    //private String endpoint = "https://api.spotify.com/v1/audio-features/";
 
     public ValenceService(Context context) {
         sharedPreferences = context.getSharedPreferences("SPOTIFY", 0);
@@ -42,7 +41,9 @@ public class ValenceService {
 
     public ArrayList<String> getValenceValues(final VolleyCallBack callBack) {
 
-        String endpoint = "https://api.spotify.com/v1/audio-features?ids=2Eeur20xVqfUoM3Q7EFPFt%2C3hUxzQpSfdDqwM3ZTFQY0K%2C1BxfuPKGuaTgP7aM0Bbdwr%2C4svZDCRz4cJoneBpjpx8DJ%2C5kI4eCXXzyuIUXjQra0Cxi";
+        //String realPoint = "https://api.spotify.com/v1/audio-features?ids=2Eeur20xVqfUoM3Q7EFPFt%2C3hUxzQpSfdDqwM3ZTFQY0K%2C1BxfuPKGuaTgP7aM0Bbdwr%2C4svZDCRz4cJoneBpjpx8DJ%2C5kI4eCXXzyuIUXjQra0Cxi";
+        String endpoint = SpotifyMainActivity.valenceEndpoint;
+        //Log.i("Valences endpoint!!!:", endpoint);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, endpoint, null, response -> {
                     JSONArray audioFeatures = response.optJSONArray("audio_features");

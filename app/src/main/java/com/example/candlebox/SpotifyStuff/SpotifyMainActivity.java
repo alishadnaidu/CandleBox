@@ -23,6 +23,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
     private Button addBtn;
     private RecentlyPlayedSong song;
     private TopTracks top;
+    public static String valenceEndpoint = "https://api.spotify.com/v1/audio-features?ids=";
 
     private SongService songService;
     private TopTrackService topTrackService;
@@ -79,6 +80,20 @@ public class SpotifyMainActivity extends AppCompatActivity {
             songIds.add(favTracks.get(i).getId());
         }
         Log.i(TAG, String.valueOf(songIds));
+        makeEndpoint();
+    }
+
+    private void makeEndpoint() {
+        String toAdd;
+        for (int b = 0; b < songIds.size(); b++) {
+            toAdd = songIds.get(b);
+            if (b != songIds.size()-1) {
+                toAdd += "%2C";
+            }
+            valenceEndpoint += toAdd;
+        }
+        //Log.i("The Valence Endpoint: ", valenceEndpoint);
+        getValences();
     }
 
     private void getValences() {
@@ -88,11 +103,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
                 Log.i(TAG, "Finished!");
             }
         });
-        //valenceService.getValenceValues(() -> {
-            //valences = valenceService.getValences();
-        //});
-
-        Log.i("Valence Values:", String.valueOf(valences));
+        //Log.i("Valence Values:", String.valueOf(valences));
     }
 
     private void getTracks() {
