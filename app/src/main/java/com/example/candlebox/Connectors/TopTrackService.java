@@ -36,7 +36,7 @@ public class TopTrackService {
     }
 
     public ArrayList<TopTracks> getTopTracks(final VolleyCallBack callBack) {
-        String endpoint = "https://api.spotify.com/v1/me/top/tracks?limit=8";
+        String endpoint = "https://api.spotify.com/v1/me/top/tracks?limit=9";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, endpoint, null, response -> {
                     Gson gson = new Gson();

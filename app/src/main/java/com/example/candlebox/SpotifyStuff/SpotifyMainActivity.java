@@ -103,24 +103,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
                 Log.i(TAG, "Finished!");
             }
         });
-        //Log.i("Valence Values:", String.valueOf(valences));
-    }
-
-    private void getTracks() {
-        songService.getRecentlyPlayedTracks(() -> {
-            recentlyPlayedTracks = songService.getSongs();
-            updateSong();
-        });
-    }
-
-    private void updateSong() {
-        if (recentlyPlayedTracks.size() > 0) {
-            for (int n = 0; n < recentlyPlayedTracks.size(); n++) {
-                //Log.i(TAG, String.valueOf(recentlyPlayedTracks));
-            }
-            songView.setText(recentlyPlayedTracks.get(0).getName());
-            song = recentlyPlayedTracks.get(0);
-        }
+        //Log.i("Valence Values:", String.valueOf(ValenceService.finalValences));
     }
 
 }

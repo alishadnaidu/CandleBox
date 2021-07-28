@@ -25,9 +25,11 @@ import java.util.Map;
 
 public class ValenceService {
 
-    private ArrayList<String> valences = new ArrayList<>();
+    public static final String TAG = "ValenceService";
+    public static ArrayList<String> finalValences = new ArrayList<>();
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
+    public static HashMap<String, String> valenceMap = new HashMap<String, String>();
 
     public ValenceService(Context context) {
         sharedPreferences = context.getSharedPreferences("SPOTIFY", 0);
@@ -35,7 +37,7 @@ public class ValenceService {
     }
 
     public ArrayList<String> getValences() {
-        return valences;
+        return finalValences;
     }
 
 
@@ -51,12 +53,13 @@ public class ValenceService {
                     for (int n = 0; n < audioFeatures.length(); n++) {
                         try {
                             double v = audioFeatures.getJSONObject(n).optDouble("valence");
-                            valences.add(String.valueOf(v));
+                            finalValences.add(String.valueOf(v));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-                    Log.i("All the valences: ", String.valueOf(valences));
+                    Log.i("All the valences: ", String.valueOf(finalValences));
+                    makeMap();
 
                     callBack.onSuccess();
                 }, error -> {
@@ -73,7 +76,16 @@ public class ValenceService {
             }
         };
         queue.add(jsonObjectRequest);
-        return valences;
+        return finalValences;
+    }
+
+    private void makeMap() {
+        for (int i = 0; i < SpotifyMainActivity.songIds.size(); i++) {
+            valenceMap.put(SpotifyMainActivity.songIds.get(i), finalValences.get(i));
+        }
+        for (Map.Entry m : valenceMap.entrySet()) {
+            Log.i(TAG, m.getKey() + ": " + m.getValue());
+        }
     }
 
 
