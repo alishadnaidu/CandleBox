@@ -20,7 +20,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class ValenceService {
@@ -33,6 +38,7 @@ public class ValenceService {
     public static HashMap<String, String> negativeMap = new HashMap<String, String>();
     public static HashMap<String, String> neutralMap = new HashMap<String, String>();
     public static HashMap<String, String> positiveMap = new HashMap<String, String>();
+    public static HashMap<String, String> sortedMap = new LinkedHashMap<String, String>();
 
     public ValenceService(Context context) {
         sharedPreferences = context.getSharedPreferences("SPOTIFY", 0);
@@ -44,11 +50,11 @@ public class ValenceService {
     }
 
 
+    // gets the valence value of each of the songs in the top tracks
     public ArrayList<String> getValenceValues(final VolleyCallBack callBack) {
 
-        //String realPoint = "https://api.spotify.com/v1/audio-features?ids=2Eeur20xVqfUoM3Q7EFPFt%2C3hUxzQpSfdDqwM3ZTFQY0K%2C1BxfuPKGuaTgP7aM0Bbdwr%2C4svZDCRz4cJoneBpjpx8DJ%2C5kI4eCXXzyuIUXjQra0Cxi";
+        //endpoint is generated in SpotifyMainActivity after top tracks are pulled
         String endpoint = SpotifyMainActivity.valenceEndpoint;
-        //Log.i("Valences endpoint!!!:", endpoint);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, endpoint, null, response -> {
                     JSONArray audioFeatures = response.optJSONArray("audio_features");
@@ -82,6 +88,7 @@ public class ValenceService {
         return finalValences;
     }
 
+    // generates a large map of all top tracks: (song id: valence)
     private void makeMap() {
         for (int i = 0; i < SpotifyMainActivity.songIds.size(); i++) {
             valenceMap.put(SpotifyMainActivity.songIds.get(i), finalValences.get(i));
@@ -89,20 +96,55 @@ public class ValenceService {
         for (Map.Entry m : valenceMap.entrySet()) {
             Log.i(TAG, m.getKey() + ": " + m.getValue());
         }
-        splitMap();
+        sortMap();
     }
 
+    // splits map into equal sized hashmaps of positive, neutral, and negative
+    // allows for personalization of "happiness" level of songs for user (ex. if user listens to
+    // solely happier songs, their "sad"/negative sentiment candle will still be objectively fairly happy
     private void splitMap() {
-        for (Map.Entry m : valenceMap.entrySet()) {
-            if (Double.parseDouble(m.getValue().toString()) < 0.333) {
+        Integer i = 0;
+        Integer size = sortedMap.size();
+        for (Map.Entry m : sortedMap.entrySet()) {
+            if (i < size/3) {
                 negativeMap.put(m.getKey().toString(), m.getValue().toString());
             }
-            else if (Double.parseDouble(m.getValue().toString()) < 0.666) {
+            else if (i < size/(3.0/2.0)) {
+                Log.i("Logging: ", "One for neutral tag");
                 neutralMap.put((m.getKey().toString()), m.getValue().toString());
             }
             else {
                 positiveMap.put((m.getKey().toString()), m.getValue().toString());
             }
+            i++;
         }
+        Log.i("Count: Negative map: ", negativeMap.toString());
+        Log.i("Count: Neutral map: ", neutralMap.toString());
+        Log.i("Count: Positive map: ", positiveMap.toString());
+    }
+
+    // sort valenceMap by valences
+    private void sortMap() {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, String> > list =
+                new LinkedList<Map.Entry<String, String> >(valenceMap.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, String> >() {
+            public int compare(Map.Entry<String, String> o1,
+                               Map.Entry<String, String> o2)
+            {
+                Integer first = (int) (Double.parseDouble(o1.getValue().toString())*1000);
+                Integer second = (int) (Double.parseDouble(o2.getValue().toString())*1000);
+                return first.compareTo(second);
+            }
+        });
+
+        // put data from sorted list to hashmap
+        for (Map.Entry<String, String> aa : list) {
+            sortedMap.put(aa.getKey(), aa.getValue());
+        }
+        Log.i("Final sorted hashmap: ", sortedMap.toString());
+        splitMap();
     }
 }

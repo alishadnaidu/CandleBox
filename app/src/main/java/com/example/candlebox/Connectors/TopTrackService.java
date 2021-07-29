@@ -24,7 +24,6 @@ public class TopTrackService {
     private ArrayList<TopTracks> songs = new ArrayList<>();
     private SharedPreferences sharedPreferences;
     private RequestQueue queue;
-    String artists, songTitle;
 
     public TopTrackService(Context context) {
         sharedPreferences = context.getSharedPreferences("SPOTIFY", 0);
@@ -35,6 +34,7 @@ public class TopTrackService {
         return songs;
     }
 
+    //gets the top 9 tracks of the current user
     public ArrayList<TopTracks> getTopTracks(final VolleyCallBack callBack) {
         String endpoint = "https://api.spotify.com/v1/me/top/tracks?limit=9";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
