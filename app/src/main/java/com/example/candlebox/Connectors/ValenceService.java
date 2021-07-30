@@ -41,9 +41,9 @@ public class ValenceService {
         queue = Volley.newRequestQueue(context);
     }
 
-    public ArrayList<String> getValences() {
-        return finalValences;
-    }
+//    public ArrayList<String> getValences() {
+//        return finalValences;
+//    }
 
 
     // gets the valence value of each of the songs in the top tracks
