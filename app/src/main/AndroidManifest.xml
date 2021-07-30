@@ -31,6 +31,10 @@
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".SpotifyStuff.SpotifyWebActivity">
+
+        </activity>
+
+        <activity android:name=".SpotifyStuff.MonkeyLearnSentiment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

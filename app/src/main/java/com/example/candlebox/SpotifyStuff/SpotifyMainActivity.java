@@ -15,6 +15,7 @@ import com.example.candlebox.R;
 
 import java.util.ArrayList;
 
+
 public class SpotifyMainActivity extends AppCompatActivity {
 
     public static final String TAG = "SpotifyMainActivity";

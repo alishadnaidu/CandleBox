@@ -109,6 +109,7 @@ public class ValenceService {
             if (i < size/3) {
                 negativeMap.put(m.getKey().toString(), m.getValue().toString());
             }
+            // must use decimal points here for sorting method to work!
             else if (i < size/(3.0/2.0)) {
                 Log.i("Logging: ", "One for neutral tag");
                 neutralMap.put((m.getKey().toString()), m.getValue().toString());
