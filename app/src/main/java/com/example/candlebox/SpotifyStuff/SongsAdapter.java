@@ -62,7 +62,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.Viewholder> 
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Song song = songList.get(position);
-                Intent intent = new Intent(context, SpotifyActivity.class);
+                Intent intent = new Intent(context, SongDetailActivity.class);
                 intent.putExtra(Song.class.getSimpleName(), Parcels.wrap(song));
                 context.startActivity(intent);
             }

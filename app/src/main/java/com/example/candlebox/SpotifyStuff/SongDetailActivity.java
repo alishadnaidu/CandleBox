@@ -31,7 +31,7 @@ import com.spotify.protocol.types.Track;
 import org.parceler.Parcels;
 
 //starter code from : https://developer.spotify.com/documentation/android/quick-start/
-public class SpotifyActivity extends AppCompatActivity {
+public class SongDetailActivity extends AppCompatActivity {
     public static final String TAG = "SpotifyActivity";
     private static final String CLIENT_ID = "41b1fdcb5723453d9e7e114cb85bf7be";
     private static final String REDIRECT_URI = "https://courses.codepath.com/courses/android_university_fast_track/pages/bootcamp_structure";
@@ -170,7 +170,7 @@ public class SpotifyActivity extends AppCompatActivity {
             ParseUser.logOut();
             // this will be null bc there is no current user
             ParseUser currentUser = ParseUser.getCurrentUser();
-            Intent i = new Intent(SpotifyActivity.this, LoginActivity.class);
+            Intent i = new Intent(SongDetailActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
             return true;
@@ -178,26 +178,26 @@ public class SpotifyActivity extends AppCompatActivity {
         //if add icon is tapped, navigate to the add screen
         if (item.getItemId() == R.id.add) {
             mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SpotifyActivity.this, AddActivity.class);
+            Intent i = new Intent(SongDetailActivity.this, AddActivity.class);
             startActivity(i);
             return true;
         }
         //if scan icon is tapped, navigate to the barcode screen
         if (item.getItemId() == R.id.scan) {
             mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SpotifyActivity.this, BarcodeScannerActivity.class);
+            Intent i = new Intent(SongDetailActivity.this, BarcodeScannerActivity.class);
             startActivity(i);
             return true;
         }
         if (item.getItemId() == R.id.home) {
             mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SpotifyActivity.this, MainActivity.class);
+            Intent i = new Intent(SongDetailActivity.this, MainActivity.class);
             startActivity(i);
             return true;
         }
         if (item.getItemId() == R.id.song) {
             mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SpotifyActivity.this, SongRecActivity.class);
+            Intent i = new Intent(SongDetailActivity.this, AlishasSongRecs.class);
             startActivity(i);
             finish();
             return true;

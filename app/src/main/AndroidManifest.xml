@@ -23,23 +23,22 @@
         <activity android:name=".CandleStuff.UploadCandle"></activity>
         <activity android:name=".CandleStuff.ThanksActivity"></activity>
         <activity android:name=".CandleStuff.RecentlyScannedActivity"></activity>
-        <activity android:name=".SpotifyStuff.SpotifyActivity"></activity>
-        <activity android:name=".SpotifyStuff.SpotifyMainActivity"></activity>
-        <activity android:name=".SpotifyStuff.SongRecActivity">
+        <activity android:name=".SpotifyStuff.SongDetailActivity"></activity>
+        <activity android:name=".SpotifyStuff.SpotifyMainActivity">
+
+        </activity>
+        <activity android:name=".SpotifyStuff.AlishasSongRecs">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".SpotifyStuff.SpotifyWebActivity">
 
-        </activity>
-
-        <activity android:name=".SpotifyStuff.MonkeyLearnSentiment">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>

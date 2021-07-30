@@ -104,7 +104,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
                 Log.i(TAG, "Finished!");
             }
         });
-        //Log.i("Valence Values:", String.valueOf(ValenceService.finalValences));
+        Log.i("Valence Values:", String.valueOf(ValenceService.finalValences));
     }
 
 }

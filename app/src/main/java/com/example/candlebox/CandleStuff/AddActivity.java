@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.candlebox.R;
-import com.example.candlebox.SpotifyStuff.SongRecActivity;
+import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -122,7 +122,7 @@ public class AddActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.song) {
-            Intent i = new Intent(AddActivity.this, SongRecActivity.class);
+            Intent i = new Intent(AddActivity.this, AlishasSongRecs.class);
             startActivity(i);
             return true;
         }

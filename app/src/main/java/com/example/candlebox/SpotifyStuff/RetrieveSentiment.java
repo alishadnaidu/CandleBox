@@ -13,9 +13,27 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 
 public class RetrieveSentiment extends Activity {
+    public static String body;
+    public static String url = "http://localhost:8000/";
+
     public static void main(String[] args) throws IOException {
-        Document doc  = Jsoup.connect("http://localhost:8000/awesome%20candle").get();
-        String body = String.valueOf(doc.body());
+        Document doc = Jsoup.connect(url).get();
+        body = String.valueOf(doc.body());
         System.out.println("Body: " + body);
+    }
+
+    private void getUrl() {
+        //url =
+    }
+    private void determineSentiment() {
+        if (body.contains("Positive")) {
+
+        }
+        else if (body.contains("Neutral")) {
+
+        }
+        else {
+
+        }
     }
 }

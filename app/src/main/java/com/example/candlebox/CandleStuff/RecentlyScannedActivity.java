@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.candlebox.R;
-import com.example.candlebox.SpotifyStuff.SongRecActivity;
+import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -139,7 +139,7 @@ public class RecentlyScannedActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.song) {
-            Intent i = new Intent(RecentlyScannedActivity.this, SongRecActivity.class);
+            Intent i = new Intent(RecentlyScannedActivity.this, AlishasSongRecs.class);
             startActivity(i);
             return true;
         }

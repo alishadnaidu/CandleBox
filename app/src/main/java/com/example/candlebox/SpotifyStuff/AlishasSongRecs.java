@@ -17,12 +17,11 @@ import com.example.candlebox.CandleStuff.LoginActivity;
 import com.example.candlebox.CandleStuff.MainActivity;
 import com.example.candlebox.R;
 import com.example.candlebox.Song;
-import com.example.candlebox.SpotifyStuff.SongsAdapter;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
-public class SongRecActivity extends AppCompatActivity {
+public class AlishasSongRecs extends AppCompatActivity {
 
     private RecyclerView rvSongRecs;
     private ArrayList<Song> songsList;
@@ -69,7 +68,7 @@ public class SongRecActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.logout) {
             ParseUser.logOut();
             ParseUser currentUser = ParseUser.getCurrentUser();
-            Intent i = new Intent(SongRecActivity.this, LoginActivity.class);
+            Intent i = new Intent(AlishasSongRecs.this, LoginActivity.class);
             startActivity(i);
             finish();
             return true;
@@ -77,20 +76,20 @@ public class SongRecActivity extends AppCompatActivity {
 
         // if the home icon is tapped, navigate to home screen
         if (item.getItemId() == R.id.home) {
-            Intent i = new Intent(SongRecActivity.this, MainActivity.class);
+            Intent i = new Intent(AlishasSongRecs.this, MainActivity.class);
             startActivity(i);
             return true;
         }
 
         // if the scan icon is tapped, navigate to barcode scanning screen
         if (item.getItemId() == R.id.scan) {
-            Intent i = new Intent(SongRecActivity.this, BarcodeScannerActivity.class);
+            Intent i = new Intent(AlishasSongRecs.this, BarcodeScannerActivity.class);
             startActivity(i);
             return true;
         }
 
         if (item.getItemId() == R.id.add) {
-            Intent i = new Intent(SongRecActivity.this, AddActivity.class);
+            Intent i = new Intent(AlishasSongRecs.this, AddActivity.class);
             startActivity(i);
             return true;
         }
