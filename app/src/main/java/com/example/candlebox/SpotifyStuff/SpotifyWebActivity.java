@@ -79,8 +79,8 @@ public class SpotifyWebActivity extends AppCompatActivity {
     }
 
     private void startMainActivity() {
-        Intent newintent = new Intent(SpotifyWebActivity.this, SpotifyMainActivity.class);
-        startActivity(newintent);
+        Intent i = new Intent(SpotifyWebActivity.this, SpotifyMainActivity.class);
+        startActivity(i);
     }
 
 
