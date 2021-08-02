@@ -16,8 +16,8 @@ import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
 import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
 import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
-import com.example.candlebox.Connectors.TopTrackService;
-import com.example.candlebox.Connectors.ValenceService;
+import com.example.candlebox.SpotifyStuff.Connectors.TopTrackService;
+import com.example.candlebox.SpotifyStuff.Connectors.ValenceService;
 import com.example.candlebox.R;
 import com.parse.ParseUser;
 

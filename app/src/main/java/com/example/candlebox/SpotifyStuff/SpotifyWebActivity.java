@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.candlebox.Connectors.UserService;
+import com.example.candlebox.SpotifyStuff.Connectors.UserService;
 import com.example.candlebox.R;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;

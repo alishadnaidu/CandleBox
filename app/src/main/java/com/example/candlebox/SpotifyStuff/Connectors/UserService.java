@@ -1,4 +1,4 @@
-package com.example.candlebox.Connectors;
+package com.example.candlebox.SpotifyStuff.Connectors;
 
 import android.content.SharedPreferences;
 
