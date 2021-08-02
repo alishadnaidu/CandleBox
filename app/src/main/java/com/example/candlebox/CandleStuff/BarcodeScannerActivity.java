@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.candlebox.R;
 import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
+import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -233,7 +234,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.song) {
-            Intent i = new Intent(BarcodeScannerActivity.this, AlishasSongRecs.class);
+            Intent i = new Intent(BarcodeScannerActivity.this, SpotifyWebActivity.class);
             startActivity(i);
             return true;
         }

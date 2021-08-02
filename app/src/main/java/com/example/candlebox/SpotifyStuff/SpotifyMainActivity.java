@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,10 +14,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.candlebox.CandleStuff.AddActivity;
+import com.example.candlebox.CandleStuff.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.LoginActivity;
+import com.example.candlebox.CandleStuff.MainActivity;
 import com.example.candlebox.Connectors.SongService;
 import com.example.candlebox.Connectors.TopTrackService;
 import com.example.candlebox.Connectors.ValenceService;
 import com.example.candlebox.R;
+import com.parse.ParseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -180,6 +187,50 @@ public class SpotifyMainActivity extends AppCompatActivity {
         else {
             songRecId = ValenceService.negativeList.get(index);
         }
+    }
+
+    //inflate actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    // comes into play when an item in the actionbar is clicked
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // if the logout icon is tapped, log out + navigate to the login screen
+        if (item.getItemId() == R.id.logout) {
+            ParseUser.logOut();
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            Intent i = new Intent(SpotifyMainActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish();
+            return true;
+        }
+
+        // if the home icon is tapped, navigate to home screen
+        if (item.getItemId() == R.id.home) {
+            Intent i = new Intent(SpotifyMainActivity.this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+        // if the scan icon is tapped, navigate to barcode scanning screen
+        if (item.getItemId() == R.id.scan) {
+            Intent i = new Intent(SpotifyMainActivity.this, BarcodeScannerActivity.class);
+            startActivity(i);
+            return true;
+        }
+
+        if (item.getItemId() == R.id.add) {
+            Intent i = new Intent(SpotifyMainActivity.this, AddActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

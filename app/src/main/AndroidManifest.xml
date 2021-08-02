@@ -16,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CandleBox">
         <activity android:name=".CandleStuff.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".CandleStuff.MainActivity"></activity>
         <activity android:name=".CandleStuff.AddActivity"></activity>
@@ -32,11 +37,6 @@
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".SpotifyStuff.SpotifyWebActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SpotifyStuff.SongRecActivity"></activity>
 

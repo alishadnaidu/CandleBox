@@ -187,7 +187,7 @@ public class SongDetailActivity extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.song) {
             mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SongDetailActivity.this, AlishasSongRecs.class);
+            Intent i = new Intent(SongDetailActivity.this, SpotifyWebActivity.class);
             startActivity(i);
             finish();
             return true;

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.candlebox.R;
 import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
+import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
 import com.parse.ParseUser;
 
 import nl.dionsegijn.konfetti.KonfettiView;
@@ -107,7 +108,7 @@ public class ThanksActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.song) {
-            Intent i = new Intent(ThanksActivity.this, AlishasSongRecs.class);
+            Intent i = new Intent(ThanksActivity.this, SpotifyWebActivity.class);
             startActivity(i);
             return true;
         }
