@@ -25,26 +25,19 @@
         <activity android:name=".CandleStuff.RecentlyScannedActivity"></activity>
         <activity android:name=".SpotifyStuff.SongDetailActivity"></activity>
         <activity android:name=".SpotifyStuff.SpotifyMainActivity">
-
-        </activity>
-        <activity android:name=".SpotifyStuff.AlishasSongRecs">
-
-        </activity>
-        <activity
-            android:name="com.spotify.sdk.android.authentication.LoginActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".SpotifyStuff.SpotifyWebActivity">
-
-        </activity>
-
-        <activity android:name=".SpotifyStuff.RetrieveSentiment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SpotifyStuff.AlishasSongRecs"></activity>
 
+        <activity
+            android:name="com.spotify.sdk.android.authentication.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".SpotifyStuff.SpotifyWebActivity">
+        </activity>
 
 
     </application>

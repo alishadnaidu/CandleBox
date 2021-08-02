@@ -36,6 +36,11 @@ public class ValenceService {
     public static HashMap<String, String> positiveMap = new HashMap<String, String>();
     public static HashMap<String, String> sortedMap = new LinkedHashMap<String, String>();
 
+    public static ArrayList<String> positiveList = new ArrayList<>();
+    public static ArrayList<String> neutralList = new ArrayList<>();
+    public static ArrayList<String> negativeList = new ArrayList<>();
+
+
     public ValenceService(Context context) {
         sharedPreferences = context.getSharedPreferences("SPOTIFY", 0);
         queue = Volley.newRequestQueue(context);
@@ -111,9 +116,9 @@ public class ValenceService {
             }
             i++;
         }
-        Log.i("Count: Negative map: ", negativeMap.toString());
-        Log.i("Count: Neutral map: ", neutralMap.toString());
-        Log.i("Count: Positive map: ", positiveMap.toString());
+        Log.i("Negative map", negativeMap.toString());
+        Log.i("Neutral map", neutralMap.toString());
+        Log.i("Positive map", positiveMap.toString());
     }
 
     // sort valenceMap by valences
@@ -139,5 +144,10 @@ public class ValenceService {
         }
         Log.i("Final sorted hashmap: ", sortedMap.toString());
         splitMap();
+    }
+
+    // make three lists containing the IDs of the songs for use in recommending songs
+    private void makeLists() {
+
     }
 }

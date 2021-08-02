@@ -1,5 +1,6 @@
 package com.example.candlebox.SpotifyStuff;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +17,18 @@ import com.example.candlebox.Connectors.TopTrackService;
 import com.example.candlebox.Connectors.ValenceService;
 import com.example.candlebox.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class SpotifyMainActivity extends AppCompatActivity {
@@ -28,6 +39,9 @@ public class SpotifyMainActivity extends AppCompatActivity {
     private Button btnGetMeSong;
     private EditText etGetMeSong;
     public static String valenceEndpoint = "https://api.spotify.com/v1/audio-features?ids=";
+    public String sentimentUrl;
+    public String sentiment;
+    public String songRecId;
 
     private SongService songService;
     private TopTrackService topTrackService;
@@ -36,6 +50,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
     private ArrayList<String> valences;
     public static ArrayList<String> songIds;
     public static String candleEntry;
+    public OkHttpClient client = new OkHttpClient();
 
 
     @Override
@@ -58,7 +73,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
 
         getTopTracks();
 
-        //work in progress: goal is to recommend a song when button is clicked
+        //when button clicked, clear the edit text and determine the sentiment/recommend a song
         btnGetMeSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,15 +82,13 @@ public class SpotifyMainActivity extends AppCompatActivity {
                     Toast.makeText(SpotifyMainActivity.this, "Must enter name of candle", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                RetrieveSentiment.candleEntryUrl = "http://localhost:8000/" + candleEntry;
-                Log.i(TAG, RetrieveSentiment.candleEntryUrl);
+                sentimentUrl = "https://text-sentiment-analysis2.p.rapidapi.com/?text=" + candleEntry;
+                doGetRequest(sentimentUrl);
+                //TODO: recommend a song based on the sentiment data
+                etGetMeSong.setText("");
 
-//                try {
-//                    RetrieveSentiment.getSentiment(RetrieveSentiment.candleEntryUrl);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-
+                Intent i = new Intent(SpotifyMainActivity.this, SongRecActivity.class);
+                startActivity(i);
             }
         });
 
@@ -128,6 +141,62 @@ public class SpotifyMainActivity extends AppCompatActivity {
             }
         });
         Log.i("Valence Values:", String.valueOf(ValenceService.finalValences));
+    }
+
+    //gets sentiment (negative, neutral, positive) from sentiment api
+    public void doGetRequest(String url) {
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .addHeader("x-rapidapi-key", "ca54996e86msh79e36570000c179p1888d1jsn3b620387026d")
+                .addHeader("x-rapidapi-host", "text-sentiment-analysis2.p.rapidapi.com")
+                .build();
+
+        client.newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(final Call call, IOException e) {
+                        // Error
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // For the example, you can show an error dialog or a toast
+                                // on the main UI thread
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        String res = response.body().string();
+                        Log.i("Results", res);
+                        //determine the overall sentiment (positive, neutral, or negative)
+                        try {
+                            JSONObject json = new JSONObject(res);
+                            sentiment = json.getString("sentiment");
+                            Log.i("Sentiment", sentiment);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    public void decideSong() {
+        Random rand = new Random();
+        int upperbound = ValenceService.negativeMap.size();
+        int index = rand.nextInt(upperbound);
+        //if sentiment is positive, choose a random song id from positiveList. in SongRecActivity, play this uri
+        if (sentiment.equals("positive")) {
+            //songRecId = ValenceService.positiveMap
+        }
+        else if (sentiment.equals("negative")) {
+
+        }
+        else {
+
+        }
     }
 
 }
