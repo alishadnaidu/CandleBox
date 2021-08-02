@@ -146,7 +146,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
         else {
             message = "Your candle is non-toxic. Great job picking it out!";
             if (ingredients.toLowerCase().contains("soy")) {
-                message = message + " Your candle also has a soy wax base, which is a healthy, eco-friendly alternative!";
+                message = message + " Your candle also has a soy wax base, which is a healthy, eco-friendly alternative.";
             }
             if (ingredients.toLowerCase().contains("beeswax")) {
                 message = message + " Your candle also has a beeswax base, which is a healthy, eco-friendly alternative. Say thanks to the bees! ";

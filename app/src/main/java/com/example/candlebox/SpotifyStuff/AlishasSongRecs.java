@@ -21,6 +21,7 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
+//hardcoded list of songs from spotify (my recommendations)
 public class AlishasSongRecs extends AppCompatActivity {
 
     private RecyclerView rvSongRecs;

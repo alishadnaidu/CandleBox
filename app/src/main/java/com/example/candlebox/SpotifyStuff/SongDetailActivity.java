@@ -32,12 +32,12 @@ import org.parceler.Parcels;
 
 //starter code from : https://developer.spotify.com/documentation/android/quick-start/
 public class SongDetailActivity extends AppCompatActivity {
+
     public static final String TAG = "SpotifyActivity";
     private static final String CLIENT_ID = "41b1fdcb5723453d9e7e114cb85bf7be";
     private static final String REDIRECT_URI = "https://courses.codepath.com/courses/android_university_fast_track/pages/bootcamp_structure";
     private SpotifyAppRemote mSpotifyAppRemote;
     private TextView spotifyTitle;
-    private EditText etSearchBar;
     private Button btnPlay, btnPause;
     private ImageView ivSongCover;
     private String song;
@@ -48,17 +48,13 @@ public class SongDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotify);
-        newSong = (Song) Parcels.unwrap(getIntent().getParcelableExtra(Song.class.getSimpleName()));
+        newSong = Parcels.unwrap(getIntent().getParcelableExtra(Song.class.getSimpleName()));
         Log.d(TAG, String.format("Showing details for '%s'", newSong.getSongName()));
 
         spotifyTitle = findViewById(R.id.tvSpotifyTitle);
-        etSearchBar = findViewById(R.id.etSearchBar);
         btnPlay = findViewById(R.id.btnPlay);
         btnPause = findViewById(R.id.btnPause);
         ivSongCover = findViewById(R.id.ivSongCover);
-
-        //spotifyTitle.setText(newSong.getSongName() + " by " + newSong.getArtist());
-
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +82,6 @@ public class SongDetailActivity extends AppCompatActivity {
                         .showAuthView(true)
                         .build();
 
-        // We will start writing our code here.
         SpotifyAppRemote.connect(this, connectionParams,
                 new Connector.ConnectionListener() {
 
@@ -95,15 +90,13 @@ public class SongDetailActivity extends AppCompatActivity {
                         mSpotifyAppRemote = spotifyAppRemote;
                         Log.d("MainActivity", "Connected! Yay!");
 
-                        // Now you can start interacting with App Remote
+                        // Can start interacting with App Remote
                         connected();
                     }
 
                     @Override
                     public void onFailure(Throwable throwable) {
                         Log.e("MainActivity", "Failed to play song: " + throwable.getMessage(), throwable);
-
-                        // Something went wrong when attempting to connect! Handle errors here
                     }
                 });
     }
@@ -116,11 +109,11 @@ public class SongDetailActivity extends AppCompatActivity {
                 .subscribeToPlayerState()
                 .setEventCallback(playerState -> {
                     final Track track = playerState.track;
+                    //when track starts playing, set the title, artist, and image
                     if (track != null) {
                         Log.d("MainActivity", track.name + " by " + track.artist.name);
                         song = track.name;
                         artist = track.artist.name;
-
                         setImage(track);
                         setCurrentlyPlaying();
                     }
@@ -149,10 +142,7 @@ public class SongDetailActivity extends AppCompatActivity {
     }
 
 
-
-
-
-            //inflate actionbar
+    //inflate actionbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

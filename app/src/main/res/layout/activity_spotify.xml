@@ -15,26 +15,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         tools:text="betty by Taylor Swift" />
 
-    <EditText
-        android:id="@+id/etSearchBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvSpotifyTitle"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="5dp"
-        android:ems="10"
-        android:hint="Enter your candle's scent here..." />
-
     <Button
         android:id="@+id/btnPlay"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_below="@+id/etSearchBar"
+        android:layout_below="@+id/tvSpotifyTitle"
         android:layout_alignParentStart="true"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/play"
         android:foreground="?android:attr/selectableItemBackground"
         app:backgroundTint="@null" />
@@ -43,9 +31,9 @@
         android:id="@+id/btnPause"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_below="@+id/etSearchBar"
+        android:layout_below="@+id/tvSpotifyTitle"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="108dp"
         android:background="@drawable/pause"
         android:foreground="?android:attr/selectableItemBackground"

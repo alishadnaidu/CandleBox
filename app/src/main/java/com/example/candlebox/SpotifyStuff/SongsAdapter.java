@@ -57,6 +57,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.Viewholder> 
             itemView.setOnClickListener(this);
         }
 
+        //navigating to song details view (SongDetailActivity) and start playing song
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
