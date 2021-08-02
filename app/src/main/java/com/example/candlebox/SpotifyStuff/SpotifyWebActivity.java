@@ -4,22 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.candlebox.CandleStuff.AddActivity;
-import com.example.candlebox.Connectors.SongService;
 import com.example.candlebox.Connectors.UserService;
 import com.example.candlebox.R;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
-
-import java.util.ArrayList;
 
 public class SpotifyWebActivity extends AppCompatActivity {
 
@@ -31,23 +26,12 @@ public class SpotifyWebActivity extends AppCompatActivity {
 
     private SharedPreferences.Editor editor;
     private SharedPreferences msharedPreferences;
-
     private RequestQueue queue;
-
-    private TextView recentlyPlayedSongName, songId;
-    private RecentlyPlayedSong song;
-
-    private SongService songService;
-    private ArrayList<RecentlyPlayedSong> recentlyPlayedTracks;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotify_web);
-
-        songService = new SongService(getApplicationContext());
-        recentlyPlayedSongName = findViewById(R.id.recentlyPlayedSongName);
-        songId = findViewById(R.id.songId);
 
         authenticateSpotify();
 
@@ -102,6 +86,7 @@ public class SpotifyWebActivity extends AppCompatActivity {
                 // Auth flow returned an error
                 case ERROR:
                     // Handle error response
+                    Log.e("SpotifyWebActivity", "Error with authenticating for Spotify");
                     break;
 
                 // Most likely auth flow was cancelled

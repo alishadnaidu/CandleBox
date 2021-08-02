@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.RecentlyScannedDisplay;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.candlebox.CandleStuff.Models.RecentlyScannedCandles;
 import com.example.candlebox.R;
 
 import java.util.List;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:padding="8dp"
-    tools:context=".CandleStuff.RecentlyScannedActivity">
+    tools:context=".CandleStuff.RecentlyScannedDisplay.RecentlyScannedActivity">
 
     <TextView
         android:id="@+id/tvRecentlyScanned"

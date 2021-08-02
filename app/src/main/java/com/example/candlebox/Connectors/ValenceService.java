@@ -67,7 +67,7 @@ public class ValenceService {
 
                     callBack.onSuccess();
                 }, error -> {
-                    // TODO: Handle error
+                    Log.e("ValenceService", "Error with getting valences");
 
                 }) {
             @Override

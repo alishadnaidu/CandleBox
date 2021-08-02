@@ -2,6 +2,7 @@ package com.example.candlebox.Connectors;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -53,7 +54,7 @@ public class TopTrackService {
 
                     callBack.onSuccess();
                 }, error -> {
-                    // TODO: Handle error
+                    Log.e("TopTrackService", "Error occurred while getting top tracks");
 
                 }) {
             @Override

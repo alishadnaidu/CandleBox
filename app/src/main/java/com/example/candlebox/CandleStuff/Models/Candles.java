@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.Models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
@@ -38,7 +38,5 @@ public class Candles extends ParseObject {
     public void setImg(ParseFile parseFile) {
         put(KEY_IMAGE, parseFile);
     }
-
-
 
 }

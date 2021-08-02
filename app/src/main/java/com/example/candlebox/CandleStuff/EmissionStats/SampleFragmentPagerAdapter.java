@@ -1,4 +1,4 @@
-package com.example.candlebox.ui;
+package com.example.candlebox.CandleStuff.EmissionStats;
 
 import android.content.Context;
 
@@ -6,10 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.example.candlebox.CandleStuff.Frag1;
-import com.example.candlebox.CandleStuff.Frag2;
-import com.example.candlebox.CandleStuff.Frag3;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,14 +30,14 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            Frag1 myFragment = Frag1.newInstance();
+            HoursFragment myFragment = HoursFragment.newInstance();
             return myFragment;
         }
         if (position == 1) {
-            Frag2 myFragment2 = Frag2.newInstance();
+            CarbonEmissionFragment myFragment2 = CarbonEmissionFragment.newInstance();
             return myFragment2;
         }
-        Frag3 myFragment3 = Frag3.newInstance();
+        TreesFragment myFragment3 = TreesFragment.newInstance();
         return myFragment3;
     }
 

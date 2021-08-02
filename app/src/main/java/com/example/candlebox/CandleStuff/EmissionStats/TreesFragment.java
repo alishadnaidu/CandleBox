@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.EmissionStats;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 
-public class Frag3 extends Fragment {
+public class TreesFragment extends Fragment {
     public static final String TAG = "Frag3";
     public static String time;
     public static TextView tvTesterFrag3;
@@ -45,8 +45,8 @@ public class Frag3 extends Fragment {
     }
 
     //creates new instance of Frag3(), used in adapter
-    public static Frag3 newInstance() {
-        return new Frag3();
+    public static TreesFragment newInstance() {
+        return new TreesFragment();
     }
 
     //returns the beginning of a greeting based on the current time, used in Frag1 and Frag2 as well

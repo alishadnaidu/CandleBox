@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.BarcodeScanner;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.candlebox.CandleStuff.Models.Candles;
+import com.example.candlebox.CandleStuff.Models.RecentlyScannedCandles;
+import com.example.candlebox.CandleStuff.RecentlyScannedDisplay.RecentlyScannedActivity;
+import com.example.candlebox.CandleStuff.UploadingNewCandle.UploadCandle;
 import com.example.candlebox.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.parse.GetCallback;

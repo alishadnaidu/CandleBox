@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.UploadingNewCandle;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
+import com.example.candlebox.CandleStuff.Login.LoginActivity;
+import com.example.candlebox.CandleStuff.Models.Candles;
 import com.example.candlebox.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;

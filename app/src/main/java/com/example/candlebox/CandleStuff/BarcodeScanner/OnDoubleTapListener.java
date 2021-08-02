@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.BarcodeScanner;
 
 import android.content.Context;
 import android.view.GestureDetector;

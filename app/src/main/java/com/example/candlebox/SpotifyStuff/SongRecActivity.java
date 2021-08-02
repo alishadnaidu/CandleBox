@@ -13,20 +13,17 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.candlebox.CandleStuff.AddActivity;
-import com.example.candlebox.CandleStuff.BarcodeScannerActivity;
-import com.example.candlebox.CandleStuff.LoginActivity;
-import com.example.candlebox.CandleStuff.MainActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
+import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.Login.LoginActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
 import com.example.candlebox.R;
-import com.example.candlebox.Song;
 import com.parse.ParseUser;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.client.CallResult;
 import com.spotify.protocol.types.Track;
-
-import org.parceler.Parcels;
 
 public class SongRecActivity extends AppCompatActivity {
     public static final String TAG = "SpotifyActivity";
@@ -38,7 +35,6 @@ public class SongRecActivity extends AppCompatActivity {
     private ImageView ivSongCover;
     private String song;
     private String artist;
-    Song newSong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

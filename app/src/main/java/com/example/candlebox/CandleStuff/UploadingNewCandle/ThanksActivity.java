@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.UploadingNewCandle;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,8 +10,11 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
+import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.R;
-import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
 import com.parse.ParseUser;
 

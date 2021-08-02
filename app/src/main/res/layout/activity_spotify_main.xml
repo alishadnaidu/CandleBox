@@ -41,7 +41,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/avenir"
-        android:text="Get me a song!" />
+        android:text="Get a song!" />
 
     <ImageView
         android:id="@+id/ivSingingBird"

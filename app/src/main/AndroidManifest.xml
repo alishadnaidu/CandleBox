@@ -8,30 +8,28 @@
     <uses-feature android:name="android.hardware.camera2.full" />
 
     <application
-        android:name=".CandleStuff.ParseApplication"
+        android:name=".CandleStuff.EmissionStats.ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CandleBox">
-        <activity android:name=".CandleStuff.LoginActivity">
+        <activity android:name=".CandleStuff.Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CandleStuff.MainActivity"></activity>
-        <activity android:name=".CandleStuff.AddActivity"></activity>
-        <activity android:name=".CandleStuff.BarcodeScannerActivity"></activity>
-        <activity android:name=".CandleStuff.UploadCandle"></activity>
-        <activity android:name=".CandleStuff.ThanksActivity"></activity>
-        <activity android:name=".CandleStuff.RecentlyScannedActivity"></activity>
-        <activity android:name=".SpotifyStuff.SongDetailActivity"></activity>
+        <activity android:name=".CandleStuff.EmissionStats.MainActivity"></activity>
+        <activity android:name=".CandleStuff.EmissionStats.AddActivity"></activity>
+        <activity android:name=".CandleStuff.BarcodeScanner.BarcodeScannerActivity"></activity>
+        <activity android:name=".CandleStuff.UploadingNewCandle.UploadCandle"></activity>
+        <activity android:name=".CandleStuff.UploadingNewCandle.ThanksActivity"></activity>
+        <activity android:name=".CandleStuff.RecentlyScannedDisplay.RecentlyScannedActivity"></activity>
         <activity android:name=".SpotifyStuff.SpotifyMainActivity">
         </activity>
-        <activity android:name=".SpotifyStuff.AlishasSongRecs"></activity>
 
         <activity
             android:name="com.spotify.sdk.android.authentication.LoginActivity"

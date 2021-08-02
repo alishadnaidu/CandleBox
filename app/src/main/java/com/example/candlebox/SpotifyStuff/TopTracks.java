@@ -3,7 +3,6 @@ package com.example.candlebox.SpotifyStuff;
 public class TopTracks {
     private String id;
     private String name;
-    private TopTracks artist;
 
     public TopTracks(String id, String name) {
         this.name = name;
@@ -24,13 +23,5 @@ public class TopTracks {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public TopTracks getArtist() {
-        return artist;
-    }
-
-    public void setArtist(TopTracks artist) {
-        this.artist = artist;
     }
 }

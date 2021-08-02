@@ -1,7 +1,6 @@
 package com.example.candlebox.SpotifyStuff;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,16 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.candlebox.CandleStuff.AddActivity;
-import com.example.candlebox.CandleStuff.BarcodeScannerActivity;
-import com.example.candlebox.CandleStuff.LoginActivity;
-import com.example.candlebox.CandleStuff.MainActivity;
-import com.example.candlebox.Connectors.SongService;
+import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
+import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.Login.LoginActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
 import com.example.candlebox.Connectors.TopTrackService;
 import com.example.candlebox.Connectors.ValenceService;
 import com.example.candlebox.R;
@@ -48,7 +45,6 @@ public class SpotifyMainActivity extends AppCompatActivity {
     public String sentiment;
     public static String songRecId;
 
-    private SongService songService;
     private TopTrackService topTrackService;
     private ValenceService valenceService;
     private ArrayList<TopTracks> favTracks;
@@ -62,8 +58,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spotify_main);
 
-        //initialize service to get songs, top tracks, and valences
-        songService = new SongService(getApplicationContext());
+        //initialize service to get top tracks and valences
         topTrackService = new TopTrackService(getApplicationContext());
         valenceService = new ValenceService(getApplicationContext());
 
@@ -79,9 +74,9 @@ public class SpotifyMainActivity extends AppCompatActivity {
                 candleEntry = etGetMeSong.getText().toString();
                 if (candleEntry.isEmpty()) {
                     Toast.makeText(SpotifyMainActivity.this, "Please enter the name of a candle!", Toast.LENGTH_SHORT).show();
-                    return;
                 }
                 else {
+                    //determine the unique url for sentiment analysis using candleEntry
                     sentimentUrl = "https://text-sentiment-analysis2.p.rapidapi.com/?text=" + candleEntry;
                     doGetRequest(sentimentUrl);
                     etGetMeSong.setText("");
@@ -98,7 +93,6 @@ public class SpotifyMainActivity extends AppCompatActivity {
             processList();
         });
     }
-
 
     //makes list of song ids from the user's top tracks
     private void processList() {
@@ -173,11 +167,11 @@ public class SpotifyMainActivity extends AppCompatActivity {
                 });
     }
 
+    //gets random song from corresponding list to be played in SongRecActivity
     public void decideSong() {
         Random rand = new Random();
         int upperbound = ValenceService.negativeMap.size();
         int index = rand.nextInt(upperbound);
-        //if sentiment is positive, choose a random song id from positiveList. in SongRecActivity, play this uri
         if (sentiment.equals("positive")) {
             songRecId = ValenceService.positiveList.get(index);
         }

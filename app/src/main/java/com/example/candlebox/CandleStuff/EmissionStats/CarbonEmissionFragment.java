@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.EmissionStats;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.candlebox.R;
 import com.parse.ParseUser;
 
-public class Frag2 extends Fragment {
+public class CarbonEmissionFragment extends Fragment {
     public static final String TAG = "Frag2";
     public static TextView tvTesterFrag2;
     @Override
@@ -24,8 +24,8 @@ public class Frag2 extends Fragment {
         tvTesterFrag2 = (TextView) view.findViewById(R.id.tvTesterFrag2);
 
         // set personalized greeting based on current time
-        Frag3.returnTime();
-        tvGreeting2.setText(Frag3.time + ParseUser.getCurrentUser().getUsername());
+        TreesFragment.returnTime();
+        tvGreeting2.setText(TreesFragment.time + ParseUser.getCurrentUser().getUsername());
 
         // set the amount of CO2 statistic
         tvTesterFrag2.setText(String.valueOf(MainActivity.amountOfCO2));
@@ -35,7 +35,7 @@ public class Frag2 extends Fragment {
     }
 
     //creates new instance of Frag2
-    public static Frag2 newInstance() {
-        return new Frag2();
+    public static CarbonEmissionFragment newInstance() {
+        return new CarbonEmissionFragment();
     }
 }

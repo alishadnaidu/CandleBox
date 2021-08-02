@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.BarcodeScanner;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -27,8 +27,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
+import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.R;
-import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.RecentlyScannedDisplay;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
+import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
+import com.example.candlebox.CandleStuff.Login.LoginActivity;
+import com.example.candlebox.CandleStuff.Models.RecentlyScannedCandles;
 import com.example.candlebox.R;
-import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
 import com.parse.FindCallback;
 import com.parse.GetCallback;

@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.EmissionStats;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +16,7 @@ import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Frag1 extends Fragment {
+public class HoursFragment extends Fragment {
 
     public static final String TAG = "Frag1";
     public static TextView tvTesterFrag1;
@@ -32,8 +32,8 @@ public class Frag1 extends Fragment {
         tvTesterFrag1 = view.findViewById(R.id.tvTesterFrag1);
 
         // set personalized greeting based on the current time
-        Frag3.returnTime();
-        tvGreeting1.setText(Frag3.time + ParseUser.getCurrentUser().getUsername());
+        TreesFragment.returnTime();
+        tvGreeting1.setText(TreesFragment.time + ParseUser.getCurrentUser().getUsername());
 
         // set the hours based on calculations from MainActivity
         tvTesterFrag1.setText(String.valueOf(MainActivity.totalHours));
@@ -43,7 +43,7 @@ public class Frag1 extends Fragment {
     }
 
     //creates new instance of Frag1(), used in adapter
-    public static Frag1 newInstance() {
-        return new Frag1();
+    public static HoursFragment newInstance() {
+        return new HoursFragment();
     }
 }

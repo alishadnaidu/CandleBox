@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
 import com.example.candlebox.R;
 import com.parse.LogInCallback;
 import com.parse.ParseUser;

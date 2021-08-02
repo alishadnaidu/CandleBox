@@ -1,7 +1,10 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.EmissionStats;
 
 import android.app.Application;
 
+import com.example.candlebox.CandleStuff.Models.Candles;
+import com.example.candlebox.CandleStuff.Models.RecentlyScannedCandles;
+import com.example.candlebox.CandleStuff.Models.Stats;
 import com.parse.Parse;
 import com.parse.ParseObject;
 

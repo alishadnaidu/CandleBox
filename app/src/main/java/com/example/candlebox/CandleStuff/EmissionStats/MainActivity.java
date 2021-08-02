@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.EmissionStats;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -9,12 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.Login.LoginActivity;
+import com.example.candlebox.CandleStuff.Models.Stats;
 import com.example.candlebox.R;
-import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
-import com.example.candlebox.SpotifyStuff.SongRecActivity;
-import com.example.candlebox.SpotifyStuff.SpotifyMainActivity;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
-import com.example.candlebox.ui.SampleFragmentPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -123,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "Trees: " + String.valueOf(totalTrees));
 
                 //set text for fragments
-                Frag1.tvTesterFrag1.setText(String.valueOf(totalHours));
-                Frag2.tvTesterFrag2.setText(String.valueOf(amountOfCO2));
+                HoursFragment.tvTesterFrag1.setText(String.valueOf(totalHours));
+                CarbonEmissionFragment.tvTesterFrag2.setText(String.valueOf(amountOfCO2));
             }
         });
     }

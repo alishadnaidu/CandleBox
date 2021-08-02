@@ -1,4 +1,4 @@
-package com.example.candlebox.CandleStuff;
+package com.example.candlebox.CandleStuff.EmissionStats;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
+import com.example.candlebox.CandleStuff.Login.LoginActivity;
+import com.example.candlebox.CandleStuff.Models.Stats;
 import com.example.candlebox.R;
-import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
 import com.parse.ParseException;
 import com.parse.ParseUser;
