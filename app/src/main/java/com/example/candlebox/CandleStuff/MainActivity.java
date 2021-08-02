@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.example.candlebox.R;
 import com.example.candlebox.SpotifyStuff.AlishasSongRecs;
+import com.example.candlebox.SpotifyStuff.SongRecActivity;
 import com.example.candlebox.SpotifyStuff.SpotifyMainActivity;
 import com.example.candlebox.ui.SampleFragmentPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.song) {
-            //Intent i = new Intent(MainActivity.this, SongRecActivity.class);
-            Intent i = new Intent(MainActivity.this, AlishasSongRecs.class);
+            Intent i = new Intent(MainActivity.this, SpotifyMainActivity.class);
+            //Intent i = new Intent(MainActivity.this, AlishasSongRecs.class);
             startActivity(i);
             return true;
         }

@@ -83,7 +83,6 @@ public class SongRecActivity extends AppCompatActivity {
                     public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                         mSpotifyAppRemote = spotifyAppRemote;
                         Log.d("SongRecActivity", "Connected! Yay!");
-
                         // Can start interacting with App Remote
                         connected();
                     }
@@ -96,8 +95,8 @@ public class SongRecActivity extends AppCompatActivity {
     }
 
     private void connected() {
-        //start playing a song
-        mSpotifyAppRemote.getPlayerApi().play(newSong.songUri);
+        //start playing the recommended song
+        mSpotifyAppRemote.getPlayerApi().play("spotify:track:" + SpotifyMainActivity.songRecId);
         // Subscribe to PlayerState
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
@@ -105,7 +104,7 @@ public class SongRecActivity extends AppCompatActivity {
                     final Track track = playerState.track;
                     //when track starts playing, set the title, artist, and image
                     if (track != null) {
-                        Log.d("MainActivity", track.name + " by " + track.artist.name);
+                        Log.d("SongRecActivity", track.name + " by " + track.artist.name);
                         song = track.name;
                         artist = track.artist.name;
                         setImage(track);
@@ -181,7 +180,7 @@ public class SongRecActivity extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.song) {
             mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SongRecActivity.this, AlishasSongRecs.class);
+            Intent i = new Intent(SongRecActivity.this, SpotifyMainActivity.class);
             startActivity(i);
             finish();
             return true;

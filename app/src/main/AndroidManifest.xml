@@ -25,11 +25,6 @@
         <activity android:name=".CandleStuff.RecentlyScannedActivity"></activity>
         <activity android:name=".SpotifyStuff.SongDetailActivity"></activity>
         <activity android:name=".SpotifyStuff.SpotifyMainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SpotifyStuff.AlishasSongRecs"></activity>
 
@@ -37,7 +32,13 @@
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".SpotifyStuff.SpotifyWebActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".SpotifyStuff.SongRecActivity"></activity>
 
 
     </application>

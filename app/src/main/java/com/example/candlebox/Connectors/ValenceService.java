@@ -36,9 +36,9 @@ public class ValenceService {
     public static HashMap<String, String> positiveMap = new HashMap<String, String>();
     public static HashMap<String, String> sortedMap = new LinkedHashMap<String, String>();
 
-    public static ArrayList<String> positiveList = new ArrayList<>();
-    public static ArrayList<String> neutralList = new ArrayList<>();
-    public static ArrayList<String> negativeList = new ArrayList<>();
+    public static ArrayList<String> positiveList;
+    public static ArrayList<String> neutralList;
+    public static ArrayList<String> negativeList;
 
 
     public ValenceService(Context context) {
@@ -55,7 +55,6 @@ public class ValenceService {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, endpoint, null, response -> {
                     JSONArray audioFeatures = response.optJSONArray("audio_features");
-                    Log.i("ValenceService", String.valueOf(audioFeatures.length()));
                     for (int n = 0; n < audioFeatures.length(); n++) {
                         try {
                             double v = audioFeatures.getJSONObject(n).optDouble("valence");
@@ -64,7 +63,6 @@ public class ValenceService {
                             e.printStackTrace();
                         }
                     }
-                    Log.i("All the valences: ", String.valueOf(finalValences));
                     makeMap();
 
                     callBack.onSuccess();
@@ -116,9 +114,7 @@ public class ValenceService {
             }
             i++;
         }
-        Log.i("Negative map", negativeMap.toString());
-        Log.i("Neutral map", neutralMap.toString());
-        Log.i("Positive map", positiveMap.toString());
+        makeLists();
     }
 
     // sort valenceMap by valences
@@ -148,6 +144,8 @@ public class ValenceService {
 
     // make three lists containing the IDs of the songs for use in recommending songs
     private void makeLists() {
-
+        positiveList = new ArrayList<>(positiveMap.keySet());
+        neutralList = new ArrayList<>(neutralMap.keySet());
+        negativeList = new ArrayList<>(negativeMap.keySet());
     }
 }

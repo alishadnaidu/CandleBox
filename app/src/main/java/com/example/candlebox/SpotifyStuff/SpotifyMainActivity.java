@@ -41,7 +41,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
     public static String valenceEndpoint = "https://api.spotify.com/v1/audio-features?ids=";
     public String sentimentUrl;
     public String sentiment;
-    public String songRecId;
+    public static String songRecId;
 
     private SongService songService;
     private TopTrackService topTrackService;
@@ -69,7 +69,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
         btnGetMeSong = findViewById(R.id.btnGetMeSong);
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("SPOTIFY", 0);
-        userView.setText(sharedPreferences.getString("userid", "No User"));
+        //userView.setText(sharedPreferences.getString("userid", "No User"));
 
         getTopTracks();
 
@@ -86,9 +86,6 @@ public class SpotifyMainActivity extends AppCompatActivity {
                 doGetRequest(sentimentUrl);
                 //TODO: recommend a song based on the sentiment data
                 etGetMeSong.setText("");
-
-                Intent i = new Intent(SpotifyMainActivity.this, SongRecActivity.class);
-                startActivity(i);
             }
         });
 
@@ -98,7 +95,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
     private void getTopTracks() {
         topTrackService.getTopTracks(() -> {
             favTracks = topTrackService.getTopSongs();
-            updateTopTrack();
+            //updateTopTrack();
             processList();
         });
     }
@@ -161,8 +158,7 @@ public class SpotifyMainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                // For the example, you can show an error dialog or a toast
-                                // on the main UI thread
+                                // For the example, you can show an error dialog or a toast on the main UI thread
                             }
                         });
                     }
@@ -170,12 +166,14 @@ public class SpotifyMainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, final Response response) throws IOException {
                         String res = response.body().string();
-                        Log.i("Results", res);
                         //determine the overall sentiment (positive, neutral, or negative)
                         try {
                             JSONObject json = new JSONObject(res);
                             sentiment = json.getString("sentiment");
                             Log.i("Sentiment", sentiment);
+                            decideSong();
+                            Intent i = new Intent(SpotifyMainActivity.this, SongRecActivity.class);
+                            startActivity(i);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -189,13 +187,13 @@ public class SpotifyMainActivity extends AppCompatActivity {
         int index = rand.nextInt(upperbound);
         //if sentiment is positive, choose a random song id from positiveList. in SongRecActivity, play this uri
         if (sentiment.equals("positive")) {
-            //songRecId = ValenceService.positiveMap
+            songRecId = ValenceService.positiveList.get(index);
         }
-        else if (sentiment.equals("negative")) {
-
+        else if (sentiment.equals("neutral")) {
+            songRecId = ValenceService.neutralList.get(index);
         }
         else {
-
+            songRecId = ValenceService.negativeList.get(index);
         }
     }
 
