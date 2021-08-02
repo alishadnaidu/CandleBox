@@ -34,8 +34,6 @@ import okhttp3.Response;
 public class SpotifyMainActivity extends AppCompatActivity {
 
     public static final String TAG = "SpotifyMainActivity";
-    private TextView userView;
-    private TextView songView;
     private Button btnGetMeSong;
     private EditText etGetMeSong;
     public static String valenceEndpoint = "https://api.spotify.com/v1/audio-features?ids=";
@@ -52,7 +50,6 @@ public class SpotifyMainActivity extends AppCompatActivity {
     public static String candleEntry;
     public OkHttpClient client = new OkHttpClient();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,13 +60,8 @@ public class SpotifyMainActivity extends AppCompatActivity {
         topTrackService = new TopTrackService(getApplicationContext());
         valenceService = new ValenceService(getApplicationContext());
 
-        userView = findViewById(R.id.mainSongID);
-        songView = findViewById(R.id.songName);
         etGetMeSong = findViewById(R.id.etGetMeSong);
         btnGetMeSong = findViewById(R.id.btnGetMeSong);
-
-        SharedPreferences sharedPreferences = this.getSharedPreferences("SPOTIFY", 0);
-        //userView.setText(sharedPreferences.getString("userid", "No User"));
 
         getTopTracks();
 
@@ -78,14 +70,15 @@ public class SpotifyMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 candleEntry = etGetMeSong.getText().toString();
-                if (candleEntry == "" || candleEntry == null) {
-                    Toast.makeText(SpotifyMainActivity.this, "Must enter name of candle", Toast.LENGTH_SHORT).show();
+                if (candleEntry.isEmpty()) {
+                    Toast.makeText(SpotifyMainActivity.this, "Please enter the name of a candle!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                sentimentUrl = "https://text-sentiment-analysis2.p.rapidapi.com/?text=" + candleEntry;
-                doGetRequest(sentimentUrl);
-                //TODO: recommend a song based on the sentiment data
-                etGetMeSong.setText("");
+                else {
+                    sentimentUrl = "https://text-sentiment-analysis2.p.rapidapi.com/?text=" + candleEntry;
+                    doGetRequest(sentimentUrl);
+                    etGetMeSong.setText("");
+                }
             }
         });
 
@@ -95,18 +88,10 @@ public class SpotifyMainActivity extends AppCompatActivity {
     private void getTopTracks() {
         topTrackService.getTopTracks(() -> {
             favTracks = topTrackService.getTopSongs();
-            //updateTopTrack();
             processList();
         });
     }
 
-    //updating the display to show the first item in top tracks list
-    private void updateTopTrack() {
-        Log.i(TAG, String.valueOf(favTracks.size()));
-        if (favTracks.size() > 0) {
-            songView.setText(favTracks.get(0).getName());
-        }
-    }
 
     //makes list of song ids from the user's top tracks
     private void processList() {

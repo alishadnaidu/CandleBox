@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="36dp"
-        android:text="TextView"
+        android:fontFamily="@font/avenir"
+        android:text="Navigating to song recommendation page..."
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textSize="35sp" />
@@ -21,7 +22,6 @@
         android:layout_below="@+id/recentlyPlayedSongName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="43dp"
-        android:text="TextView"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="30sp" />

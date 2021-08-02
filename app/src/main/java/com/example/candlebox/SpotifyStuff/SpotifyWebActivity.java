@@ -40,8 +40,6 @@ public class SpotifyWebActivity extends AppCompatActivity {
     private SongService songService;
     private ArrayList<RecentlyPlayedSong> recentlyPlayedTracks;
 
-
-
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +50,6 @@ public class SpotifyWebActivity extends AppCompatActivity {
         songId = findViewById(R.id.songId);
 
         authenticateSpotify();
-
 
         msharedPreferences = this.getSharedPreferences("SPOTIFY", 0);
         queue = Volley.newRequestQueue(this);
@@ -82,7 +79,6 @@ public class SpotifyWebActivity extends AppCompatActivity {
         Intent i = new Intent(SpotifyWebActivity.this, SpotifyMainActivity.class);
         startActivity(i);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
