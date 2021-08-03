@@ -3,31 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/song"
-        android:icon="@drawable/spotify_logo"
-        android:title=""
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/scan"
-        android:icon="@drawable/scan"
-        android:title=""
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/add"
-        android:icon="@drawable/instagram_new_post_outline_24"
-        android:title=""
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/home"
-        android:icon="@drawable/instagram_home_outline_24"
-        android:title=""
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/logout"
-        android:icon="@drawable/instagram_user_outline_24"
+        android:icon="@drawable/circle_add"
         android:title=""
         app:showAsAction="always" />
 </menu>

@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/home_selector"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:labelVisibilityMode="unlabeled"
+        android:title=""
+        />
     <item
         android:id="@+id/action_spotify"
         android:enabled="true"
         android:icon="@drawable/song_selector"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:labelVisibilityMode="unlabeled"
+        android:title=""
+        />
     <item
         android:id="@+id/action_scan"
         android:enabled="true"
-        android:icon="@drawable/scan"
-        app:showAsAction="always" />
+        android:icon="@drawable/barcode_selector"
+        app:showAsAction="always"
+        app:labelVisibilityMode="unlabeled"
+        android:title=""
+        />
     <item
         android:id="@+id/action_logout"
         android:enabled="true"
         android:icon="@drawable/instagram_user_outline_24"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:labelVisibilityMode="unlabeled"
+        android:title=""
+        />
+    <item
+        android:id="@+id/invisible"
+        android:enabled="true"
+        android:icon="@drawable/instagram_user_outline_24"
+        android:visible="false"
+        android:title=""
+        />
+
 </menu>

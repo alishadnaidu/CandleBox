@@ -57,6 +57,8 @@ public class RecentlyScannedActivity extends AppCompatActivity {
         queryRecentlyScanned();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setSelectedItemId(R.id.invisible);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -87,7 +89,6 @@ public class RecentlyScannedActivity extends AppCompatActivity {
         });
     }
 
-
     // load in the entries in the recently scanned candles class
     private void queryRecentlyScanned() {
         ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
@@ -107,24 +108,4 @@ public class RecentlyScannedActivity extends AppCompatActivity {
             }
         });
     }
-
-
-//    // gets the raw barcode value of the most recent entry
-//    private String getFirstCandle() {
-//        ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
-//        query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
-//        query.addDescendingOrder("createdAt");
-//        query.getFirstInBackground(new GetCallback<RecentlyScannedCandles>() {
-//            @Override
-//            public void done(RecentlyScannedCandles object, ParseException e) {
-//                if (e != null) {
-//                    Log.e(TAG, "Issue with finding first candle", e);
-//                    return;
-//                }
-//                mostRecentBarcode = object.getRecentRawBarcodeValue();
-//                Log.i(TAG, "first candle barcode: " + mostRecentBarcode);
-//            }
-//        });
-//        return mostRecentBarcode;
-//    }
 }
