@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
@@ -19,6 +20,7 @@ import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
 import com.example.candlebox.SpotifyStuff.Connectors.TopTrackService;
 import com.example.candlebox.SpotifyStuff.Connectors.ValenceService;
 import com.example.candlebox.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseUser;
 
 import org.json.JSONException;
@@ -84,6 +86,35 @@ public class SpotifyMainActivity extends AppCompatActivity {
             }
         });
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Intent homeIntent = new Intent(SpotifyMainActivity.this, MainActivity.class);
+                        startActivity(homeIntent);
+                        return true;
+                    case R.id.action_scan:
+                        Intent addIntent = new Intent(SpotifyMainActivity.this, BarcodeScannerActivity.class);
+                        startActivity(addIntent);
+                        return true;
+                    case R.id.action_spotify:
+                        Intent spotifyIntent = new Intent(SpotifyMainActivity.this, SpotifyWebActivity.class);
+                        startActivity(spotifyIntent);
+                        return true;
+                    case R.id.action_logout:
+                        ParseUser.logOut();
+                        // this will be null bc there is no current user
+                        ParseUser currentUser = ParseUser.getCurrentUser();
+                        Intent logoutIntent = new Intent(SpotifyMainActivity.this, LoginActivity.class);
+                        startActivity(logoutIntent);
+                        finish();
+                        return true;
+                    default: return true;
+                }
+            }
+        });
     }
 
     //main helper method, gets top tracks using the top track service
@@ -182,49 +213,4 @@ public class SpotifyMainActivity extends AppCompatActivity {
             songRecId = ValenceService.negativeList.get(index);
         }
     }
-
-    //inflate actionbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    // comes into play when an item in the actionbar is clicked
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // if the logout icon is tapped, log out + navigate to the login screen
-        if (item.getItemId() == R.id.logout) {
-            ParseUser.logOut();
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            Intent i = new Intent(SpotifyMainActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
-            return true;
-        }
-
-        // if the home icon is tapped, navigate to home screen
-        if (item.getItemId() == R.id.home) {
-            Intent i = new Intent(SpotifyMainActivity.this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        // if the scan icon is tapped, navigate to barcode scanning screen
-        if (item.getItemId() == R.id.scan) {
-            Intent i = new Intent(SpotifyMainActivity.this, BarcodeScannerActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        if (item.getItemId() == R.id.add) {
-            Intent i = new Intent(SpotifyMainActivity.this, AddActivity.class);
-            startActivity(i);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }

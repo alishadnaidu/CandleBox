@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
@@ -16,6 +17,7 @@ import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.CandleStuff.Models.Stats;
 import com.example.candlebox.R;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -61,6 +63,36 @@ public class AddActivity extends AppCompatActivity {
                 startActivity(i);
                 }
         });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Intent homeIntent = new Intent(AddActivity.this, MainActivity.class);
+                        startActivity(homeIntent);
+                        return true;
+                    case R.id.action_scan:
+                        Intent addIntent = new Intent(AddActivity.this, BarcodeScannerActivity.class);
+                        startActivity(addIntent);
+                        return true;
+                    case R.id.action_spotify:
+                        Intent spotifyIntent = new Intent(AddActivity.this, SpotifyWebActivity.class);
+                        startActivity(spotifyIntent);
+                        return true;
+                    case R.id.action_logout:
+                        ParseUser.logOut();
+                        // this will be null bc there is no current user
+                        ParseUser currentUser = ParseUser.getCurrentUser();
+                        Intent logoutIntent = new Intent(AddActivity.this, LoginActivity.class);
+                        startActivity(logoutIntent);
+                        finish();
+                        return true;
+                    default: return true;
+                }
+            }
+        });
     }
 
     //saves stats (hours and user), uploads to back4app database
@@ -88,47 +120,4 @@ public class AddActivity extends AppCompatActivity {
         });
     }
 
-    //inflate actionbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    // comes into play when an item in the actionbar is clicked
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // if the logout icon is tapped, log out + navigate to the login screen
-        if (item.getItemId() == R.id.logout) {
-            ParseUser.logOut();
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            Intent i = new Intent(AddActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
-            return true;
-        }
-
-        // if the home icon is tapped, navigate to home screen
-        if (item.getItemId() == R.id.home) {
-            Intent i = new Intent(AddActivity.this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        // if the scan icon is tapped, navigate to barcode scanning screen
-        if (item.getItemId() == R.id.scan) {
-            Intent i = new Intent(AddActivity.this, BarcodeScannerActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        if (item.getItemId() == R.id.song) {
-            Intent i = new Intent(AddActivity.this, SpotifyWebActivity.class);
-            startActivity(i);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

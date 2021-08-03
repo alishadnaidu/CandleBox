@@ -36,6 +36,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.barcode.Barcode;
 import com.google.mlkit.vision.barcode.BarcodeScanner;
@@ -94,6 +95,37 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                 }
             }
         }, ContextCompat.getMainExecutor(this));
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Intent homeIntent = new Intent(BarcodeScannerActivity.this, MainActivity.class);
+                        startActivity(homeIntent);
+                        return true;
+                    case R.id.action_scan:
+                        Intent addIntent = new Intent(BarcodeScannerActivity.this, BarcodeScannerActivity.class);
+                        startActivity(addIntent);
+                        return true;
+                    case R.id.action_spotify:
+                        Intent spotifyIntent = new Intent(BarcodeScannerActivity.this, SpotifyWebActivity.class);
+                        startActivity(spotifyIntent);
+                        return true;
+                    case R.id.action_logout:
+                        ParseUser.logOut();
+                        // this will be null bc there is no current user
+                        ParseUser currentUser = ParseUser.getCurrentUser();
+                        Intent logoutIntent = new Intent(BarcodeScannerActivity.this, LoginActivity.class);
+                        startActivity(logoutIntent);
+                        finish();
+                        return true;
+                    default: return true;
+                }
+            }
+        });
     }
 
     @Override
@@ -199,47 +231,5 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                 }
             }
         }
-    }
-
-    //inflate actionbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    // comes into play when an item in the actionbar is clicked
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // if the logout icon is tapped, log out + navigate to the login screen
-        if (item.getItemId() == R.id.logout) {
-            ParseUser.logOut();
-            // this will be null bc there is no current user
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            Intent i = new Intent(BarcodeScannerActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
-            return true;
-        }
-        //if add icon is tapped, navigate to the add screen
-        if (item.getItemId() == R.id.add) {
-            Intent i = new Intent(BarcodeScannerActivity.this, AddActivity.class);
-            startActivity(i);
-            return true;
-        }
-        if (item.getItemId() == R.id.home) {
-            Intent i = new Intent(BarcodeScannerActivity.this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        if (item.getItemId() == R.id.song) {
-            Intent i = new Intent(BarcodeScannerActivity.this, SpotifyWebActivity.class);
-            startActivity(i);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

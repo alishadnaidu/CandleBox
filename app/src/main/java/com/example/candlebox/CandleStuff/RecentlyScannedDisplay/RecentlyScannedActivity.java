@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.CandleStuff.Models.RecentlyScannedCandles;
 import com.example.candlebox.R;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -53,13 +55,42 @@ public class RecentlyScannedActivity extends AppCompatActivity {
         rvRecentlyScanned.setLayoutManager(new LinearLayoutManager(this));
 
         queryRecentlyScanned();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Intent homeIntent = new Intent(RecentlyScannedActivity.this, MainActivity.class);
+                        startActivity(homeIntent);
+                        return true;
+                    case R.id.action_scan:
+                        Intent addIntent = new Intent(RecentlyScannedActivity.this, BarcodeScannerActivity.class);
+                        startActivity(addIntent);
+                        return true;
+                    case R.id.action_spotify:
+                        Intent spotifyIntent = new Intent(RecentlyScannedActivity.this, SpotifyWebActivity.class);
+                        startActivity(spotifyIntent);
+                        return true;
+                    case R.id.action_logout:
+                        ParseUser.logOut();
+                        // this will be null bc there is no current user
+                        ParseUser currentUser = ParseUser.getCurrentUser();
+                        Intent logoutIntent = new Intent(RecentlyScannedActivity.this, LoginActivity.class);
+                        startActivity(logoutIntent);
+                        finish();
+                        return true;
+                    default: return true;
+                }
+            }
+        });
     }
 
 
     // load in the entries in the recently scanned candles class
     private void queryRecentlyScanned() {
         ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
-        //query.include(ParseUser.getCurrentUser().toString());
         query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
         //only include the candle-burning stats of the current user
         query.whereEqualTo(RecentlyScannedCandles.KEY_USER, ParseUser.getCurrentUser());
@@ -71,9 +102,6 @@ public class RecentlyScannedActivity extends AppCompatActivity {
                     Log.e(TAG, "Issue with getting candles", e);
                     return;
                 }
-                for (RecentlyScannedCandles candle: candles) {
-                    //Log.i(TAG, "Candle name: " + candle.getRecentCandleName());
-                }
                 allCandles.addAll(candles);
                 adapter.notifyDataSetChanged();
             }
@@ -81,73 +109,22 @@ public class RecentlyScannedActivity extends AppCompatActivity {
     }
 
 
-    // gets the raw barcode value of the most recent entry
-    private String getFirstCandle() {
-        ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
-        query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
-        query.addDescendingOrder("createdAt");
-        query.getFirstInBackground(new GetCallback<RecentlyScannedCandles>() {
-            @Override
-            public void done(RecentlyScannedCandles object, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with finding first candle", e);
-                    return;
-                }
-                mostRecentBarcode = object.getRecentRawBarcodeValue();
-                Log.i(TAG, "first candle barcode: " + mostRecentBarcode);
-            }
-        });
-        return mostRecentBarcode;
-    }
-
-    //inflate actionbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    // comes into play when an item in the actionbar is clicked
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // if the logout icon is tapped, log out + navigate to the login screen
-        if (item.getItemId() == R.id.logout) {
-            ParseUser.logOut();
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            Intent i = new Intent(RecentlyScannedActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
-            return true;
-        }
-
-        // if the home icon is tapped, navigate to home screen
-        if (item.getItemId() == R.id.home) {
-            Intent i = new Intent(RecentlyScannedActivity.this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        // if the scan icon is tapped, navigate to barcode scanning screen
-        if (item.getItemId() == R.id.scan) {
-            Intent i = new Intent(RecentlyScannedActivity.this, BarcodeScannerActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        // if the add icon is tapped, navigate to logging screen
-        if (item.getItemId() == R.id.add) {
-            Intent i = new Intent(RecentlyScannedActivity.this, AddActivity.class);
-            startActivity(i);
-            return true;
-        }
-
-        if (item.getItemId() == R.id.song) {
-            Intent i = new Intent(RecentlyScannedActivity.this, SpotifyWebActivity.class);
-            startActivity(i);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    // gets the raw barcode value of the most recent entry
+//    private String getFirstCandle() {
+//        ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
+//        query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
+//        query.addDescendingOrder("createdAt");
+//        query.getFirstInBackground(new GetCallback<RecentlyScannedCandles>() {
+//            @Override
+//            public void done(RecentlyScannedCandles object, ParseException e) {
+//                if (e != null) {
+//                    Log.e(TAG, "Issue with finding first candle", e);
+//                    return;
+//                }
+//                mostRecentBarcode = object.getRecentRawBarcodeValue();
+//                Log.i(TAG, "first candle barcode: " + mostRecentBarcode);
+//            }
+//        });
+//        return mostRecentBarcode;
+//    }
 }

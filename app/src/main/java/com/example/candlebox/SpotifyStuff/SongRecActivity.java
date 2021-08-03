@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
@@ -18,6 +19,7 @@ import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
 import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
 import com.example.candlebox.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseUser;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
@@ -58,6 +60,41 @@ public class SongRecActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mSpotifyAppRemote.getPlayerApi().pause();
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        mSpotifyAppRemote.getPlayerApi().pause();
+                        Intent homeIntent = new Intent(SongRecActivity.this, MainActivity.class);
+                        startActivity(homeIntent);
+                        return true;
+                    case R.id.action_scan:
+                        mSpotifyAppRemote.getPlayerApi().pause();
+                        Intent addIntent = new Intent(SongRecActivity.this, BarcodeScannerActivity.class);
+                        startActivity(addIntent);
+                        return true;
+                    case R.id.action_spotify:
+                        mSpotifyAppRemote.getPlayerApi().pause();
+                        Intent spotifyIntent = new Intent(SongRecActivity.this, SpotifyWebActivity.class);
+                        startActivity(spotifyIntent);
+                        return true;
+                    case R.id.action_logout:
+                        mSpotifyAppRemote.getPlayerApi().pause();
+                        ParseUser.logOut();
+                        // this will be null bc there is no current user
+                        ParseUser currentUser = ParseUser.getCurrentUser();
+                        Intent logoutIntent = new Intent(SongRecActivity.this, LoginActivity.class);
+                        startActivity(logoutIntent);
+                        finish();
+                        return true;
+                    default: return true;
+                }
             }
         });
     }
@@ -130,57 +167,4 @@ public class SongRecActivity extends AppCompatActivity {
         spotifyTitle.setText(song + " by " + artist);
     }
 
-
-    //inflate actionbar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    // comes into play when an item in the actionbar is clicked
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        // if the logout icon is tapped, log out + navigate to the login screen
-        if (item.getItemId() == R.id.logout) {
-            mSpotifyAppRemote.getPlayerApi().pause();
-            ParseUser.logOut();
-            // this will be null bc there is no current user
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            Intent i = new Intent(SongRecActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
-            return true;
-        }
-        //if add icon is tapped, navigate to the add screen
-        if (item.getItemId() == R.id.add) {
-            mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SongRecActivity.this, AddActivity.class);
-            startActivity(i);
-            return true;
-        }
-        //if scan icon is tapped, navigate to the barcode screen
-        if (item.getItemId() == R.id.scan) {
-            mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SongRecActivity.this, BarcodeScannerActivity.class);
-            startActivity(i);
-            return true;
-        }
-        if (item.getItemId() == R.id.home) {
-            mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SongRecActivity.this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-        if (item.getItemId() == R.id.song) {
-            mSpotifyAppRemote.getPlayerApi().pause();
-            Intent i = new Intent(SongRecActivity.this, SpotifyWebActivity.class);
-            startActivity(i);
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
