@@ -7,6 +7,13 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera2.full" />
 
+    <queries>
+        <!-- Camera -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
     <application
         android:name=".CandleStuff.EmissionStats.ParseApplication"
         android:allowBackup="true"
@@ -37,6 +44,7 @@
         <activity android:name=".SpotifyStuff.SpotifyWebActivity">
         </activity>
         <activity android:name=".SpotifyStuff.SongRecActivity"></activity>
+        <activity android:name=".CandleStuff.Login.LogoutActivity"></activity>
 
 
     </application>

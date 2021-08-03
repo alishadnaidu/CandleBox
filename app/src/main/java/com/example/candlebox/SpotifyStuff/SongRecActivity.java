@@ -16,11 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
 import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
-import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
+import com.example.candlebox.CandleStuff.Login.LogoutActivity;
 import com.example.candlebox.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.parse.ParseUser;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
@@ -64,7 +63,6 @@ public class SongRecActivity extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setSelectedItemId(R.id.action_spotify);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -87,12 +85,8 @@ public class SongRecActivity extends AppCompatActivity {
                         return true;
                     case R.id.action_logout:
                         mSpotifyAppRemote.getPlayerApi().pause();
-                        ParseUser.logOut();
-                        // this will be null bc there is no current user
-                        ParseUser currentUser = ParseUser.getCurrentUser();
-                        Intent logoutIntent = new Intent(SongRecActivity.this, LoginActivity.class);
+                        Intent logoutIntent = new Intent(SongRecActivity.this, LogoutActivity.class);
                         startActivity(logoutIntent);
-                        finish();
                         return true;
                     default: return true;
                 }

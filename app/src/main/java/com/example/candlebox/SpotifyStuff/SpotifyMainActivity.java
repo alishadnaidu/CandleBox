@@ -17,6 +17,7 @@ import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
 import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
 import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
+import com.example.candlebox.CandleStuff.Login.LogoutActivity;
 import com.example.candlebox.SpotifyStuff.Connectors.TopTrackService;
 import com.example.candlebox.SpotifyStuff.Connectors.ValenceService;
 import com.example.candlebox.R;
@@ -106,12 +107,8 @@ public class SpotifyMainActivity extends AppCompatActivity {
                         startActivity(spotifyIntent);
                         return true;
                     case R.id.action_logout:
-                        ParseUser.logOut();
-                        // this will be null bc there is no current user
-                        ParseUser currentUser = ParseUser.getCurrentUser();
-                        Intent logoutIntent = new Intent(SpotifyMainActivity.this, LoginActivity.class);
+                        Intent logoutIntent = new Intent(SpotifyMainActivity.this, LogoutActivity.class);
                         startActivity(logoutIntent);
-                        finish();
                         return true;
                     default: return true;
                 }

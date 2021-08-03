@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
 import com.example.candlebox.CandleStuff.Login.LoginActivity;
+import com.example.candlebox.CandleStuff.Login.LogoutActivity;
 import com.example.candlebox.CandleStuff.Models.Stats;
 import com.example.candlebox.R;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
@@ -84,12 +85,8 @@ public class AddActivity extends AppCompatActivity {
                         startActivity(spotifyIntent);
                         return true;
                     case R.id.action_logout:
-                        ParseUser.logOut();
-                        // this will be null bc there is no current user
-                        ParseUser currentUser = ParseUser.getCurrentUser();
-                        Intent logoutIntent = new Intent(AddActivity.this, LoginActivity.class);
+                        Intent logoutIntent = new Intent(AddActivity.this, LogoutActivity.class);
                         startActivity(logoutIntent);
-                        finish();
                         return true;
                     default: return true;
                 }

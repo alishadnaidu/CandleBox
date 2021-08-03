@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
 import com.example.candlebox.CandleStuff.Login.LoginActivity;
+import com.example.candlebox.CandleStuff.Login.LogoutActivity;
 import com.example.candlebox.CandleStuff.Models.Stats;
 import com.example.candlebox.R;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;
@@ -40,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
         queryStats();
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
                 MainActivity.this));
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -68,12 +69,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(spotifyIntent);
                         return true;
                     case R.id.action_logout:
-                        ParseUser.logOut();
-                        // this will be null bc there is no current user
-                        ParseUser currentUser = ParseUser.getCurrentUser();
-                        Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        Intent logoutIntent = new Intent(MainActivity.this, LogoutActivity.class);
                         startActivity(logoutIntent);
-                        finish();
                         return true;
                     default: return true;
                 }
