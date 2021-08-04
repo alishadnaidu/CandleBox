@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         return hours * 4;
     }
 
-    //
+    // sorts points into a sorted hashmap containing the keys/values to be graphed
     private void sortPoints() {
         //make a list called sortedKeys containing all the keys/dates sorted: ex. {709, 711, 713}
         ArrayList<String> keysString = new ArrayList<>(graphPairs.keySet());

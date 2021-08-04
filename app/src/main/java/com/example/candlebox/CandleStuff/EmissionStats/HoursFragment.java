@@ -47,9 +47,7 @@ public class HoursFragment extends Fragment {
         mCubicValueLineChart = view.findViewById(R.id.cubiclinechart);
         series = new ValueLineSeries();
         series.setColor(0xFF92CEFF);
-
-        HoursFragment.mCubicValueLineChart.addSeries(series);
-        HoursFragment.mCubicValueLineChart.startAnimation();
+        mCubicValueLineChart.setShowIndicator(true);
 
         return view;
     }
