@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
-import com.example.candlebox.CandleStuff.Login.LoginActivity;
 import com.example.candlebox.CandleStuff.Login.LogoutActivity;
 import com.example.candlebox.CandleStuff.Models.Stats;
 import com.example.candlebox.R;
@@ -25,11 +24,14 @@ import com.parse.ParseUser;
 
 import org.eazegraph.lib.models.ValueLinePoint;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
     public static Integer totalHours;
     public static Integer amountOfCO2;
     public static Integer totalTrees;
-
+    private String sortingValueString;
     private String month;
     private String day;
-    private HashMap<String, Integer> graphPairs = new HashMap<>();
+    private Map<String, Map.Entry<String, Integer>> graphPairs = new HashMap<>();
     public static ArrayList<String> keysDates = new ArrayList<>();
     public static ArrayList<Integer> valuesHours = new ArrayList<>();
+    public static TreeMap<String, Integer> sortedGraphPairs = new TreeMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         queryStats();
+        queryGraph();
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -108,44 +112,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //add up all the hours for that user
                 for (Stats stat : statistics) {
-                        //check that the hours are being logged correctly
-                        Log.i(TAG, "Hours: " + stat.getHours() + ", username: " +
-                                stat.getUser().getUsername());
-                        totalHours += stat.getHours();
-
-                        //making a hashmap containing the dates and hours of current month for graph
-                        String date = String.valueOf(stat.getCreatedAt());
-                        month = String.valueOf(stat.getCreatedAt().getMonth() + 1);
-                        day = date.substring(8,10);
-
-                        //getting the current month
-                        Date today = new Date();
-                        String thisMonth = String.valueOf(today.getMonth() + 1);
-
-                        //adds the hours to the value associated with the key if it exists
-                        // if not, it makes a new entry
-                        if (month.equals(thisMonth)) {
-                            String key = month + "/" + day;
-                            if (graphPairs.containsKey(key)) {
-                                Log.i("DatesList", "The key is not null");
-                                Integer value = graphPairs.get(key);
-                                graphPairs.put(key, value + stat.getHours());
-                            }
-                            else {
-                                Log.i("DatesList", "The key is null" + graphPairs.get(key));
-                                graphPairs.put(key, stat.getHours());
-                            }
-                        }
+                    //check that the hours are being logged correctly
+                    Log.i(TAG, "Hours: " + stat.getHours() + ", username: " +
+                            stat.getUser().getUsername());
+                    totalHours += stat.getHours();
                 }
-
-                // now we have a complete hashmap with the dates and hours of the current month
-                // populate the lists containing the data that will go in the graph
-                // x-axis: keys/dates; y-axis: values/hours
-                for (Map.Entry m : graphPairs.entrySet()) {
-                    keysDates.add((String) m.getKey());
-                    valuesHours.add((Integer) m.getValue());
-                }
-                setGraphPoints();
 
                 //calculate the stats for CO2 and trees
                 amountOfCO2 = calcCO2(totalHours);
@@ -163,6 +134,64 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //gets the stats for making a graph of the hours logged by user for current month + last month
+    private void queryGraph() {
+        ParseQuery<Stats> query = ParseQuery.getQuery(Stats.class);
+        query.include(Stats.KEY_USER);
+        //only include the candle-burning hours of the current user
+        query.whereEqualTo(Stats.KEY_USER, ParseUser.getCurrentUser());
+        query.findInBackground(new FindCallback<Stats>() {
+            @Override
+            public void done(List<Stats> statistics, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting stats", e);
+                    return;
+                }
+                //making a hashmap containing the dates and hours of current/last month for graph
+                for (Stats stat : statistics) {
+                    //get month, day, and year to create key and check that stats are from the past 2 months
+                    String date = String.valueOf(stat.getCreatedAt());
+                    month = String.valueOf(stat.getCreatedAt().getMonth() + 1);
+                    day = date.substring(8,10);
+                    Integer year = stat.getCreatedAt().getYear() + 1900;
+
+                    //getting the current/last month and current year to compare to each entry
+                    Date today = new Date();
+                    String lastMonth = String.valueOf(today.getMonth());
+                    String thisMonth = String.valueOf(today.getMonth() + 1);
+                    Integer thisYear = today.getYear() + 1900;
+
+                    //only include the entry if it is from the past 2 months of current year
+                    if (year.equals(thisYear)) {
+                        sortingValueString = month + day;
+                        String formattedKey = month + "/" + day;
+                        if (month.equals(lastMonth) || month.equals(thisMonth)) {
+                            //adds the hours to the value associated with the key if it exists
+                            // if not, it makes a new entry
+                            if (graphPairs.containsKey(sortingValueString)) {
+                                Map.Entry<String, Integer> mapEntry = graphPairs.get(sortingValueString);
+                                Integer value = mapEntry.getValue();
+                                graphPairs.put(sortingValueString, new AbstractMap.SimpleEntry(formattedKey, value + stat.getHours()));
+                            }
+                            else {
+                                graphPairs.put(sortingValueString, new AbstractMap.SimpleEntry(formattedKey, stat.getHours()));
+                            }
+                        }
+                    }
+
+                }
+                // populate the lists containing the data that will go in the graph
+                // x-axis: keys/dates; y-axis: values/hours
+                sortPoints();
+                for (Map.Entry m : sortedGraphPairs.entrySet()) {
+                    keysDates.add((String) m.getKey());
+                    valuesHours.add((Integer) m.getValue());
+                }
+                setGraphPoints();
+            }
+        });
+    }
+
     //simple calculation function used in queryStats()
     private Integer calcCO2(Integer hours) {
         return hours*10;
@@ -173,11 +202,29 @@ public class MainActivity extends AppCompatActivity {
         return hours * 4;
     }
 
+    //
+    private void sortPoints() {
+        //make a list called sortedKeys containing all the keys/dates sorted: ex. {709, 711, 713}
+        ArrayList<String> keysString = new ArrayList<>(graphPairs.keySet());
+        ArrayList<Integer> sortedKeys = new ArrayList<Integer>();
+        for (int i = 0; i < keysString.size(); i++) {
+            sortedKeys.add(Integer.parseInt(keysString.get(i)));
+        }
+        Collections.sort(sortedKeys);
+
+        //grab the "entry", aka the second part of the graphPairs hashmap and get the key and value
+        //to add to the sortedGraphPairs hashmap
+        for (int i = 0; i < sortedKeys.size(); i++) {
+            Map.Entry<String, Integer> pairEntry = graphPairs.get(sortedKeys.get(i).toString());
+            sortedGraphPairs.put(pairEntry.getKey(), pairEntry.getValue());
+        }
+        Log.i("Final sorted hashmap: ", sortedGraphPairs.toString());
+    }
+
     //setting the points to graph in the value line chart, starting animation
     private void setGraphPoints() {
         for (int i = 0; i < keysDates.size(); i++) {
             HoursFragment.series.addPoint(new ValueLinePoint(keysDates.get(i), valuesHours.get(i)));
-            Log.i("Pairs", keysDates.get(i) + ", " + valuesHours.get(i).toString());
         }
         //add the series and start animation here so that it runs in the correct order, otherwise graph will be blank
         HoursFragment.mCubicValueLineChart.addSeries(HoursFragment.series);
