@@ -23,7 +23,13 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.eazegraph.lib.models.ValueLinePoint;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     public static Integer totalHours;
     public static Integer amountOfCO2;
     public static Integer totalTrees;
+
+    private String month;
+    private String day;
+    private HashMap<String, Integer> graphPairs = new HashMap<>();
+    public static ArrayList<String> keysDates = new ArrayList<>();
+    public static ArrayList<Integer> valuesHours = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void done(List<Stats> statistics, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Issue with getting posts", e);
+                    Log.e(TAG, "Issue with getting stats", e);
                     return;
                 }
                 //add up all the hours for that user
@@ -100,7 +112,41 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "Hours: " + stat.getHours() + ", username: " +
                                 stat.getUser().getUsername());
                         totalHours += stat.getHours();
+
+                        //making a hashmap containing the dates and hours of current month for graph
+                        String date = String.valueOf(stat.getCreatedAt());
+                        month = String.valueOf(stat.getCreatedAt().getMonth() + 1);
+                        day = date.substring(8,10);
+
+                        //getting the current month
+                        Date today = new Date();
+                        String thisMonth = String.valueOf(today.getMonth() + 1);
+
+                        //adds the hours to the value associated with the key if it exists
+                        // if not, it makes a new entry
+                        if (month.equals(thisMonth)) {
+                            String key = month + "/" + day;
+                            if (graphPairs.containsKey(key)) {
+                                Log.i("DatesList", "The key is not null");
+                                Integer value = graphPairs.get(key);
+                                graphPairs.put(key, value + stat.getHours());
+                            }
+                            else {
+                                Log.i("DatesList", "The key is null" + graphPairs.get(key));
+                                graphPairs.put(key, stat.getHours());
+                            }
+                        }
                 }
+
+                // now we have a complete hashmap with the dates and hours of the current month
+                // populate the lists containing the data that will go in the graph
+                // x-axis: keys/dates; y-axis: values/hours
+                for (Map.Entry m : graphPairs.entrySet()) {
+                    keysDates.add((String) m.getKey());
+                    valuesHours.add((Integer) m.getValue());
+                }
+                setGraphPoints();
+
                 //calculate the stats for CO2 and trees
                 amountOfCO2 = calcCO2(totalHours);
                 totalTrees = calcTrees(totalHours);
@@ -117,13 +163,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //simple calculation functions used in queryStats()
+    //simple calculation function used in queryStats()
     private Integer calcCO2(Integer hours) {
         return hours*10;
     }
 
+    //simple calculation function used in queryStats()
     private Integer calcTrees(Integer hours) {
-        return hours*4;
+        return hours * 4;
+    }
+
+    //setting the points to graph in the value line chart, starting animation
+    private void setGraphPoints() {
+        for (int i = 0; i < keysDates.size(); i++) {
+            HoursFragment.series.addPoint(new ValueLinePoint(keysDates.get(i), valuesHours.get(i)));
+            Log.i("Pairs", keysDates.get(i) + ", " + valuesHours.get(i).toString());
+        }
+        //add the series and start animation here so that it runs in the correct order, otherwise graph will be blank
+        HoursFragment.mCubicValueLineChart.addSeries(HoursFragment.series);
+        HoursFragment.mCubicValueLineChart.startAnimation();
     }
 
     //inflate actionbar

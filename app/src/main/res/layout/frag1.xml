@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -83,4 +84,19 @@
         android:text="@string/hoursTitleEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="20sp" />
+
+    <org.eazegraph.lib.charts.ValueLineChart
+        android:id="@+id/cubiclinechart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tvHoursTitleEnd"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        app:egCurveSmoothness="0.4"
+        app:egIndicatorLineColor="#757575"
+        app:egIndicatorTextColor="#757575"
+        app:egLegendHeight="40dp"
+        app:egShowStandardValue="true"
+        app:egUseCubic="true"
+        app:egUseOverlapFill="true" />
 </RelativeLayout>

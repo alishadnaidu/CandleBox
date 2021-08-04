@@ -108,7 +108,7 @@ dependencies {
     //unirest
     implementation 'com.konghq:unirest-java:3.11.09'
 
-    //okhttp
-    //implementation 'com.squareup.okhttp3:okhttp:4.1.0'
-
+    // graphs from https://github.com/blackfizz/EazeGraph
+    compile 'com.github.blackfizz:eazegraph:1.2.2@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
 }

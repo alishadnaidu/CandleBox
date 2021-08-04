@@ -9,6 +9,7 @@ public class Stats extends ParseObject {
     // set keys; set getter and setter methods for each field in Stats class
     public static final String KEY_USER = "user";
     public static final String KEY_HOURS = "hours";
+    //public static final String KEY_DATE =
 
     public ParseUser getUser() {
         return getParseUser(KEY_USER);
@@ -23,4 +24,6 @@ public class Stats extends ParseObject {
     public void setHours(Integer hours) {
         put(KEY_HOURS, hours);
     }
+
+
 }
