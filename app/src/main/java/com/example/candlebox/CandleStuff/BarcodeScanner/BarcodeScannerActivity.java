@@ -73,7 +73,6 @@ public class BarcodeScannerActivity extends AppCompatActivity {
 
         cameraExecutor = Executors.newSingleThreadExecutor();
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
-
         analyzer = new MyImageAnalyzer(getSupportFragmentManager());
 
         cameraProviderFuture.addListener(new Runnable() {

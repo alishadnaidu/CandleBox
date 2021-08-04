@@ -37,8 +37,6 @@ public class RecentlyScannedActivity extends AppCompatActivity {
     protected CandlesAdapter adapter;
     protected List<RecentlyScannedCandles> allCandles;
 
-    public String mostRecentBarcode;
-
     private RecyclerView rvRecentlyScanned;
 
     @Override
@@ -90,7 +88,7 @@ public class RecentlyScannedActivity extends AppCompatActivity {
     private void queryRecentlyScanned() {
         ParseQuery<RecentlyScannedCandles> query = ParseQuery.getQuery(RecentlyScannedCandles.class);
         query.include(RecentlyScannedCandles.KEY_RECENTRAWBARCODEVALUE);
-        //only include the candle-burning stats of the current user
+        // only include the candle-burning stats of the current user
         query.whereEqualTo(RecentlyScannedCandles.KEY_USER, ParseUser.getCurrentUser());
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<RecentlyScannedCandles>() {

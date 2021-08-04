@@ -69,7 +69,6 @@ public class BottomDialog extends BottomSheetDialogFragment {
         return view;
     }
 
-
     //gets value of rawBarcode (method used in BarcodeScannerActivity)
     public void fetchRawBarcode(String rawBarcode) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();

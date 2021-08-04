@@ -45,7 +45,6 @@ public class CandlesAdapter extends RecyclerView.Adapter<CandlesAdapter.ViewHold
         }
     }
 
-
     @Override
     public int getItemCount() {
         return candles.size();

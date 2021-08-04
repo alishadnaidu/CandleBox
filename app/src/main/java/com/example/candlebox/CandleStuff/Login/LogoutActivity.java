@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.candlebox.CandleStuff.BarcodeScanner.BarcodeScannerActivity;
-import com.example.candlebox.CandleStuff.EmissionStats.AddActivity;
 import com.example.candlebox.CandleStuff.EmissionStats.MainActivity;
 import com.example.candlebox.R;
 import com.example.candlebox.SpotifyStuff.SpotifyWebActivity;

@@ -49,7 +49,6 @@ public class ValenceService {
 
     // gets the valence value of each of the songs in the top tracks
     public ArrayList<String> getValenceValues(final VolleyCallBack callBack) {
-
         //endpoint is generated in SpotifyMainActivity after top tracks are pulled
         String endpoint = SpotifyMainActivity.valenceEndpoint;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
