@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background = "@drawable/gradient_drawable"
+    android:background="#A7D1F3"
     tools:context=".CandleStuff.Login.LoginActivity">
 
 
@@ -12,16 +12,19 @@
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/tvLoginTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="#8BFFFFFF"
+        android:drawableStart="@drawable/blueuser"
+        android:drawablePadding="5dp"
         android:fontFamily="@font/avenir"
         android:hint="@string/username"
         android:padding="7dp"
         android:textColor="#000000"
+        android:textSize="20sp"
         app:backgroundTint="@null" />
 
     <EditText
@@ -36,11 +39,14 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="0dp"
         android:background="#8BFFFFFF"
+        android:drawableStart="@drawable/bluepw"
+        android:drawablePadding="5dp"
         android:fontFamily="@font/avenir"
         android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="7dp"
         android:textColor="#000000"
+        android:textSize="20sp"
         app:backgroundTint="@null" />
 
     <Button
@@ -55,18 +61,10 @@
         android:fontFamily="@font/avenir"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/signIn"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#000000"
+        android:textSize="20sp"
         app:backgroundTint="@null" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="0dp"
-        app:srcCompat="@drawable/horizontal_logo" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -81,7 +79,35 @@
         android:fontFamily="@font/avenir"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="@string/signUp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#000000"
+        android:textSize="20sp"
         app:backgroundTint="@null" />
+
+    <TextView
+        android:id="@+id/tvLoginTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/avenir"
+        android:text="log in to candlebox"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvForgotPW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPassword"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/avenir"
+        android:text="forgot password?"
+        android:textColor="#000000"
+        android:textSize="16sp" />
 
 </RelativeLayout>

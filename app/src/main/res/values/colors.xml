@@ -9,5 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="confetti_blue">#2ACDFF</color>
     <color name="base_blue">#92CEFF</color>
+    <color name="base_gray">#757575</color>
+
 
 </resources>

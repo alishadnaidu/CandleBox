@@ -16,7 +16,7 @@
         android:text="@string/allAboutYourCandle"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
 
@@ -24,36 +24,39 @@
         android:id="@+id/candleName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/allAboutYourCandle"
+        android:layout_below="@+id/ivCandle"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="0dp"
         android:fontFamily="@font/avenir"
         android:text="@string/unknownCandle"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="16sp"
+        android:textColor="#757575"
+        android:textSize="20sp"
         android:textStyle="bold"
         tools:text="The Lovers Candle" />
 
     <TextView
         android:id="@+id/ingredientsList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivCandle"
+        android:layout_below="@+id/candleName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="@font/avenir"
         android:textAlignment="center"
         android:textSize="16sp"
         tools:text="List of ingredients, etc etc." />
 
     <TextView
         android:id="@+id/sustainabilityMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ingredientsList"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="158dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/avenir"
         android:paddingBottom="20dp"
         android:textAlignment="center"
         android:textSize="16sp"
@@ -63,9 +66,9 @@
         android:id="@+id/ivCandle"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@+id/candleName"
+        android:layout_below="@+id/allAboutYourCandle"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/candle_logo"
+        android:layout_marginTop="0dp"
+        app:srcCompat="@drawable/heart"
         tools:layout_centerHorizontal="true" />
 </RelativeLayout>

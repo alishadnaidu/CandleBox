@@ -102,10 +102,10 @@ public class BottomDialog extends BottomSheetDialogFragment {
                     candleDatabaseName = candle.getCandleName();
                     candleName.setText(candleDatabaseName);
                     //rawDataDisplay.setText(String.valueOf(fetchRawBarcode));
-                    ingredientsList.setText(candle.getIngredients());
+                    ingredientsList.setText("Ingredients: " + candle.getIngredients());
                     //check whether the candle contains toxic ingredients
                     checkToxicity(candle.getIngredients());
-                    addToRecentlyScanned(candleDatabaseName, candle.getIngredients(), candle.getRawBarcodeValue());
+                    addToRecentlyScanned(candleDatabaseName, "Ingredients: " + candle.getIngredients(), candle.getRawBarcodeValue());
                 }
                 //candle doesn't exist --> navigate to the upload candle screen
                 else if (e.getCode() == ParseException.OBJECT_NOT_FOUND)

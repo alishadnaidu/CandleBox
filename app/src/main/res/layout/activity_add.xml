@@ -33,7 +33,10 @@
         android:layout_alignParentStart="false"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="133dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        app:stepperActionsColor="@color/white"
+        app:stepperBackgroundColor="@color/base_blue"
+        app:stepperTextColor="@color/base_gray" />
 
     <TextView
         android:id="@+id/textView"
