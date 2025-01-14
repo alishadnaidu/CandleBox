@@ -14,6 +14,8 @@ Original App Design Project - README Template
 CandleBox allows a user to scan the barcode of a candle they’re thinking of purchasing to see if it contains any toxic chemicals that they would not want burning in their house and being released into the environment! The motivation of my app is to promote eco-friendly, non-toxic candles as an alternative to typical paraffin wax candles, which release carcinogens when burned. Another main feature of my app is a tool that allows the user to log hours of candle-burning to see your stats (such as CO2 emission) over time and a song recommendation algorithm that uses the user's top tracks from Spotify, the sentiment of the candle name, and the happiness level of a song to recommend a song that matches the name and scent of a candle.
 
 Watch my demo [here](https://drive.google.com/file/d/1R1BepaWGqBmUoqB8T9bnmfukWQ96ux43/view?usp=sharing)!
+[<img width="324" alt="Screenshot 2025-01-14 at 1 48 27 PM" src="https://github.com/user-attachments/assets/6cfc9a0e-8e7b-4dee-bfe2-c2963e9f0aa7" />](https://drive.google.com/file/d/1R1BepaWGqBmUoqB8T9bnmfukWQ96ux43/view?usp=sharing)
+
 
 
 ### App Evaluation
